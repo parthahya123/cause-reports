@@ -98,6 +98,26 @@
   .primer { background: #f0f4ff; border: 1px solid #c7d2fe; padding: 1.25rem 1.5rem; margin: 2rem 0; font-family: system-ui, sans-serif; font-size: 13.5px; line-height: 1.72; color: #333; }
   .primer .pt { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: #6366f1; margin-bottom: .5rem; font-weight: 700; }
 
+  .snake-thumb { width: 96px; height: 70px; object-fit: cover; display: block; margin-bottom: .45rem; border-radius: 2px; background: #d1d5db; }
+  .snake-cell { min-width: 130px; }
+
+  .cp-diagram { margin: 2rem 0 2.5rem; }
+  .cp-stage { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0; }
+  .cp-track { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .cp-dot { width: 14px; height: 14px; border-radius: 50%; background: #1a1a1a; flex-shrink: 0; margin-top: .2rem; }
+  .cp-dot.green { background: #059669; }
+  .cp-line { width: 2px; background: #d1d5db; flex: 1; min-height: 30px; }
+  .cp-line.red { background: #fca5a5; }
+  .cp-body { flex: 1; padding-bottom: .75rem; }
+  .cp-label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 700; color: #111; margin-bottom: .15rem; }
+  .cp-label.green { color: #059669; }
+  .cp-sub { font-family: system-ui, sans-serif; font-size: 11.5px; color: #888; }
+  .cp-bar-wrap { margin: .45rem 0 .5rem; }
+  .cp-bar-bg { height: 9px; background: #f0f0ee; border-radius: 5px; width: 100%; overflow: hidden; }
+  .cp-bar-fill { height: 9px; border-radius: 5px; }
+  .cp-drop { font-family: system-ui, sans-serif; font-size: 12px; color: #b91c1c; line-height: 1.5; background: #fef2f2; border-left: 3px solid #fca5a5; padding: .3rem .65rem; margin-bottom: .25rem; }
+  .cp-note { font-family: system-ui, sans-serif; font-size: 11px; color: #999; margin-top: .6rem; font-style: italic; }
+
   #expand-all-btn { font-family: system-ui, sans-serif; font-size: 12px; color: #888; background: none; border: 1px solid #ddd; padding: .3rem .7rem; cursor: pointer; float: right; margin-top: 3.8rem; }
   #expand-all-btn:hover { background: var(--surface-alt); }
 </style>
@@ -147,6 +167,8 @@
 </div>
 
 <h2 id="basics">What is snakebite — and why does it matter?</h2>
+
+<p>Between midnight and dawn, in a rice paddy in Bihar or a cassava field in Benue State, someone steps on a snake. The bite is sometimes painless — especially a krait, which bites at night while the victim sleeps and whose neurotoxin works silently. By the time the family realizes what happened, hours have passed. The nearest facility with functioning antivenom is far away, and the journey costs money the family may not have. This is the shape of most of the 138,000 snakebite deaths that happen every year.</p>
 
 <div class="primer">
   <div class="pt">For readers new to the space</div>
@@ -201,25 +223,25 @@
   <thead><tr><th>Snake</th><th>Venom type</th><th>How it kills</th><th>Therapeutic window</th></tr></thead>
   <tbody>
     <tr>
-      <td><strong><em>Bungarus caeruleus</em></strong><br>Common krait</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Common_krait_.jpg" alt="Common krait"><strong><em>Bungarus caeruleus</em></strong><br>Common krait</td>
       <td>Neurotoxic (pre-synaptic)</td>
       <td>β-bungarotoxin destroys nerve terminals at the neuromuscular junction — irreversibly. Descending paralysis: ptosis → ophthalmoplegia → limb weakness → respiratory failure. Krait bites are often painless and noticed only after victim wakes unable to breathe.</td>
       <td><strong>~6 hours, cliff-shaped.</strong> After paralysis is established, antivenom reverses nothing — the nerve terminal is gone. Mechanical ventilation, not antivenom, saves late arrivals.</td>
     </tr>
     <tr>
-      <td><strong><em>Naja naja</em></strong><br>Indian cobra</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Naja_naja_%28Indian_cobra%29.jpg" alt="Indian cobra"><strong><em>Naja naja</em></strong><br>Indian cobra</td>
       <td>Neurotoxic (post-synaptic) + cytotoxic</td>
       <td>α-neurotoxins block acetylcholine receptors (partially reversible), causing paralysis. Cytotoxins cause local tissue necrosis that can progress to amputation even with treatment.</td>
       <td><strong>~180 minutes, partially reversible.</strong> ASV given within 3h reverses receptor block; later ASV still prevents local progression but neuromuscular recovery is slower.</td>
     </tr>
     <tr>
-      <td><strong><em>Daboia russelii</em></strong><br>Russell's viper</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/7/74/Daboia_russelii_A_Chawla01.jpg" alt="Russell's viper"><strong><em>Daboia russelii</em></strong><br>Russell's viper</td>
       <td>Hemotoxic / vasculotoxic</td>
       <td>Activates the clotting cascade, causing consumptive coagulopathy: fibrinogen consumed, all clotting factors depleted. The patient bleeds from every wound site including the gums and urine. Also causes acute kidney injury (AKI) in 10–46% of victims, of which 37–41% develop chronic kidney disease.</td>
       <td><strong>Gradual decay, but AKI threshold at ~2h.</strong> Coagulopathy is reversible even at 24–48h with adequate ASV. But AKI risk is 10× higher if antivenom is delayed >2h — renal damage is an early clock even when the bleeding risk extends longer.</td>
     </tr>
     <tr>
-      <td><strong><em>Echis carinatus</em></strong><br>Saw-scaled viper</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/3/39/Saw_Scaled_Viper_Echis_carinatus.jpg" alt="Saw-scaled viper"><strong><em>Echis carinatus</em></strong><br>Saw-scaled viper</td>
       <td>Hemotoxic</td>
       <td>Similar coagulopathy to Russell's. Slow-onset: symptoms can appear as late as 27h after bite. Untreated CFR 10–20% in areas without antivenom access.</td>
       <td><strong>Extended, gradual.</strong> Coagulopathy reversible at 24h+; slower onset means victims sometimes underestimate severity and delay seeking care.</td>
@@ -237,31 +259,31 @@
   <thead><tr><th>Snake</th><th>Primary range</th><th>Venom type</th><th>Key clinical features</th></tr></thead>
   <tbody>
     <tr>
-      <td><strong><em>Echis ocellatus</em></strong><br>Carpet viper / saw-scaled viper</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/2/26/Echis_ocellatus.jpg" alt="West African carpet viper"><strong><em>Echis ocellatus</em></strong><br>West African carpet viper</td>
       <td><strong>West Africa</strong>: Nigeria, Ghana, Mali, Burkina Faso, Niger. Accounts for ~66% of bites in northeastern Nigeria.</td>
       <td>Hemotoxic — coagulopathy similar in syndrome to Indian <em>Echis carinatus</em> but distinct venom protein composition; Indian ASV provides zero cross-neutralization.</td>
       <td>Primary target species for EchiTAb-Plus-ICP. Untreated CFR ~12–20% in communities without antivenom access (Benue valley, Nigeria). The dominant cause of snakebite death in West Africa. Covered well by EchiTAb-Plus-ICP.</td>
     </tr>
     <tr>
-      <td><strong><em>Bitis arietans</em></strong><br>Puff adder</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Bitis_arietans.jpg" alt="Puff adder"><strong><em>Bitis arietans</em></strong><br>Puff adder</td>
       <td>Pan-African — most geographically widespread dangerous snake on the continent. Savanna, farmland, peri-urban areas across SSA.</td>
       <td>Cytotoxic / hemotoxic — massive local tissue destruction, systemic coagulopathy. Responsible for more bites than any other African snake due to its abundance and sit-and-wait ambush behavior.</td>
       <td>Major driver of Africa's ~14,600 amputations/yr. Severe local necrosis; limb loss common even with treatment if antivenom is delayed. Covered by EchiTAb-Plus-ICP and SAIMR Polyvalent.</td>
     </tr>
     <tr>
-      <td><strong><em>Naja nigricollis</em></strong><br>Black-necked spitting cobra</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Naja_nigricollis_%28Warren_Klein%29.jpg" alt="Black-necked spitting cobra"><strong><em>Naja nigricollis</em></strong><br>Black-necked spitting cobra</td>
       <td><strong>West and East Africa</strong> — a dominant cobra species in Nigeria, Ghana, Kenya, Tanzania.</td>
       <td>Neurotoxic + cytotoxic. Spits venom up to 2–3 metres, causing ocular injury and potential blindness without a bite. Three-finger toxins (3FTx) are the primary lethal component.</td>
       <td><strong>Significant product gap:</strong> A 2026 preclinical study found EchiTab-Plus failed to neutralize <em>N. nigricollis</em> venom, despite covering this species nominally. African cobra 3FTx are proving harder to neutralize than hemotoxic viper toxins — this is the central bottleneck for recombinant antivenom R&amp;D targeting Africa.</td>
     </tr>
     <tr>
-      <td><strong><em>Dendroaspis</em> spp.</strong><br>Mambas (black and green)</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Dendroaspis_polylepis.jpg" alt="Black mamba"><strong><em>Dendroaspis</em> spp.</strong><br>Mambas (black and green)</td>
       <td>Primarily <strong>East and Southern Africa</strong>. Less common in West Africa. Black mamba: East/Southern; green mamba: coastal East/West.</td>
       <td>Neurotoxic — dendrotoxins block potassium channels. Rapid ascending paralysis. Untreated CFR for significant envenomation approaches 100%.</td>
       <td>Fewer bites than puff adder (mambas avoid humans), but near-certain death without prompt antivenom. Fav-Afrique provided mamba coverage; its 2014 discontinuation created a coverage gap primarily in East/Southern Africa where mambas are clinically significant. EchiTAb-Plus lyophilized formulation covers <em>D. polylepis</em> (black mamba).</td>
     </tr>
     <tr>
-      <td><strong><em>Bitis gabonica</em></strong><br>Gaboon viper</td>
+      <td class="snake-cell"><img class="snake-thumb" src="https://upload.wikimedia.org/wikipedia/commons/9/98/Bitis_gabonica.jpg" alt="Gaboon viper"><strong><em>Bitis gabonica</em></strong><br>Gaboon viper</td>
       <td>Forest zones: Central and West Africa, parts of East Africa.</td>
       <td>Hemotoxic / cytotoxic — largest venom yield of any snake (~9ml). Extremely severe local tissue destruction.</td>
       <td>Rare but highly lethal. Untreated CFR 40–80% for significant envenomation. Less common than puff adder; clinical management requires very high ASV doses.</td>
@@ -364,6 +386,74 @@
 <h2 id="why-fails">Why the treatment fails</h2>
 
 <p>Antivenom works. The problem is that the chain between bite and effective treatment has about six places it can break — and in rural South Asia and sub-Saharan Africa, most of them break routinely. The failures cluster into four categories, all of which apply in both geographies to varying degrees.</p>
+
+<div class="cp-diagram">
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot"></div><div class="cp-line"></div></div>
+    <div class="cp-body">
+      <div class="cp-label">Bite happens</div>
+      <div class="cp-sub">1.8–2.7 million significant envenomations per year globally</div>
+      <div class="cp-bar-wrap"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:100%;background:#1a1a1a;"></div></div></div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#e5e7eb;border:2px solid #9ca3af;"></div><div class="cp-line red"></div></div>
+    <div class="cp-body">
+      <div class="cp-drop">14 of 100 die before reaching care — no transport, can't afford it, or spent hours at a traditional healer first. In Africa: often no ambulance at all.</div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#374151;"></div><div class="cp-line"></div></div>
+    <div class="cp-body">
+      <div class="cp-label">Reaches a health facility</div>
+      <div class="cp-sub">86 of 100 in India (demand is not the problem)</div>
+      <div class="cp-bar-wrap"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:86%;background:#374151;"></div></div></div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#e5e7eb;border:2px solid #9ca3af;"></div><div class="cp-line red"></div></div>
+    <div class="cp-body">
+      <div class="cp-drop">34 of 86 get no antivenom — not stocked, wrong species, clinician unsure how to use it. In much of Africa: no effective product exists at all since Fav-Afrique's 2014 discontinuation.</div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#1d4ed8;"></div><div class="cp-line"></div></div>
+    <div class="cp-body">
+      <div class="cp-label">Receives antivenom</div>
+      <div class="cp-sub">~52 of 100</div>
+      <div class="cp-bar-wrap"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:52%;background:#1d4ed8;"></div></div></div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#e5e7eb;border:2px solid #9ca3af;"></div><div class="cp-line red"></div></div>
+    <div class="cp-body">
+      <div class="cp-drop">~19 of 52 treated: arrived too late (krait's 6-hour cliff), or the vial was degraded by heat before it was used — looks fine, delivers nothing.</div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#2563eb;"></div><div class="cp-line"></div></div>
+    <div class="cp-body">
+      <div class="cp-label">Timely + potent antivenom</div>
+      <div class="cp-sub">~33 of 100</div>
+      <div class="cp-bar-wrap"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:33%;background:#2563eb;"></div></div></div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot" style="background:#e5e7eb;border:2px solid #9ca3af;"></div><div class="cp-line red"></div></div>
+    <div class="cp-body">
+      <div class="cp-drop">~13 of 33 under-dosed — the hospital gives a fixed starter course (8–10 vials) and stops, rather than dosing to clinical endpoint. Patient leaves still envenomed.</div>
+    </div>
+  </div>
+  <div class="cp-stage">
+    <div class="cp-track"><div class="cp-dot green"></div></div>
+    <div class="cp-body">
+      <div class="cp-label green">Full guideline-concordant treatment</div>
+      <div class="cp-sub">~20 of 100 — this patient survives</div>
+      <div class="cp-bar-wrap"><div class="cp-bar-bg"><div class="cp-bar-fill" style="width:20%;background:#059669;"></div></div></div>
+    </div>
+  </div>
+  <p class="cp-note">India data (where surveillance is best): ICMR NTF survey + district CFR studies. Africa's funnel leaks harder at every step — especially "receives antivenom," where much of the continent has no effective product since the 2014 Fav-Afrique collapse.</p>
+</div>
 
 <h3>1. The patient arrives too late</h3>
 
@@ -603,6 +693,49 @@
 </div>
 
 <h3>The interventions, ordered by what they address</h3>
+
+<div class="diagram cea-bars">
+  <div class="diagram-label">Cost per DALY averted — P50 estimates, ordered best to worst (threshold: $150/DALY)</div>
+  <svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;font-family:system-ui,sans-serif;font-size:11.5px;">
+    <!-- Scale: $335 max = 480px width. $150 threshold at 215px -->
+    <!-- Threshold line at $150 -->
+    <line x1="215" y1="0" x2="215" y2="232" stroke="#374151" stroke-width="1" stroke-dasharray="5,3"/>
+    <text x="216" y="10" fill="#374151" font-size="10" font-weight="600">$150 threshold</text>
+
+    <!-- Row 1: Adrenaline $27 -->
+    <text x="0" y="28" fill="#333" font-size="11" font-weight="600">Adrenaline kits</text>
+    <text x="0" y="41" fill="#888" font-size="10">Mandatory add-on to every ASV site</text>
+    <rect x="0" y="44" width="39" height="12" rx="2" fill="#059669"/>
+    <text x="43" y="55" fill="#059669" font-size="10.5" font-weight="700">$27</text>
+
+    <!-- Row 2: District QI $110 -->
+    <text x="0" y="74" fill="#333" font-size="11" font-weight="600">District hospital clinical QI</text>
+    <text x="0" y="87" fill="#888" font-size="10">Dosing protocols, endpoint monitoring, training</text>
+    <rect x="0" y="90" width="158" height="12" rx="2" fill="#059669"/>
+    <text x="162" y="101" fill="#059669" font-size="10.5" font-weight="700">$110</text>
+
+    <!-- Row 3: NAPSE $134 -->
+    <text x="0" y="120" fill="#333" font-size="11" font-weight="600">NAPSE awareness (108 trigger only)</text>
+    <text x="0" y="133" fill="#888" font-size="10">Community education → immediate ambulance dispatch</text>
+    <rect x="0" y="136" width="193" height="12" rx="2" fill="#059669"/>
+    <text x="197" y="147" fill="#059669" font-size="10.5" font-weight="700">$134</text>
+
+    <!-- Row 4: CHC/transport $207 (with lyophilized ASV) -->
+    <text x="0" y="166" fill="#333" font-size="11" font-weight="600">CHC ASV banks + lyophilized + 108 transport</text>
+    <text x="0" y="179" fill="#888" font-size="10">Requires lyophilized ASV — liquid ASV pushes well above $150</text>
+    <rect x="0" y="182" width="298" height="12" rx="2" fill="#d97706"/>
+    <text x="302" y="193" fill="#d97706" font-size="10.5" font-weight="700">$207</text>
+
+    <!-- Row 5: EchiTAb West Africa $322 -->
+    <text x="0" y="212" fill="#333" font-size="11" font-weight="600">EchiTAb West Africa</text>
+    <text x="0" y="225" fill="#888" font-size="10">Gated on sole-producer risk + 2026 cobra neutralization gap</text>
+    <rect x="0" y="228" width="463" height="12" rx="2" fill="#dc2626"/>
+    <text x="467" y="239" fill="#dc2626" font-size="10.5" font-weight="700">$322</text>
+
+    <!-- "off chart" label for undifferentiated + village banks -->
+    <text x="0" y="255" fill="#dc2626" font-size="10.5">Generic distribution: ~$335 (corrected) · Village banks: ~$1,789 — both declined</text>
+  </svg>
+</div>
 
 <table>
   <thead><tr><th>Intervention</th><th>Primary driver it attacks</th><th>$/DALY (P50)</th><th>P10–P90 range</th><th>Verdict</th></tr></thead>
