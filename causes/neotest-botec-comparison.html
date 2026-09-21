@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeoTest — Two BOTECs Compared</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #0c4a6e;
+    --accent-light: #f0f9ff;
+    --accent-border: #bae6fd;
+    --text: #1a1a1a;
+    --muted: #555;
+    --border: #e0deda;
+    --bg: #fafaf8;
+    --surface: #fff;
+    --surface-alt: #f7f6f4;
+    --red: #b91c1c;
+    --red-light: #fef2f2;
+    --green: #059669;
+    --green-light: #f0fdf4;
+    --amber: #92400e;
+    --amber-light: #fffbeb;
+  }
+
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.88; color: var(--text); background: var(--bg); }
+  .layout { display: flex; min-height: 100vh; }
+  nav { width: 232px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2.25rem 1.5rem; background: var(--surface-alt); border-right: 1px solid var(--border); }
+  nav .home { display: block; font-family: system-ui, sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: #999; text-decoration: none; margin-bottom: 1.5rem; }
+  nav .home:hover { color: #333; }
+  nav h5 { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #bbb; margin-bottom: .6rem; margin-top: 1.5rem; }
+  nav ul { list-style: none; }
+  nav ul li a { font-family: system-ui, sans-serif; font-size: 12.5px; color: #666; text-decoration: none; display: block; padding: .22rem .6rem; border-left: 2px solid transparent; }
+  nav ul li a:hover { color: var(--text); }
+  nav ul li a.active { color: var(--text); border-left-color: var(--accent); font-weight: 600; }
+  nav .sep { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  main { flex: 1; max-width: 800px; padding: 4rem 3.5rem 7rem; }
+  .eyebrow { font-family: system-ui, sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin-bottom: .6rem; }
+  h1 { font-size: 2.5rem; line-height: 1.15; font-weight: 700; letter-spacing: -.025em; margin-bottom: .45rem; color: #0f0f0f; }
+  .dek { font-family: system-ui, sans-serif; font-size: 15.5px; color: #666; margin-bottom: 2.75rem; line-height: 1.5; }
+
+  .verdict { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 1.3rem 1.6rem; margin-bottom: 3.25rem; }
+  .verdict .vl { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #aaa; margin-bottom: .5rem; }
+  .verdict p { font-family: system-ui, sans-serif; font-size: 13.5px; color: #333; line-height: 1.65; margin-bottom: .55rem; }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .metrics { display: flex; gap: 1.25rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
+  .metric { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.25rem; flex: 1; min-width: 120px; }
+  .metric .mv { font-size: 1.45rem; font-weight: 700; color: #0f0f0f; font-family: system-ui, sans-serif; letter-spacing: -.02em; line-height: 1.1; }
+  .metric .ml { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: #aaa; margin-top: .3rem; }
+  .metric.hl .mv { color: var(--accent); }
+
+  h2 { font-size: 1.6rem; font-weight: 700; margin-top: 4rem; margin-bottom: 1.25rem; letter-spacing: -.015em; padding-bottom: .5rem; border-bottom: 1px solid var(--border); scroll-margin-top: 1.5rem; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: .7rem; color: #222; }
+
+  p { margin-bottom: 1.2rem; }
+  a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: #1e3a8a; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.25rem; font-family: system-ui, sans-serif; font-size: 13px; }
+  th { text-align: left; padding: .6rem .85rem; background: var(--surface-alt); border: 1px solid var(--border); font-weight: 600; color: #333; }
+  td { padding: .55rem .85rem; border: 1px solid var(--border); color: #444; vertical-align: top; line-height: 1.5; }
+  tr:nth-child(even) td { background: #faf9f7; }
+  td.ours { background: #eff6ff !important; font-weight: 600; color: #1e40af; }
+  td.theirs { background: #f9fafb !important; color: #555; }
+  td.agree { background: #f0fdf4 !important; color: #065f46; }
+  td.warn { background: #fffbeb !important; color: #92400e; }
+  td.red { background: #fef2f2 !important; color: #991b1b; }
+
+  .callout { background: var(--accent-light); border: 1px solid var(--accent-border); padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; line-height: 1.72; }
+  .callout strong { color: var(--accent); }
+  .callout-amber { background: var(--amber-light); border: 1px solid #fcd34d; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-amber .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--amber); margin-bottom: .5rem; font-weight: 700; }
+  .callout-red { background: var(--red-light); border: 1px solid #fca5a5; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-red .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--red); margin-bottom: .5rem; font-weight: 700; }
+  .callout-green { background: var(--green-light); border: 1px solid #6ee7b7; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-green .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--green); margin-bottom: .5rem; font-weight: 700; }
+
+  .note { background: #f8f9fa; border: 1px solid #d0d5dd; padding: 1.1rem 1.5rem; margin: 1.75rem 0; font-size: .93rem; font-family: system-ui, sans-serif; line-height: 1.7; }
+  .note .nt { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: #888; margin-bottom: .5rem; }
+
+  details { border: 1px solid var(--border); margin: 1.5rem 0; }
+  details summary { padding: .9rem 1.15rem; font-family: system-ui, sans-serif; font-size: 13.5px; font-weight: 600; color: #333; cursor: pointer; background: var(--surface-alt); list-style: none; display: flex; align-items: center; gap: .6rem; user-select: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: '▶'; font-size: 10px; color: #aaa; transition: transform .15s; flex-shrink: 0; }
+  details[open] summary::before { transform: rotate(90deg); }
+  details summary:hover { background: #efede9; }
+  .details-body { padding: 1.25rem 1.5rem; font-family: system-ui, sans-serif; font-size: 13.5px; line-height: 1.72; color: #333; border-top: 1px solid var(--border); }
+  .details-body p { font-family: system-ui, sans-serif; font-size: 13.5px; margin-bottom: .9rem; }
+  .details-body table { font-size: 12.5px; }
+  .details-body h4 { font-weight: 700; margin: 1rem 0 .4rem; color: #222; font-size: 13.5px; }
+  .details-body ul, .details-body ol { margin: .4rem 0 .9rem 1.4rem; }
+  .details-body ul li, .details-body ol li { margin-bottom: .3rem; }
+
+  /* diff card */
+  .diff-card { border: 1px solid var(--border); margin: 2rem 0; }
+  .diff-card .dh { display: flex; align-items: baseline; justify-content: space-between; padding: .85rem 1.15rem; border-bottom: 1px solid var(--border); background: var(--surface-alt); flex-wrap: wrap; gap: .5rem; }
+  .diff-card .dh .dtitle { font-family: system-ui, sans-serif; font-weight: 700; font-size: 14px; color: #111; }
+  .diff-card .dh .dtag { font-family: system-ui, sans-serif; font-size: 11.5px; color: #fff; padding: .15rem .55rem; border-radius: 2px; font-weight: 600; }
+  .diff-card .dh .dtag.favors-us { background: #1e40af; }
+  .diff-card .dh .dtag.favors-them { background: #059669; }
+  .diff-card .dh .dtag.neutral { background: #6b7280; }
+  .diff-card .dh .dtag.mixed { background: #92400e; }
+  .diff-card .db { padding: 1.15rem 1.25rem 1rem; font-family: system-ui, sans-serif; font-size: 13.5px; line-height: 1.7; color: #333; }
+  .diff-card .db p { margin-bottom: .8rem; font-family: system-ui, sans-serif; font-size: 13.5px; }
+  .diff-card .db p:last-child { margin-bottom: 0; }
+  .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .sbs-box { padding: .85rem 1rem; border-radius: 2px; }
+  .sbs-box .sl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; margin-bottom: .4rem; }
+  .sbs-box p { font-size: 13px; margin-bottom: 0; }
+  .sbs-akhil { background: #f9fafb; border: 1px solid #d1d5db; }
+  .sbs-akhil .sl { color: #6b7280; }
+  .sbs-ours { background: #eff6ff; border: 1px solid #93c5fd; }
+  .sbs-ours .sl { color: #1d4ed8; }
+
+  /* math bridge */
+  .bridge { margin: 2rem 0; }
+  .bridge-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; font-family: system-ui, sans-serif; font-size: 13px; }
+  .bridge-num { font-weight: 700; min-width: 60px; font-size: 15px; }
+  .bridge-arrow { color: #aaa; flex-shrink: 0; }
+  .bridge-label { color: #555; flex: 1; }
+  .bridge-delta { font-weight: 600; min-width: 55px; text-align: right; }
+  .bridge-delta.up { color: var(--red); }
+  .bridge-delta.down { color: var(--green); }
+  .bridge-delta.flat { color: #6b7280; }
+  .bridge-start { color: #059669; }
+  .bridge-end { color: var(--accent); }
+
+  /* questions */
+  .q-card { border: 1px solid var(--border); margin: 1.25rem 0; }
+  .q-card .qh { padding: .8rem 1.1rem; background: var(--surface-alt); border-bottom: 1px solid var(--border); font-family: system-ui, sans-serif; font-size: 13.5px; font-weight: 700; color: #111; display: flex; gap: .75rem; align-items: baseline; }
+  .q-card .qnum { color: var(--accent); font-size: 16px; flex-shrink: 0; }
+  .q-card .qb { padding: 1rem 1.15rem; font-family: system-ui, sans-serif; font-size: 13.5px; line-height: 1.7; color: #333; }
+  .q-card .qb p { font-family: system-ui, sans-serif; font-size: 13.5px; margin-bottom: .7rem; }
+  .q-card .qb p:last-child { margin-bottom: 0; }
+  .q-card .qtag { font-size: 10.5px; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; padding: .1rem .45rem; border-radius: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+
+  ul.bl, ol.bl { margin: .5rem 0 1.2rem 1.7rem; }
+  ul.bl li, ol.bl li { margin-bottom: .5rem; }
+
+  #expand-all-btn { font-family: system-ui, sans-serif; font-size: 12px; color: #888; background: none; border: 1px solid #ddd; padding: .3rem .7rem; cursor: pointer; float: right; margin-top: 3.8rem; }
+  #expand-all-btn:hover { background: var(--surface-alt); }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <a class="home" href="../index.html">← All causes</a>
+  <h5>This report</h5>
+  <ul>
+    <li><a href="#headline">The headline gap</a></li>
+    <li><a href="#what-is-botec">What is a BOTEC</a></li>
+    <li><a href="#scorecard">Side-by-side scorecard</a></li>
+    <li><a href="#diff1">1. Discount rate</a></li>
+    <li><a href="#diff2">2. TAM definition</a></li>
+    <li><a href="#diff3">3. Adoption rates</a></li>
+    <li><a href="#diff4">4. DALYs per test</a></li>
+    <li><a href="#diff5">5. Launch year</a></li>
+    <li><a href="#bridge">Walking the math</a></li>
+    <li><a href="#agree">Where we agree</a></li>
+    <li><a href="#disagree">Where we disagree</a></li>
+    <li><a href="#questions">Questions for Akhil</a></li>
+  </ul>
+</nav>
+
+<main>
+<button id="expand-all-btn" onclick="toggleAll()">Expand all</button>
+
+<div class="eyebrow">NeoTest Diligence · September 2026</div>
+<h1>Two BOTECs, One Grant</h1>
+<div class="dek">Akhil's model says $76/DALY. Ours says $111. Same facility, same disease, same data. This page explains every knob we turned differently and why — so you can decide whose assumptions to trust.</div>
+
+<div class="verdict">
+  <div class="vl">Bottom line</div>
+  <p><strong>Both models support the investment.</strong> $76 and $111 are both well inside a reasonable philanthropic bar ($100–200/DALY). The gap is not a reason to doubt the recommendation — it is a reason to understand which assumptions drive it, because those assumptions also determine which risks matter most.</p>
+  <p><strong>The four main sources of the gap:</strong> Akhil uses a lower cost-discount rate (2% vs our 9%), higher adoption rates, takes HTA DALYs at face value rather than applying a community-adherence haircut, and models an earlier launch. Each is a defensible choice; none is obviously wrong. Our model is more conservative on all four.</p>
+  <p><strong>The one number that matters most is not in either model:</strong> whether first-line ampicillin-plus-gentamicin actually works for the Klebsiella cases that dominate LMIC neonatal sepsis. If it doesn't, the community mortality mechanism — which carries 79% of modelled DALYs in both models — is overstated. Neither model applies a resistance haircut to the mortality stream. That is the shared blind spot.</p>
+</div>
+
+<div class="metrics">
+  <div class="metric theirs" style="border-top: 3px solid #6b7280;">
+    <div class="mv">$76</div>
+    <div class="ml">Akhil's CE ($/DALY, @4%)</div>
+  </div>
+  <div class="metric hl" style="border-top: 3px solid var(--accent);">
+    <div class="mv">$111</div>
+    <div class="ml">Our CE ($/DALY, @9%/4%)</div>
+  </div>
+  <div class="metric" style="border-top: 3px solid #d1d5db;">
+    <div class="mv">$36</div>
+    <div class="ml">Gap — explained below</div>
+  </div>
+  <div class="metric" style="border-top: 3px solid #d1d5db;">
+    <div class="mv">5</div>
+    <div class="ml">Structural differences</div>
+  </div>
+</div>
+
+<!-- ===================== WHAT IS A BOTEC ===================== -->
+<h2 id="what-is-botec">What is a BOTEC, and why did we build our own?</h2>
+
+<p>A BOTEC — back-of-the-envelope calculation — is a model that takes a set of assumptions about the world and produces a single number: how much does it cost to avert one DALY? The number is not the point. The assumptions are.</p>
+
+<p>Akhil built his model to answer a developer's question: is there enough commercial and philanthropic demand to justify building a neonatal sepsis diagnostic? His BCR of 31× (benefits ÷ costs, valuing DALYs at GDP per capita) is designed to show that the social return on investment is large — which it is, on any reasonable set of assumptions.</p>
+
+<p>We built our own model to answer a funder's question: is this the best use of $10M? For that question, the absolute CE number matters, not just the BCR. A BCR of 31× using GDP-per-capita DALY valuation is not directly comparable to GiveWell's bar ($50–100/DALY) or to the syphilis program we evaluated in July ($132/DALY). Converting to $/DALY — which both models also produce — makes the comparison clean.</p>
+
+<p>We also made three structural changes that reflect our different vantage point:</p>
+
+<ul class="bl">
+  <li>We applied a higher cost-discount rate (9% vs 2%), reflecting our own portfolio's opportunity cost rather than a social planner's rate.</li>
+  <li>We applied a community-adherence haircut to the HTA's DALYs-per-test, reflecting empirical evidence that real-world referral rates run lower than modelled.</li>
+  <li>We updated the launch year based on regulatory pathway analysis, which pushes the India timeline from 2031 to 2033.</li>
+</ul>
+
+<p>None of these changes are corrections of errors in Akhil's model. They are different choices about the right lens for a philanthropic funder. The resulting CE — $111 vs $76 — is best read as a range: the truth is probably somewhere in between.</p>
+
+<!-- ===================== SCORECARD ===================== -->
+<h2 id="scorecard">Side-by-side scorecard</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Akhil's model</th>
+      <th>Our model (BOTEC v4)</th>
+      <th>Direction of difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Output metric</strong></td>
+      <td class="theirs">BCR = 31× <em>and</em> $76/DALY</td>
+      <td class="ours">$111/DALY</td>
+      <td>Different framing — $76 vs $111 are both CE</td>
+    </tr>
+    <tr>
+      <td><strong>Cost discount rate</strong></td>
+      <td class="theirs">2% (social rate)</td>
+      <td class="ours">9% (funder opportunity cost)</td>
+      <td>Our rate → higher PV costs → worse CE</td>
+    </tr>
+    <tr>
+      <td><strong>DALY discount rate</strong></td>
+      <td class="agree">4%</td>
+      <td class="agree">4%</td>
+      <td style="background:#f0fdf4; color:#065f46;">Same</td>
+    </tr>
+    <tr>
+      <td><strong>TAM definition</strong></td>
+      <td class="theirs">PSBI presentations (~1.9M India/yr)</td>
+      <td class="ours">SNCU admissions (~1.9M India/yr)</td>
+      <td>Similar volumes; different conceptual frame</td>
+    </tr>
+    <tr>
+      <td><strong>India peak adoption</strong></td>
+      <td class="theirs">15% of PSBI TAM</td>
+      <td class="ours">5.5% HB + 15% Leader + 8% private</td>
+      <td>Akhil's 15% generates ~2× more tests</td>
+    </tr>
+    <tr>
+      <td><strong>India launch year</strong></td>
+      <td class="theirs">2031</td>
+      <td class="ours">2033</td>
+      <td>Our 2-year delay → fewer early DALYs</td>
+    </tr>
+    <tr>
+      <td><strong>Counterfactual launch</strong></td>
+      <td class="theirs">2038 (7yr delay)</td>
+      <td class="ours">2040 (7yr delay)</td>
+      <td>Same acceleration assumption; different base</td>
+    </tr>
+    <tr>
+      <td><strong>DALYs per test</strong></td>
+      <td class="theirs">0.1665 (direct from HTA)</td>
+      <td class="ours">0.128 (c2 = 0.38 haircut)</td>
+      <td>Ours 23% lower — community adherence</td>
+    </tr>
+    <tr>
+      <td><strong>P(launch) discount</strong></td>
+      <td class="theirs">0.65 × 0.8 = explicit</td>
+      <td class="ours">Implicit in adoption rates</td>
+      <td>Akhil's explicit P reduces expected value</td>
+    </tr>
+    <tr>
+      <td><strong>Time horizon</strong></td>
+      <td class="theirs">15 years (to 2045)</td>
+      <td class="ours">24 years (to 2049)</td>
+      <td>Ours longer — but discounting limits tail value</td>
+    </tr>
+    <tr>
+      <td><strong>Hospital cost savings</strong></td>
+      <td class="theirs">$21.53/test; makes CE negative</td>
+      <td class="ours">Modest DALY credit; not separate CE</td>
+      <td>Akhil more bullish on cost-savings contribution</td>
+    </tr>
+    <tr>
+      <td><strong>AMR haircut</strong></td>
+      <td class="warn">None</td>
+      <td class="warn">None (both blind spot)</td>
+      <td>Neither model discounts mortality for resistance</td>
+    </tr>
+    <tr>
+      <td><strong>Headline CE</strong></td>
+      <td class="theirs">$76/DALY</td>
+      <td class="ours">$111/DALY</td>
+      <td>Gap = $35</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===================== DIFFERENCE 1 ===================== -->
+<h2 id="diff1">The five structural differences</h2>
+
+<div class="diff-card">
+  <div class="dh">
+    <span class="dtitle">1 — Discount rate: 2% vs 9%</span>
+    <span class="dtag mixed">Works in both directions</span>
+  </div>
+  <div class="db">
+    <div class="side-by-side">
+      <div class="sbs-box sbs-akhil">
+        <div class="sl">Akhil</div>
+        <p>2% social discount rate on costs and benefits. "The rate a social planner should use for public welfare." PV costs: $52.6M.</p>
+      </div>
+      <div class="sbs-box sbs-ours">
+        <div class="sl">Ours</div>
+        <p>9% cost discount (funder opportunity cost), 4% DALY discount. "What else could this $60M earn?" PV costs: $21.2M.</p>
+      </div>
+    </div>
+    <p>The discount rate is not a technical parameter — it is a philosophical one. It answers the question: how much less do you value a dollar of impact that arrives in 2040 versus 2030?</p>
+    <p>A social planner — someone optimizing for collective welfare across time — uses a low rate (2–3%) because future people's lives matter nearly as much as present ones. A funder with an investment portfolio uses a higher rate (8–10%) because the alternative use of that money is a portfolio earning real returns.</p>
+    <p>The counterintuitive effect: <strong>our higher cost-discount rate actually makes our PV costs lower</strong> ($21.2M vs Akhil's $52.6M). Money disbursed as AMC payments in 2035–2045 is worth much less today at 9% than at 2%. But this doesn't improve our CE much, because we also model fewer DALYs (see differences 3 and 4). The cost-discount effect is more than offset by the adoption and DALYs differences.</p>
+    <p><strong>Who is right?</strong> For comparing to GiveWell benchmarks — which use a similar opportunity-cost framing — our 9% is the right rate. For a policy audience arguing for government funding, Akhil's 2% is appropriate. Both can be correct for their intended audience.</p>
+  </div>
+</div>
+
+<!-- ===================== DIFFERENCE 2 ===================== -->
+<div class="diff-card" id="diff2">
+  <div class="dh">
+    <span class="dtitle">2 — What population does the test reach? (TAM definition)</span>
+    <span class="dtag neutral">Closer than it looks</span>
+  </div>
+  <div class="db">
+    <div class="side-by-side">
+      <div class="sbs-box sbs-akhil">
+        <div class="sl">Akhil</div>
+        <p>PSBI presentations: all neonates meeting WHO danger-sign criteria, both facility-born and community-presenting. India: ~1.9M/yr. Denominator includes community cases that haven't yet reached a testing facility.</p>
+      </div>
+      <div class="sbs-box sbs-ours">
+        <div class="sl">Ours</div>
+        <p>SNCU admissions: neonates already in specialist wards. India: 1.9M headline, 265–500k functional (workup-relevant). The TAM is already inside the facility.</p>
+      </div>
+    </div>
+    <p>At first glance these look like very different populations. In practice, the headline TAM figures are almost identical — both are roughly 1.9M for India. That is not a coincidence: SNCU admissions and PSBI presentations in India are closely related, because ~89% of births are institutional (NFHS-5), and most PSBI cases present to or through the same facilities.</p>
+    <p>The conceptual difference matters more than the numerical one. Akhil's PSBI frame asks "how many neonates could benefit if this test were widely deployed?" Ours asks "how many are already in a facility where the test could be run today?" The PSBI frame is broader and more appropriate for long-run market sizing; the SNCU frame is more conservative and more appropriate for near-term CE estimation.</p>
+    <p>Where the two definitions diverge materially: Akhil includes community-presenting neonates who are not in SNCUs. These require both a community-level test deployment AND a functional referral pathway to get treated. Our model captures this separately through the c2 community-adherence parameter — which Akhil's model does not apply (see Difference 4).</p>
+  </div>
+</div>
+
+<!-- ===================== DIFFERENCE 3 ===================== -->
+<div class="diff-card" id="diff3">
+  <div class="dh">
+    <span class="dtitle">3 — How fast does a new diagnostic spread? (Adoption rates)</span>
+    <span class="dtag favors-them">Akhil more optimistic → his CE better</span>
+  </div>
+  <div class="db">
+    <div class="side-by-side">
+      <div class="sbs-box sbs-akhil">
+        <div class="sl">Akhil</div>
+        <p>India peak penetration: 15% of PSBI TAM. 2 years to reach 50% of peak. Calibrated to malaria RDT rollout (48% of febrile U5s by 2017).</p>
+      </div>
+      <div class="sbs-box sbs-ours">
+        <div class="sl">Ours</div>
+        <p>India HB cluster: 5.5%; Leader cluster: 15%; private: 8%. Calibrated to TNMSC/Karnataka tender histories for CRP and blood-culture kit procurement.</p>
+      </div>
+    </div>
+    <p>This is the largest single driver of the gap. Akhil's 15% of PSBI generates roughly <strong>285,000 India tests/year at peak</strong>. Our blended adoption across India's SNCU clusters generates roughly <strong>130,000 India tests/year at peak</strong>. That is a 2× difference in test volume for India alone — and India is the country that carries ~50% of all modelled DALYs.</p>
+    <p>Akhil calibrates to the malaria RDT experience, which is a reasonable anchor: malaria RDTs reached 48% of febrile under-5s in Africa within a decade. But the malaria RDT analogy has two favourable features that neonatal sepsis diagnostics lack. First, the malaria target population is enormous and diffuse (all febrile children); a new test just needs to be available, not to reach a specialist clinician. Second, malaria programs had massive donor support and established procurement infrastructure. NeoTest targets SNCU clinicians — a much narrower professional group — in a procurement environment without an established pull mechanism.</p>
+    <p>Our calibration to TNMSC and Karnataka tender histories for blood-culture and CRP kits is more specific but less data-rich. The honest range is wide. Akhil's 15% is not implausible over 15 years; our 5.5% for the high-burden cluster is a more conservative read of where India's public SNCU system typically starts with new diagnostics.</p>
+    <details>
+      <summary>Why 5.5% rather than 15%? The India SNCU procurement reality</summary>
+      <div class="details-body">
+        <p>India's 1.9M SNCU admissions headline includes a long tail of non-functional units — facilities that technically have an SNCU designation but run without adequate staffing, power, or supplies. The workup-relevant denominator (where a clinician would actually use a rapid test result) is closer to 265–500k.</p>
+        <p>5.5% of the headline 1.9M is 105k tests — which is 21–40% of the corrected functional TAM. In that framing, 5.5% is not conservative; it is ambitious relative to current Indian public-sector CRP testing rates, which run below 10% even in well-equipped SNCUs.</p>
+        <p>The Leader cluster (AIIMS, JIPMER, KEM) runs at 15% adoption in our model — closer to Akhil's assumption — because these institutions already have functioning microbiological workup protocols and are the most likely early adopters. The difference is that we do not assume Leader-tier adoption generalises rapidly to the HB cluster of district hospitals.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ===================== DIFFERENCE 4 ===================== -->
+<div class="diff-card" id="diff4">
+  <div class="dh">
+    <span class="dtitle">4 — Does community deployment actually work? (DALYs per test)</span>
+    <span class="dtag favors-them">Akhil more optimistic → his CE better</span>
+  </div>
+  <div class="db">
+    <div class="side-by-side">
+      <div class="sbs-box sbs-akhil">
+        <div class="sl">Akhil</div>
+        <p>0.1665 DALYs/test, taken directly from the HTA preprint. The HTA models a 50/50 inborn/community split with its own internal referral and adherence rates baked in.</p>
+      </div>
+      <div class="sbs-box sbs-ours">
+        <div class="sl">Ours</div>
+        <p>0.128 DALYs/test after applying c2 = 0.38 community adherence haircut. WHO PSBI programme data calibrates the referral-adherence central at 0.38, not the 0.50 the HTA implies.</p>
+      </div>
+    </div>
+    <p>The HTA's community DALY estimate rests on a specific assumption about how often a positive test result in a community setting actually leads to treatment. The HTA uses a referral rate parameter (Ref_M = 30%, Ref_H = 60%) that implies an effective community adherence of roughly 0.45–0.50.</p>
+    <p>When we calibrate this parameter to WHO PSBI programme field data — where community health workers and primary health posts are the testing point — the central estimate is 0.38. That is a 24% reduction in the community arm's contribution, and since the community arm carries roughly half of modelled DALYs, the effect on total DALYs/test is about 12%: from 0.1665 to roughly 0.147, and from there to 0.128 after also updating from c2=0.50 to c2=0.38 in our BOTEC.</p>
+    <p>This is the most debatable difference. Akhil's HTA is the only published quantitative framework for this technology — it is the natural starting point. Our c2 haircut is a judgment that real-world community adherence in LMIC settings runs lower than the HTA's parameters assume. Both positions can be defended. The empirical answer will require field data from early deployments.</p>
+    <details>
+      <summary>What c2 actually means — and why it matters so much</summary>
+      <div class="details-body">
+        <p>c2 is the community adherence parameter: the fraction of test-positive infants in community settings who actually receive the treatment the test result recommends. It captures everything between "the test gives a positive result" and "the baby gets antibiotics": does the health worker tell the family? Does the family believe it? Can they get to a facility? Does the facility have stock?</p>
+        <p>In the 50/50 inborn/community model, c2 only applies to the community half. The inborn (SNCU) half has structural adherence near 1.0 — the clinician is already there, the baby is already admitted, the antibiotics are already available.</p>
+        <p>Moving c2 from 0.50 to 0.38 (the WHO PSBI empirical central) reduces the community mortality stream by about 24%, which cuts total DALYs/test from 0.1665 to approximately 0.128 — a 23% reduction. This is the dominant driver of our higher CE versus Akhil's.</p>
+        <p>After the care-seeking chain analysis we conducted, we confirmed that c2 (clinician/family adherence to test result) is now the binding constraint — not L1/L2 (care-seeking and reaching a facility), which the denominator correction showed was a wrong-denominator artifact. The question is not whether PSBI babies reach a testing facility; in India, 89% of births are institutional. The question is whether a positive result at 48–72 hours changes the treatment decision. Field evidence from Indian NICUs is promising but limited to a few sites.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ===================== DIFFERENCE 5 ===================== -->
+<div class="diff-card" id="diff5">
+  <div class="dh">
+    <span class="dtitle">5 — When does the test reach market? (Launch year)</span>
+    <span class="dtag favors-them">Akhil more optimistic → his CE better</span>
+  </div>
+  <div class="db">
+    <div class="side-by-side">
+      <div class="sbs-box sbs-akhil">
+        <div class="sl">Akhil</div>
+        <p>Regulatory approval 2030. India commercial launch 2031. Tier 2 (Ghana, Kenya, Brazil) 2032. Tier 3 2034. Driven by TRL-of-landscape assessment.</p>
+      </div>
+      <div class="sbs-box sbs-ours">
+        <div class="sl">Ours</div>
+        <p>India launch 2033, conditional on NEDL 2031 gate. Regulatory pathway analysis: WHO PQ median ~2035 (P≤2030 ≈ 0%). NEDL listing is the binding gate, not WHO PQ timing.</p>
+      </div>
+    </div>
+    <p>Two years seems small. But under a pure-acceleration model — where the marginal DALYs are only those that happen earlier because of the AMC — a 2-year shift in launch date moves the starting point of the accumulation window and has a compounding effect through discounting.</p>
+    <p>Akhil's 2030 regulatory approval requires NeoSep-SAA to complete its culture-confirmed pivotal study, achieve WHO prequalification, and clear CDSCO registration in about four years from now. The regulatory pathway analysis we commissioned found that across 47 novel diagnostics, the median from WHO PQ to national LMIC scale is ten years, and the fastest feasible path (embedding Indian SNCU sites in the global pivotal, compressing the NEDL nomination) produces a 2031 NEDL listing — not a 2030 regulatory clearance.</p>
+    <p>That said, Akhil's optimism is not baseless. His 2031 launch year maps to India's NEDL 2031 gate, which is also our central. The difference is subtle: Akhil counts commercial sales from 2031; we count meaningful public-sector uptake from 2033 (reflecting that NEDL listing does not immediately translate to procurement). This is a matter of what "launch" means in a public-sector context.</p>
+  </div>
+</div>
+
+<!-- ===================== MATH BRIDGE ===================== -->
+<h2 id="bridge">Walking the math: how you get from $76 to $111</h2>
+
+<p>Each difference above has a directional effect on CE. Here is the approximate contribution of each, starting from Akhil's $76 and arriving at our $111. The numbers are illustrative — isolating one assumption at a time while holding everything else constant produces a rough decomposition, not an exact accounting.</p>
+
+<div class="bridge">
+  <div class="bridge-row">
+    <span class="bridge-num bridge-start">$76</span>
+    <span class="bridge-arrow">→</span>
+    <span class="bridge-label"><strong>Akhil's central estimate</strong> (2% cost discount, 15% India adoption, 0.1665 DALYs/test, 2031 launch)</span>
+    <span class="bridge-delta flat"></span>
+  </div>
+  <div class="bridge-row">
+    <span class="bridge-num">~$60</span>
+    <span class="bridge-arrow">→</span>
+    <span class="bridge-label">Raise cost discount from 2% → 9%: PV costs fall from $52.6M to $21.2M, CE improves</span>
+    <span class="bridge-delta down">−$16</span>
+  </div>
+  <div class="bridge-row">
+    <span class="bridge-num">~$80</span>
+    <span class="bridge-arrow">→</span>
+    <span class="bridge-label">Lower adoption to our India mix (~130k peak vs ~285k): fewer marginal tests, fewer DALYs</span>
+    <span class="bridge-delta up">+$20</span>
+  </div>
+  <div class="bridge-row">
+    <span class="bridge-num">~$95</span>
+    <span class="bridge-arrow">→</span>
+    <span class="bridge-label">Apply c2 = 0.38 haircut: DALYs/test from 0.1665 → 0.128 (−23%)</span>
+    <span class="bridge-delta up">+$15</span>
+  </div>
+  <div class="bridge-row">
+    <span class="bridge-num">~$111</span>
+    <span class="bridge-arrow">→</span>
+    <span class="bridge-label">Push India launch from 2031 → 2033: fewer early marginal tests, discounting effects</span>
+    <span class="bridge-delta up">+$16</span>
+  </div>
+  <div class="bridge-row">
+    <span class="bridge-num bridge-end">$111</span>
+    <span class="bridge-arrow">→</span>
+    <span class="bridge-label"><strong>Our central estimate</strong> (9%/4%, 5.5% HB adoption, 0.128 DALYs/test, 2033 launch)</span>
+    <span class="bridge-delta flat"></span>
+  </div>
+</div>
+
+<div class="note">
+  <div class="nt">Note on direction</div>
+  The cost-discount change pushes CE in our favour (lower is better); the adoption, DALYs/test, and launch-year changes all push it against us. The net result is $35 worse. If you think Akhil is right on adoption and launch but we are right on discount rate, the answer is closer to $60. If you think we are right on all four, you get $111.
+</div>
+
+<!-- ===================== WHERE WE AGREE ===================== -->
+<h2 id="agree">Where we agree</h2>
+
+<div class="callout-green">
+  <div class="ct">Strong agreement</div>
+  Seven things both models treat the same way — and which represent the most defensible parts of the analysis.
+</div>
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Shared assumption</th><th>Evidence base</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Acceleration</strong></td>
+      <td class="agree">7 years</td>
+      <td>Malaria RDT AMC precedent; no prior LMIC pull mechanism for neonatal sepsis diagnostics</td>
+    </tr>
+    <tr>
+      <td><strong>DALY discount rate</strong></td>
+      <td class="agree">4% per year</td>
+      <td>GBD/WHO convention for health economic analysis</td>
+    </tr>
+    <tr>
+      <td><strong>AMC price tiers</strong></td>
+      <td class="agree">$7 / $5 / $3 per test</td>
+      <td>Facility design documents; developer interviews</td>
+    </tr>
+    <tr>
+      <td><strong>50/50 inborn/community mix</strong></td>
+      <td class="agree">Equal weighting</td>
+      <td>HTA preprint; PSBI epidemiology data</td>
+    </tr>
+    <tr>
+      <td><strong>Test sensitivity</strong></td>
+      <td class="agree">Se ~0.90 per WHO TPP</td>
+      <td>WHO target product profile; NeoSep-SAA Uganda study</td>
+    </tr>
+    <tr>
+      <td><strong>De-escalation as mechanism</strong></td>
+      <td class="agree">Stop-gate only</td>
+      <td>NeoPInS, ProABIS, 15-study scoping review — all stop-gate designs</td>
+    </tr>
+    <tr>
+      <td><strong>AMR credit</strong></td>
+      <td class="warn">Both overstate</td>
+      <td>Bottom-up model: 0.013 claimed vs ~0.00036 defensible (36× gap). Neither model applies resistance-reversal data.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===================== WHERE WE DISAGREE ===================== -->
+<h2 id="disagree">Where we genuinely disagree</h2>
+
+<p>Three disagreements are matters of evidence; one is a philosophical choice; one is a shared blind spot.</p>
+
+<h3>Genuine empirical disagreements</h3>
+
+<div class="callout-amber">
+  <div class="ct">Disagreement 1 — Adoption rate calibration</div>
+  Akhil uses the malaria RDT as his primary adoption analogue. We use TNMSC tender histories for SNCU diagnostics. The malaria analogue is optimistic because it applies a community-level commodity rollout to a specialist clinical decision. The TNMSC analogue is conservative because Indian public procurement moves slowly and the CRP/blood-culture history is not a direct precedent for a novel POCT. Neither is right; neither is wrong. The honest range is probably 8–15% at peak. We use 5.5% for the HB cluster specifically because that tier represents the weakest institutional capacity, not the full India market.
+</div>
+
+<div class="callout-amber">
+  <div class="ct">Disagreement 2 — Community adherence (c2)</div>
+  This is the disagreement with the largest CE effect. Akhil takes HTA referral rates at face value; we apply an independent WHO PSBI calibration that puts real-world adherence ~25% lower. The right answer here is a field question — neither of us has data from an actual NeoTest-like deployment. The first field study (ideally in a WHO PSBI-compliant setting) will settle this.
+</div>
+
+<div class="callout-amber">
+  <div class="ct">Disagreement 3 — Launch year</div>
+  Akhil models 2031 India commercial launch; we model 2033 meaningful public-sector uptake. These are measuring different things. If "launch" means first commercial sale, 2031 is plausible. If "launch" means the NEDL listing that triggers public-sector procurement at scale, 2031 is aggressive and 2033 is more defensible. For CE purposes, we think the procurement-scale definition is the right one.
+</div>
+
+<h3>Philosophical choice</h3>
+
+<div class="callout">
+  <strong>Cost discount rate (2% vs 9%):</strong> This is not resolvable by evidence. Akhil's 2% is standard in academic health economics for public policy analysis. Our 9% reflects the opportunity cost of philanthropic capital. For a funder benchmarking against GiveWell or other CE programs, 9% is the right rate. For a government policymaker, 2% is more defensible. The choice shifts the CE by roughly $16/DALY.
+</div>
+
+<h3>The shared blind spot</h3>
+
+<div class="callout-red">
+  <div class="ct">Neither model handles AMR properly</div>
+  Both models credit the full mortality benefit of a positive test result triggering empiric ampicillin-plus-gentamicin treatment. Klebsiella — the dominant neonatal-sepsis pathogen in India and sub-Saharan Africa — is 96–99% resistant to that regimen. BARNARDS 2021 found first-line coverage of only 25–28% of Gram-negative isolates. Neither Akhil's model nor ours applies a resistance haircut to the mortality stream. If first-line treatment covers only 25–28% of Gram-negative cases, the community mortality mechanism — which carries 79% of modelled DALYs in both models — is substantially overstated. A resistance-adjusted CE for the community mortality channel alone would be roughly $190–250/DALY. This is the most important unresolved question in both models.
+</div>
+
+<!-- ===================== QUESTIONS FOR AKHIL ===================== -->
+<h2 id="questions">Questions for Akhil</h2>
+
+<p>Seven questions that would either resolve the key disagreements or clarify whether the models are actually measuring different things.</p>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">1</span> Adoption calibration: why the malaria RDT rather than SNCU-specific data? <span class="qtag">biggest CE impact</span></div>
+  <div class="qb">
+    <p>Your model uses malaria RDT rollout (48% of febrile U5s) as the primary adoption analogue. The malaria RDT targets all febrile children presenting anywhere; NeoTest targets SNCU clinicians in specialist wards. Do you think the 15% peak penetration is defensible for the district HB-cluster SNCUs, or is it anchored primarily to the Leader-tier institutions?</p>
+    <p>If we segmented the India market the way we do — HB cluster (5.5%), Leader cluster (15%), private (8%) — what would your model produce? We suspect the aggregate isn't far from your 15% of the full PSBI TAM, but the distributional question matters for which years DALYs flow in.</p>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">2</span> Community adherence: does the HTA's c2 = 0.50 hold in the field? <span class="qtag">biggest CE impact</span></div>
+  <div class="qb">
+    <p>Your model takes the HTA's per-1000-neonates values directly. The HTA community arm implies an effective referral-and-adherence rate of roughly 0.45–0.50. WHO PSBI programme field data calibrates real-world community adherence at 0.38 across LMIC settings. Is there evidence from any existing community NeoTest-analogous deployment that supports the HTA's implied c2? Or is this a modelling assumption that the first pilot study would need to validate?</p>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">3</span> AMR trajectory: have you stress-tested the community mortality mechanism against Klebsiella resistance?</div>
+  <div class="qb">
+    <p>BARNARDS 2021 found 25–28% first-line coverage of Gram-negative neonatal sepsis isolates. Klebsiella is 96–99% resistant to ampicillin plus gentamicin at district level. Your model credits the full mortality benefit of a positive test triggering first-line treatment. If that treatment is ineffective for the dominant pathogen in LMIC settings, the community mortality channel is overstated by a factor of 3–4×. Have you modelled a resistance-adjusted scenario? What does it look like?</p>
+    <p>This is also an argument for GARDP's NeoSep1 program being a prerequisite, not just a complement — and potentially for the AMC requiring antibiogram co-deployment at participating facilities.</p>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">4</span> Launch year 2031: what does this require on the regulatory clock?</div>
+  <div class="qb">
+    <p>2031 India commercial launch requires regulatory approval by 2030 — roughly four years from now. The culture-confirmed pivotal hasn't started. Median WHO PQ approval for novel diagnostics runs ~5 years from pivotal completion. Even with the fastest feasible path (Indian SNCU sites in the pivotal, expedited CDSCO review), the regulatory pathway analysis puts a 2031 NEDL listing at the optimistic end, not the central case. Can you walk us through the specific regulatory milestones that make 2031 achievable? Is 2031 first commercial sale or first public-sector procurement?</p>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">5</span> Post-AMC pricing: what does the model assume after the $30M cap is exhausted?</div>
+  <div class="qb">
+    <p>Your 15-year model horizon (to 2045) runs well past the expected AMC exhaustion point (~3.3M tests at P50, depleted by ~2038–2040). What price does the model assume for tests beyond the AMC cap? GeneXpert held at $9.98 for 16 years with no second manufacturer. If the post-AMC price reverts to cost-plus without a binding cap, some of the out-year volume and DALYs in your model may not materialise in the public sector. Has this been modelled?</p>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">6</span> Success probability structure: does P(launch) = 0.65 interact with the marginal test calculation?</div>
+  <div class="qb">
+    <p>Your model applies P(launch) = 0.65 as an explicit discount to expected tests. Our model folds this into adoption rates rather than applying it as a separate multiplier. This is more than a presentational difference: if the counterfactual (no AMC) also has some positive probability of a product launching eventually, then the marginal DALY calculation should net out the counterfactual P(launch), not just the AMC-world P(launch). How does your counterfactual handle the case where a product launches anyway, just 7 years later — does the same 0.65 apply in both worlds?</p>
+  </div>
+</div>
+
+<div class="q-card">
+  <div class="qh"><span class="qnum">7</span> AMR DALY credit: does 0.017 DALYs/1000 tests survive a resistance-reversal check?</div>
+  <div class="qb">
+    <p>Both models credit 0.013–0.017 DALYs/test for AMR reduction from stopping unnecessary antibiotic courses. A bottom-up resistance-dynamics model gives ~0.00036 DALYs/test — about 36× lower — because near-term resistance reversal from a single avoided antibiotic course is close to zero at the population level. 68% of neonatal Klebsiella sepsis is horizontal-transmission-driven, not de-novo selection from the marginal empiric course. Has the HTA's AMR stream been checked against resistance-reversal evidence? The stewardship benefit is real; the near-term DALY credit may not be.</p>
+    <p>Note: this barely moves the CE headline (~$111 → $113 when zeroed) because AMR is only 9% of total DALYs. It is an intellectual-honesty issue, not a financial-decision issue. But we would rather note it explicitly than have it cited by a reader as a genuine benefit stream.</p>
+  </div>
+</div>
+
+<!-- ===================== APPENDIX ===================== -->
+<h2 id="appendix">Appendix: model inputs compared</h2>
+
+<details>
+  <summary>Full parameter table — Akhil vs ours</summary>
+  <div class="details-body">
+    <table>
+      <thead><tr><th>Parameter</th><th>Akhil</th><th>Ours</th><th>Effect on CE</th></tr></thead>
+      <tbody>
+        <tr><td>Cost discount rate</td><td>2%</td><td>9%</td><td>Lower costs in our model (−$16)</td></tr>
+        <tr><td>DALY discount rate</td><td>4%</td><td>4%</td><td>Same</td></tr>
+        <tr><td>India launch year</td><td>2031</td><td>2033</td><td>Fewer early tests in our model (+$16)</td></tr>
+        <tr><td>Counterfactual launch year (India)</td><td>2038</td><td>2040</td><td>Same 7yr acceleration in both</td></tr>
+        <tr><td>Time horizon</td><td>15 years</td><td>24 years</td><td>Longer tail in our model; limited by discounting</td></tr>
+        <tr><td>India peak adoption</td><td>15% of PSBI</td><td>5.5% HB / 15% Leader / 8% private</td><td>~2× more India tests in Akhil (+$20 if removed)</td></tr>
+        <tr><td>DALYs per test</td><td>0.1665</td><td>0.128 (c2=0.38)</td><td>23% lower in our model (+$15)</td></tr>
+        <tr><td>P(launch)</td><td>0.65 explicit</td><td>Implicit in adoption</td><td>Akhil's explicit discount reduces his expected DALYs</td></tr>
+        <tr><td>P(commercialise | launch)</td><td>0.8 per country</td><td>Implicit</td><td>Further reduces Akhil's expected DALYs</td></tr>
+        <tr><td>AMC tiers</td><td>$7/$5/$3</td><td>$7/$5/$3</td><td>Same</td></tr>
+        <tr><td>Milestone prize</td><td>$20M</td><td>$20M</td><td>Same</td></tr>
+        <tr><td>Implementation support</td><td>$10M</td><td>$10M</td><td>Same</td></tr>
+        <tr><td>Hospital cost savings</td><td>$21.53/test (makes CE negative)</td><td>Modest DALY credit</td><td>Akhil includes savings that we separate</td></tr>
+        <tr><td>AMR DALY credit</td><td>0.017/test</td><td>0.013/test (BOTEC); ~0.00036 (bottom-up)</td><td>Immaterial for decision (<$2/DALY)</td></tr>
+        <tr><td>First-line resistance haircut</td><td>None</td><td>None</td><td>Shared blind spot — could add $80–140/DALY</td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+
+<details>
+  <summary>What "BCR = 31×" actually means — and why we prefer $/DALY</summary>
+  <div class="details-body">
+    <p>A benefit-cost ratio of 31× means: for every dollar of philanthropic cost, society gains $31 of welfare benefit. But the "benefit" is DALYs valued at GDP per capita — roughly $2,300 for India ($2,100) and $4,400 for Kenya. By this metric, a DALY averted in India is worth about $2,300, so 693,000 DALYs × $2,300 = $1.6 billion in benefit against $52.6M in cost = BCR ~31×.</p>
+    <p>The problem with using BCR for philanthropic allocation: it privileges interventions in poor countries (where GDP/capita is low, so DALYs valued at GDP/capita are cheap relative to cost) over rich-country interventions, which is not the right criterion. It also makes the number incomparable to GiveWell's benchmark, which uses a standard cost-per-DALY metric that doesn't depend on the GDP of the recipient country.</p>
+    <p>CE ($/DALY) solves this by asking the neutral question: how many dollars of philanthropic cost per unit of health benefit? At $76–111/DALY, NeoTest sits between GiveWell's top-charity bar (~$50–100) and the syphilis program we evaluated in July ($132). That comparison is only possible with the CE metric.</p>
+  </div>
+</details>
+
+</main>
+</div>
+
+<script>
+function toggleAll() {
+  const details = document.querySelectorAll('details');
+  const btn = document.getElementById('expand-all-btn');
+  const anyOpen = Array.from(details).some(d => d.open);
+  details.forEach(d => d.open = !anyOpen);
+  btn.textContent = anyOpen ? 'Expand all' : 'Collapse all';
+}
+
+// Highlight active nav item on scroll
+const sections = document.querySelectorAll('h2[id], h3[id]');
+const navLinks = document.querySelectorAll('nav ul li a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
