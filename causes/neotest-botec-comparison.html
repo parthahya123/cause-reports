@@ -541,7 +541,9 @@
 
 <div class="callout-amber">
   <div class="ct">Disagreement 1 — Adoption rate calibration</div>
-  Akhil uses the malaria RDT as his primary adoption analogue. We use TNMSC tender histories for SNCU diagnostics. The malaria analogue is optimistic because it applies a community-level commodity rollout to a specialist clinical decision. The TNMSC analogue is conservative because Indian public procurement moves slowly and the CRP/blood-culture history is not a direct precedent for a novel POCT. Neither is right; neither is wrong. The honest range is probably 8–30% at peak. Georgia halved Akhil's original 30% to 15% as a conservative adjustment; we use 5.5–15% segmented by SNCU tier. The models converge more than the raw numbers suggest — both agree on the Leader-tier ceiling (~15%).
+  <p>Akhil uses the malaria RDT as his primary adoption analogue. We use TNMSC tender histories for SNCU diagnostics. Research across comparator diagnostics in 2026 found: CBNAAT/Truenat (India's best-resourced NEDL-listed molecular test) reached only ~26% test-share after ten years. CRP/PCT in East African facilities is "barely used routinely." Brazil's mandated pulse-ox screen plateaued at ~61% SUS penetration over a decade — and that had a legal mandate and donor support.</p>
+  <p><strong>India (HB 5.5%, Leader 15%):</strong> Research confirms these are defensible central estimates. 15% Leader is "central-to-conservative"; 5.5% HB is "contingent-central" — it holds if NEDL listing triggers procurement, but falls if NEDL listing is missed.</p>
+  <p><strong>Brazil (35%) and SSA (20–25%):</strong> Research found no documented analogue for 20–35% NICU POCT penetration without either donor saturation or legal mandate. Revised priors from comparator evidence: Brazil ~10–18%, SSA ~8–12%. The BOTEC's Brazil/SSA adoption assumptions are optimistic by a factor of ~2×. Combined CE impact of reducing to evidence-anchored values: roughly +$15–25/DALY.</p>
 </div>
 
 <div class="callout-amber">
@@ -562,9 +564,11 @@
 
 <h3>The shared blind spot</h3>
 
-<div class="callout-red">
-  <div class="ct">Neither model handles AMR properly</div>
-  Both models credit the full mortality benefit of a positive test result triggering empiric ampicillin-plus-gentamicin treatment. Klebsiella — the dominant neonatal-sepsis pathogen in India and sub-Saharan Africa — is 96–99% resistant to that regimen. BARNARDS 2021 found first-line coverage of only 25–28% of Gram-negative isolates. Neither Akhil's model nor ours applies a resistance haircut to the mortality stream. If first-line treatment covers only 25–28% of Gram-negative cases, the community mortality mechanism — which carries ~81% of modelled DALYs in both models (81.4% per the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">CGD HTA</a>) — is substantially overstated. A resistance-adjusted CE for the community mortality channel alone would be roughly $190–250/DALY. This is the most important unresolved question in both models.
+<div class="callout-amber">
+  <div class="ct">AMR DALY credit — overestimated ~10× in both models, but immaterial for the decision</div>
+  <p>Both models credit ~10% of total benefit (0.013–0.017 DALY/test) to AMR reduction from stopping unnecessary antibiotic courses. A 2026 research audit of this component found the benefit is real but the magnitude is wrong. The mechanism — fewer unnecessary antibiotic-days → lower selection pressure → fewer future resistance-driven deaths — is valid, but the near-term DALY conversion is ~7×10⁻⁴/test (0.7%) rather than 10%, because consumption-to-resistance elasticity is 0.10 and near-term BSI-DALY causation is indirect. The correct AMR credit is ~0.001 DALY/test, not 0.013.</p>
+  <p>Headline CE impact: ~$111 → ~$113/DALY. This is an intellectual-honesty correction, not a decision-changing one.</p>
+  <p><strong>What does NOT apply here:</strong> The framing that first-line resistance "cancels" the mortality benefit is incorrect in a de-escalation design. NeoTest is used to STOP empiric antibiotics at 48–72h, not to decide whether to start them. Empiric treatment begins at hour 0 for all danger-sign infants regardless of POCT result. The POCT tells the clinician whether to continue (positive) or stop (negative) — and a positive result can prompt escalation from amp-gent to an appropriate regimen. <a href="https://www.barnards.ox.ac.uk/">BARNARDS</a>-confirmed 31% amp-gent coverage makes this escalation pathway more important, not less — and makes GARDP's NeoSep1 a genuine prerequisite for the mortality mechanism to hold.</p>
 </div>
 
 <!-- ===================== QUESTIONS FOR AKHIL ===================== -->
@@ -617,11 +621,58 @@
 </div>
 
 <div class="q-card">
-  <div class="qh"><span class="qnum">7</span> AMR DALY credit: does 0.017 DALYs/1000 tests survive a resistance-reversal check?</div>
+  <div class="qh"><span class="qnum">7</span> AMR DALY credit: does 0.013 DALYs/test survive a resistance-reversal check? <span class="qtag">confirmed overestimate</span></div>
   <div class="qb">
-    <p>Both models credit 0.013–0.017 DALYs/test for AMR reduction from stopping unnecessary antibiotic courses. A bottom-up resistance-dynamics model gives ~0.00036 DALYs/test — about 36× lower — because near-term resistance reversal from a single avoided antibiotic course is close to zero at the population level. 68% of neonatal Klebsiella sepsis is horizontal-transmission-driven, not de-novo selection from the marginal empiric course. Has the HTA's AMR stream been checked against resistance-reversal evidence? The stewardship benefit is real; the near-term DALY credit may not be.</p>
-    <p>Note: this barely moves the CE headline (~$111 → $113 when zeroed) because AMR is only ~10% of total DALYs (the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">HTA</a> and our BOTEC both give 10.2% for this stream). It is an intellectual-honesty issue, not a financial-decision issue. But we would rather note it explicitly than have it cited by a reader as a genuine benefit stream.</p>
+    <p>Both models credit 0.013–0.017 DALYs/test for AMR reduction from stopping unnecessary antibiotic courses. A 2026 Fermi audit (antibiotic-days averted × consumption-to-resistance elasticity × resistance-BSI-DALY conversion) gives ~0.00073 DALYs/test — roughly 10–14× lower. The two inputs that drive this down: (a) consumption-to-AMR elasticity is ~0.10, not 1.0; (b) near-term resistance reversal from a single avoided course is near-zero because 68% of neonatal Klebsiella sepsis is horizontal-transmission-driven, not de novo selection from the marginal empiric course.</p>
+    <p>The stewardship benefit is real and belongs in a separate AMR-externality accounting line, but it should not be in the near-term DALY headline. <strong>Revised AMR credit: ~0.001 DALY/test (0.7% of total), not 0.013 (10%).</strong></p>
+    <p>CE impact: ~$111 → ~$113/DALY. This is a calibration correction, not a model-invalidating finding. The mortality channel (79% of DALYs) is unaffected.</p>
   </div>
+</div>
+
+<!-- ===================== RESEARCH UPDATES ===================== -->
+<h2 id="research">Research loop findings (11 runs, Sep 2026)</h2>
+
+<p>Between the initial model comparison and publication, eleven dedicated research runs interrogated the key BOTEC sensitivities. Summary below; full synthesis documents linked per run.</p>
+
+<h3>Confirmed / validated findings</h3>
+
+<table>
+  <thead><tr><th>Run</th><th>Question</th><th>Verdict</th><th>CE impact</th></tr></thead>
+  <tbody>
+    <tr><td>Run X — Net-harm</td><td>Does POCT-guided antibiotic use cause net harm in high-prescribing settings?</td><td class="agree">Refuted. All 15 neonatal biomarker RCTs (N=4,755 inc. <a href="https://doi.org/10.1016/S0140-6736(17)30553-0">NeoPInS, Lancet 2017</a>) are de-escalation designs. Net-harm is a theoretical artifact of initiation-gating only.</td><td>None — design choice confirmed safe</td></tr>
+    <tr><td>Run Y — Care-seeking</td><td>Is the 2.5% reachability ceiling correct?</td><td class="agree">Refuted as a denominator error. 2.5% applies community multipliers to facility-born infants. BOTEC uses SNCU admissions (correct denominator). Reachability within the BOTEC TAM is 17–29%.</td><td>None — BOTEC denominator confirmed</td></tr>
+    <tr><td>AMR loop</td><td>Amp-gent coverage of LMIC neonatal pathogens</td><td class="warn">Pathogen-weighted amp-gent coverage: <strong>~31% central (21–43%)</strong>, not 50–70%. 50–70% is a high-income / GBS-dominant artifact. BARNARDS Gram-negative blend = 28.5%, our model = 29.1% (internal check).</td><td>Indirect — elevates urgency of NeoSep1</td></tr>
+    <tr><td>AMR loop</td><td>AMR DALY component validity</td><td class="warn">AMR DALY/test ~0.001 (0.7%), not 0.013 (10%). Overestimated 10–14×. Consumption-to-resistance elasticity = 0.10; near-term reversal near zero for transmission-driven Klebsiella.</td><td><strong>+$2/DALY</strong> ($111→$113)</td></tr>
+    <tr><td>Loop 2 — India adoption</td><td>HB 5.5% / Leader 15% defensibility</td><td class="agree">Both confirmed as defensible central estimates. CBNAAT/Truenat (best-case NEDL-listed Indian diagnostic) hit only ~26% test-share after 10 years. CRP/PCT is already bimodal (standard in teaching NICUs, sparse in DHs).</td><td>None — confirmed</td></tr>
+    <tr><td>Loop 6 — India regulatory</td><td>NEDL 2031 achievability</td><td class="warn">NEDL cadence ~6 years (2019→Jul 2025). No-predicate Class C/D IVD requires Indian clinical eval (12–42 mo) regardless of foreign approval. NEDL lists categories, not products — needs a new category endorsed. 2031 is a "single-window binary bet," not a central case.</td><td>Miss → 2037, delaying India public track by 6 years</td></tr>
+    <tr><td>Loop 8 — Brazil/SSA adoption</td><td>20–35% peak adoption defensibility</td><td class="red">Not defensible. No documented analogue for 20–35% NICU POCT penetration without donor saturation or legal mandate. Brazil mandated pulse-ox screen hit ~61% SUS after a decade. Revised evidence-anchored priors: <strong>Brazil ~10–18%, SSA ~8–12%</strong>.</td><td><strong>+$15–25/DALY</strong> combined</td></tr>
+    <tr><td>Loop 9 — c2 adherence</td><td>c2 = 0.50 central estimate</td><td class="agree">Confirmed defensible. Mode-B de-escalation stop-adherence: ProACT 0.648, PRORATA ~0.53, unsupervised floor ~0.35, protocolized ceiling ~0.85. 0.50 is appropriate for a well-run programme; should be treated as a <em>design variable</em>, not a fixed input.</td><td>None — confirmed</td></tr>
+    <tr><td>Loop 7 — Post-AMC pricing</td><td>Price spike risk after AMC exhausts</td><td class="red">Critical design gap confirmed. GeneXpert held at $9.98 for 11 years; MSF COGS estimate $3–4.60 (2.5× multiple). Gavi PCV AMC has a $3.50 binding tail ceiling + volume guarantee. NeoTest BOTEC has a <em>subsidy schedule</em> but <strong>no contracted binding price ceiling</strong> — this is the GeneXpert failure zone.</td><td>Design fix needed, not CE change</td></tr>
+    <tr><td>Loop 10 — Implementation costs</td><td>$10M implementation support adequacy</td><td class="warn">Tight. Bottom-up Fermi: $5.4M / $8.3M / $13.5M (low/central/high) vs $10M budget → 54–134% utilization. $10M is adequate if (a) LFA-architecture rollout (not molecular-platform), (b) host systems absorb recurring costs post-2032. Underfunded by ~$3M at central.</td><td>Design gap: suggest $12–13M</td></tr>
+    <tr><td>Loop 4 — NeoSep-SAA</td><td>WHO TPP achievability (85%/70%)</td><td class="warn">Operating band Se = 0.54–0.92 — wide, reference-standard-dependent. Uganda field study 92%/73%; independent Indian POC-SAA under culture truth: 53.6%/80.4%. Hospital specificity floor (80%) not met by any published neonatal POC product. AMC's 85% gate is achievable but not certain — it is currently a validation-design decision.</td><td>P(prize claim) ~40–60%</td></tr>
+    <tr><td>Loop 5 — Competing landscape</td><td>AMC design robustness to competition</td><td class="warn">No product currently clears both WHO TPP operating points in neonates. Main risk is NOT a split-prize race but a single narrow-passer capturing the entire prize as a monopoly (the GeneXpert failure mode). AMC needs stronger usability and post-market quality safeguards.</td><td>Design fix needed</td></tr>
+  </tbody>
+</table>
+
+<h3>Proposed BOTEC updates</h3>
+
+<table>
+  <thead><tr><th>Parameter</th><th>Current BOTEC</th><th>Research finding</th><th>Proposed revision</th><th>CE impact</th></tr></thead>
+  <tbody>
+    <tr><td>AMR DALY/test</td><td>0.013 (10.2% of total)</td><td>Overestimated 10–14×; defensible value ~0.001</td><td class="warn">Reduce to 0.001</td><td>+$2/DALY</td></tr>
+    <tr><td>Brazil peak adoption</td><td>35%</td><td>No documented analogue; evidence-anchored ~10–18%</td><td class="warn">Reduce to 15%</td><td>+$5–8/DALY</td></tr>
+    <tr><td>SSA peak adoption (Ethiopia/Kenya/Ghana)</td><td>20–25%</td><td>Evidence-anchored ~8–12%; false-adoption risk in facilities without stable electricity</td><td class="warn">Reduce to 12%</td><td>+$5–8/DALY</td></tr>
+    <tr><td>AMC binding price ceiling</td><td>Not in disbursement agreement</td><td>Critical gap; Gavi PCV AMC has 10-yr binding ceiling + second-source trigger</td><td class="red">Add binding $5 ceiling (years 1–5 post-AMC) + generic-entry trigger at >$4/test</td><td>Design fix, not CE input</td></tr>
+    <tr><td>Implementation support</td><td>$10M</td><td>Bottom-up central: $8.3M; high-case: $13.5M</td><td class="warn">Increase to $12–13M</td><td>+$1–2/DALY (cost increase)</td></tr>
+    <tr><td>P(WHO TPP) sensitivity</td><td>Not modeled explicitly</td><td>Se band 0.54–0.92; hospital Sp floor not cleared by any product</td><td class="warn">Add P(TPP) = 0.45–0.65 scenario in S3</td><td>Design fix</td></tr>
+    <tr><td>India adoption HB/Leader</td><td>5.5% / 15%</td><td>Confirmed defensible</td><td class="agree">No change</td><td>None</td></tr>
+    <tr><td>c2 adherence</td><td>0.50</td><td>Confirmed; treat as design variable not fixed input</td><td class="agree">No change to central; add protocol-conditioned range (0.35–0.85)</td><td>None to central</td></tr>
+    <tr><td>De-escalation design condition</td><td>Written into BOTEC logic</td><td>Confirmed structurally correct; must be written into AMC disbursement conditions</td><td class="agree">Disbursement condition: de-escalation-only use required</td><td>Design fix confirmed</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>Revised central CE (incorporating confirmed updates):</strong> Reducing AMR DALY credit to 0.001 and Brazil/SSA adoption to evidence-anchored values moves the central CE from ~$111 to roughly <strong>$128–135/DALY</strong> — still below the <a href="https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness">GiveWell top-charity threshold</a> (~$150/DALY implied by their allocation decisions), and below our July syphilis program evaluation ($132/DALY). The fundamental case for NeoTest remains strong; the adjustments tighten but do not reverse the verdict.
 </div>
 
 <!-- ===================== APPENDIX ===================== -->
