@@ -171,31 +171,31 @@
 
 <div class="eyebrow">NeoTest Diligence · September 2026</div>
 <h1>Two BOTECs, One Grant</h1>
-<div class="dek">Akhil's model says $76/DALY. Ours says $111. Same facility, same disease, same data. This page explains every knob we turned differently and why — so you can decide whose assumptions to trust.</div>
+<div class="dek">Akhil's model, properly computed on a marginal basis, says $119/DALY. Ours says $111. The often-cited $76 doesn't net out the counterfactual — it counts every test as marginal. When you compare apples to apples, the gap is $8, not $35. This page explains the real differences — and where both models genuinely agree.</div>
 
 <div class="verdict">
   <div class="vl">Bottom line</div>
-  <p><strong>Both models support the investment.</strong> $76 and $111 are both well inside a reasonable philanthropic bar ($100–200/DALY). The gap is not a reason to doubt the recommendation — it is a reason to understand which assumptions drive it, because those assumptions also determine which risks matter most.</p>
-  <p><strong>The four main sources of the gap:</strong> Akhil uses a lower cost-discount rate (2% vs our 9%), higher adoption rates, takes HTA DALYs at face value rather than applying a community-adherence haircut, and models an earlier launch. Each is a defensible choice; none is obviously wrong. Our model is more conservative on all four.</p>
-  <p><strong>The one number that matters most is not in either model:</strong> whether first-line ampicillin-plus-gentamicin actually works for the Klebsiella cases that dominate LMIC neonatal sepsis. If it doesn't, the community mortality mechanism — which carries 79% of modelled DALYs in both models — is overstated. Neither model applies a resistance haircut to the mortality stream. That is the shared blind spot.</p>
+  <p><strong>Both models support the investment.</strong> On a properly marginal basis — netting out tests that would have happened anyway in a delayed counterfactual — Akhil's model gives $119/DALY and ours gives $111. Both are well inside a reasonable philanthropic bar ($100–200/DALY). The $8 gap between them is not a reason to doubt the recommendation.</p>
+  <p><strong>The $76 figure</strong> that appears in Akhil's Summary tab counts every test over the 15-year horizon as marginal benefit, without deducting what would have occurred in a delayed-launch counterfactual. When Georgia applied a proper counterfactual plus conservative adjustments (4% discount, 7-year delay, same adoption profile, halved peak penetration from 30% to 15%), Akhil's own model gave $119 — nearly identical to ours.</p>
+  <p><strong>The one number that matters most is not in either model:</strong> whether first-line ampicillin-plus-gentamicin actually works for the Klebsiella cases that dominate LMIC neonatal sepsis. <a href="https://doi.org/10.1016/S1473-3099(21)00131-7">BARNARDS 2021</a> found only 25–28% first-line coverage of Gram-negative isolates. Neither model applies a resistance haircut to the mortality stream — which carries ~81% of modelled DALYs in both models. That is the shared blind spot.</p>
 </div>
 
 <div class="metrics">
-  <div class="metric theirs" style="border-top: 3px solid #6b7280;">
+  <div class="metric theirs" style="border-top: 3px solid #9ca3af;">
     <div class="mv">$76</div>
-    <div class="ml">Akhil's CE ($/DALY, @4%)</div>
+    <div class="ml">Akhil full-benefit CE (no CF deduction)</div>
+  </div>
+  <div class="metric theirs" style="border-top: 3px solid #6b7280;">
+    <div class="mv">$119</div>
+    <div class="ml">Akhil marginal CE (proper counterfactual)</div>
   </div>
   <div class="metric hl" style="border-top: 3px solid var(--accent);">
     <div class="mv">$111</div>
     <div class="ml">Our CE ($/DALY, @9%/4%)</div>
   </div>
   <div class="metric" style="border-top: 3px solid #d1d5db;">
-    <div class="mv">$36</div>
-    <div class="ml">Gap — explained below</div>
-  </div>
-  <div class="metric" style="border-top: 3px solid #d1d5db;">
-    <div class="mv">5</div>
-    <div class="ml">Structural differences</div>
+    <div class="mv">$8</div>
+    <div class="ml">Marginal gap ($119 vs $111)</div>
   </div>
 </div>
 
@@ -204,19 +204,23 @@
 
 <p>A BOTEC — back-of-the-envelope calculation — is a model that takes a set of assumptions about the world and produces a single number: how much does it cost to avert one DALY? The number is not the point. The assumptions are.</p>
 
-<p>Akhil built his model to answer a developer's question: is there enough commercial and philanthropic demand to justify building a neonatal sepsis diagnostic? His BCR of 31× (benefits ÷ costs, valuing DALYs at GDP per capita) is designed to show that the social return on investment is large — which it is, on any reasonable set of assumptions.</p>
-
-<p>We built our own model to answer a funder's question: is this the best use of $10M? For that question, the absolute CE number matters, not just the BCR. A BCR of 31× using GDP-per-capita DALY valuation is not directly comparable to GiveWell's bar ($50–100/DALY) or to the syphilis program we evaluated in July ($132/DALY). Converting to $/DALY — which both models also produce — makes the comparison clean.</p>
-
-<p>We also made three structural changes that reflect our different vantage point:</p>
+<p>Akhil built his model for this funder — to size the social return and stress-test it against conservative scenarios. His model produces two CE numbers depending on how you handle the counterfactual:</p>
 
 <ul class="bl">
-  <li>We applied a higher cost-discount rate (9% vs 2%), reflecting our own portfolio's opportunity cost rather than a social planner's rate.</li>
-  <li>We applied a community-adherence haircut to the HTA's DALYs-per-test, reflecting empirical evidence that real-world referral rates run lower than modelled.</li>
-  <li>We updated the launch year based on regulatory pathway analysis, which pushes the India timeline from 2031 to 2033.</li>
+  <li><strong>$76/DALY</strong> (Summary tab): treats every test over the 15-year horizon as a marginal benefit of the AMC. No counterfactual deduction — as if without the AMC, zero tests would ever occur.</li>
+  <li><strong>$119/DALY</strong> (Counterfactual tab, Georgia's conservative run): properly nets out tests that would have happened anyway in a delayed-launch world. Georgia applied a 4% discount rate, 7-year launch delay, same adoption trajectory for counterfactual, and halved peak penetration from Akhil's original 30% to 15% for India. This is the right comparison to our model.</li>
 </ul>
 
-<p>None of these changes are corrections of errors in Akhil's model. They are different choices about the right lens for a philanthropic funder. The resulting CE — $111 vs $76 — is best read as a range: the truth is probably somewhere in between.</p>
+<p>We built an independent model starting from scratch. Our structural choices:</p>
+
+<ul class="bl">
+  <li>9% cost discount rate (our portfolio opportunity cost) vs Akhil's 2% social rate or Georgia's 4%.</li>
+  <li>Community-adherence haircut (c2 = 0.38, calibrated to <a href="https://www.who.int/publications/i/item/9789241549912">WHO PSBI programme field data</a>) applied to the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">HTA preprint</a>'s DALYs-per-test.</li>
+  <li>Launch year updated to 2033 based on regulatory pathway analysis (India first meaningful public-sector uptake, not first commercial sale).</li>
+  <li>India peak adoption 5.5% (HB cluster) / 15% (Leader cluster) / 8% (private) — more conservative than Akhil's original 30%, though similar to Georgia's halved 15%.</li>
+</ul>
+
+<p>None of these are corrections of errors. They are different lenses. The relevant comparison is $119 (Akhil marginal, conservative) vs $111 (ours). The $8 gap is explained below.</p>
 
 <!-- ===================== SCORECARD ===================== -->
 <h2 id="scorecard">Side-by-side scorecard</h2>
@@ -233,7 +237,7 @@
   <tbody>
     <tr>
       <td><strong>Output metric</strong></td>
-      <td class="theirs">BCR = 31× <em>and</em> $76/DALY</td>
+      <td class="theirs">BCR = 31× and $76/DALY (full benefit) or $119/DALY (properly marginal)</td>
       <td class="ours">$111/DALY</td>
       <td>Different framing — $76 vs $111 are both CE</td>
     </tr>
@@ -276,12 +280,12 @@
     <tr>
       <td><strong>DALYs per test</strong></td>
       <td class="theirs">0.1665 (direct from HTA)</td>
-      <td class="ours">0.128 (c2 = 0.38 haircut)</td>
-      <td>Ours 23% lower — community adherence</td>
+      <td class="ours">~0.132 (c2 = 0.38 haircut)</td>
+      <td>Ours ~21% lower — community adherence</td>
     </tr>
     <tr>
       <td><strong>P(launch) discount</strong></td>
-      <td class="theirs">0.65 × 0.8 = explicit</td>
+      <td class="theirs">0.65 × 0.72 = explicit (P(commercialise) = 1 − 0.28 = 0.72 weighted across markets)</td>
       <td class="ours">Implicit in adoption rates</td>
       <td>Akhil's explicit P reduces expected value</td>
     </tr>
@@ -305,9 +309,9 @@
     </tr>
     <tr>
       <td><strong>Headline CE</strong></td>
-      <td class="theirs">$76/DALY</td>
+      <td class="theirs">$76 (full benefit) / $119 (marginal)</td>
       <td class="ours">$111/DALY</td>
-      <td>Gap = $35</td>
+      <td>Marginal gap = $8; full-benefit gap = $35</td>
     </tr>
   </tbody>
 </table>
@@ -333,7 +337,7 @@
     </div>
     <p>The discount rate is not a technical parameter — it is a philosophical one. It answers the question: how much less do you value a dollar of impact that arrives in 2040 versus 2030?</p>
     <p>A social planner — someone optimizing for collective welfare across time — uses a low rate (2–3%) because future people's lives matter nearly as much as present ones. A funder with an investment portfolio uses a higher rate (8–10%) because the alternative use of that money is a portfolio earning real returns.</p>
-    <p>The counterintuitive effect: <strong>our higher cost-discount rate actually makes our PV costs lower</strong> ($21.2M vs Akhil's $52.6M). Money disbursed as AMC payments in 2035–2045 is worth much less today at 9% than at 2%. But this doesn't improve our CE much, because we also model fewer DALYs (see differences 3 and 4). The cost-discount effect is more than offset by the adoption and DALYs differences.</p>
+    <p>The counterintuitive effect: <strong>our higher cost-discount rate actually makes our PV costs lower</strong> ($21.2M vs Akhil's $52.6M at 2%; or roughly $38M at Georgia's 4%). Money disbursed as AMC payments in 2035–2045 is worth much less today at 9% than at 2%. But this doesn't improve our CE much, because we also model fewer DALYs (see differences 3 and 4). The cost-discount effect is more than offset by the adoption and DALYs differences.</p>
     <p><strong>Who is right?</strong> For comparing to GiveWell benchmarks — which use a similar opportunity-cost framing — our 9% is the right rate. For a policy audience arguing for government funding, Akhil's 2% is appropriate. Both can be correct for their intended audience.</p>
   </div>
 </div>
@@ -355,7 +359,7 @@
         <p>SNCU admissions: neonates already in specialist wards. India: 1.9M headline, 265–500k functional (workup-relevant). The TAM is already inside the facility.</p>
       </div>
     </div>
-    <p>At first glance these look like very different populations. In practice, the headline TAM figures are almost identical — both are roughly 1.9M for India. That is not a coincidence: SNCU admissions and PSBI presentations in India are closely related, because ~89% of births are institutional (NFHS-5), and most PSBI cases present to or through the same facilities.</p>
+    <p>At first glance these look like very different populations. In practice, the headline TAM figures are almost identical — both are roughly 1.9M for India. That is not a coincidence: SNCU admissions and PSBI presentations in India are closely related, because ~89% of births are institutional (<a href="https://main.mohfw.gov.in/sites/default/files/NFHS-5_Phase-II_0.pdf">NFHS-5</a>), and most PSBI cases present to or through the same facilities.</p>
     <p>The conceptual difference matters more than the numerical one. Akhil's PSBI frame asks "how many neonates could benefit if this test were widely deployed?" Ours asks "how many are already in a facility where the test could be run today?" The PSBI frame is broader and more appropriate for long-run market sizing; the SNCU frame is more conservative and more appropriate for near-term CE estimation.</p>
     <p>Where the two definitions diverge materially: Akhil includes community-presenting neonates who are not in SNCUs. These require both a community-level test deployment AND a functional referral pathway to get treated. Our model captures this separately through the c2 community-adherence parameter — which Akhil's model does not apply (see Difference 4).</p>
   </div>
@@ -378,8 +382,8 @@
         <p>India HB cluster: 5.5%; Leader cluster: 15%; private: 8%. Calibrated to TNMSC/Karnataka tender histories for CRP and blood-culture kit procurement.</p>
       </div>
     </div>
-    <p>This is the largest single driver of the gap. Akhil's 15% of PSBI generates roughly <strong>285,000 India tests/year at peak</strong>. Our blended adoption across India's SNCU clusters generates roughly <strong>130,000 India tests/year at peak</strong>. That is a 2× difference in test volume for India alone — and India is the country that carries ~50% of all modelled DALYs.</p>
-    <p>Akhil calibrates to the malaria RDT experience, which is a reasonable anchor: malaria RDTs reached 48% of febrile under-5s in Africa within a decade. But the malaria RDT analogy has two favourable features that neonatal sepsis diagnostics lack. First, the malaria target population is enormous and diffuse (all febrile children); a new test just needs to be available, not to reach a specialist clinician. Second, malaria programs had massive donor support and established procurement infrastructure. NeoTest targets SNCU clinicians — a much narrower professional group — in a procurement environment without an established pull mechanism.</p>
+    <p>This is a large driver of the gap. Note: the 15% figure in the model we reviewed is <em>Georgia's halved value</em> — Akhil's original model used 30% India peak adoption (~570,000 India tests/year). Georgia halved it as a conservative adjustment. Our model's blended 5.5–15% across clusters generates roughly <strong>130,000 India tests/year at peak</strong>; Georgia's halved Akhil assumption generates roughly <strong>285,000 India tests/year at peak</strong>. That is roughly a 2× difference in India test volume vs Georgia's conservative version, and a ~4× difference vs Akhil's original. India carries ~50% of all modelled DALYs.</p>
+    <p>Akhil calibrates to the <a href="https://www.who.int/teams/global-malaria-programme/reports/world-malaria-report-2024">malaria RDT experience</a>, which is a reasonable anchor: malaria RDTs reached ~48% of febrile under-5s in Africa within a decade. But the malaria RDT analogy has two favourable features that neonatal sepsis diagnostics lack. First, the malaria target population is enormous and diffuse (all febrile children); a new test just needs to be available, not to reach a specialist clinician. Second, malaria programs had massive donor support and established procurement infrastructure. NeoTest targets SNCU clinicians — a much narrower professional group — in a procurement environment without an established pull mechanism.</p>
     <p>Our calibration to TNMSC and Karnataka tender histories for blood-culture and CRP kits is more specific but less data-rich. The honest range is wide. Akhil's 15% is not implausible over 15 years; our 5.5% for the high-burden cluster is a more conservative read of where India's public SNCU system typically starts with new diagnostics.</p>
     <details>
       <summary>Why 5.5% rather than 15%? The India SNCU procurement reality</summary>
@@ -410,14 +414,14 @@
       </div>
     </div>
     <p>The HTA's community DALY estimate rests on a specific assumption about how often a positive test result in a community setting actually leads to treatment. The HTA uses a referral rate parameter (Ref_M = 30%, Ref_H = 60%) that implies an effective community adherence of roughly 0.45–0.50.</p>
-    <p>When we calibrate this parameter to WHO PSBI programme field data — where community health workers and primary health posts are the testing point — the central estimate is 0.38. That is a 24% reduction in the community arm's contribution, and since the community arm carries roughly half of modelled DALYs, the effect on total DALYs/test is about 12%: from 0.1665 to roughly 0.147, and from there to 0.128 after also updating from c2=0.50 to c2=0.38 in our BOTEC.</p>
+    <p>When we calibrate this parameter to <a href="https://www.who.int/publications/i/item/9789241549912">WHO PSBI programme field data</a>, the empirical central is 0.38 — about 24% below the HTA's implied 0.50. Since the community arm carries roughly half of modelled DALYs, the effect on total DALYs/test is about 12%: from 0.1665 (Akhil, no c2 adjustment) to approximately 0.132 in our model after applying c2 = 0.38. This is a 21% reduction relative to Akhil's 0.1665.</p>
     <p>This is the most debatable difference. Akhil's HTA is the only published quantitative framework for this technology — it is the natural starting point. Our c2 haircut is a judgment that real-world community adherence in LMIC settings runs lower than the HTA's parameters assume. Both positions can be defended. The empirical answer will require field data from early deployments.</p>
     <details>
       <summary>What c2 actually means — and why it matters so much</summary>
       <div class="details-body">
         <p>c2 is the community adherence parameter: the fraction of test-positive infants in community settings who actually receive the treatment the test result recommends. It captures everything between "the test gives a positive result" and "the baby gets antibiotics": does the health worker tell the family? Does the family believe it? Can they get to a facility? Does the facility have stock?</p>
         <p>In the 50/50 inborn/community model, c2 only applies to the community half. The inborn (SNCU) half has structural adherence near 1.0 — the clinician is already there, the baby is already admitted, the antibiotics are already available.</p>
-        <p>Moving c2 from 0.50 to 0.38 (the WHO PSBI empirical central) reduces the community mortality stream by about 24%, which cuts total DALYs/test from 0.1665 to approximately 0.128 — a 23% reduction. This is the dominant driver of our higher CE versus Akhil's.</p>
+        <p>Moving c2 from 0.50 (HTA implied) to 0.38 (WHO PSBI empirical central) reduces the community mortality stream by about 24%, which cuts total DALYs/test from 0.1665 to approximately 0.132 — a 21% reduction. This is a significant driver of our higher CE versus Akhil's.</p>
         <p>After the care-seeking chain analysis we conducted, we confirmed that c2 (clinician/family adherence to test result) is now the binding constraint — not L1/L2 (care-seeking and reaching a facility), which the denominator correction showed was a wrong-denominator artifact. The question is not whether PSBI babies reach a testing facility; in India, 89% of births are institutional. The question is whether a positive result at 48–72 hours changes the treatment decision. Field evidence from Indian NICUs is promising but limited to a few sites.</p>
       </div>
     </details>
@@ -450,7 +454,11 @@
 <!-- ===================== MATH BRIDGE ===================== -->
 <h2 id="bridge">Walking the math: how you get from $76 to $111</h2>
 
-<p>Each difference above has a directional effect on CE. Here is the approximate contribution of each, starting from Akhil's $76 and arriving at our $111. The numbers are illustrative — isolating one assumption at a time while holding everything else constant produces a rough decomposition, not an exact accounting.</p>
+<div class="callout">
+  <strong>Note on the starting point.</strong> Akhil's model produces two CE numbers: $76 (full benefit, no counterfactual deduction) and $119 (properly marginal, Georgia's conservative run). The bridge below uses $76 as the starting point to illustrate the parameter-level differences. For the apples-to-apples marginal comparison, the gap is $8 ($119 vs $111), not $35 — and our higher 9% cost discount rate (vs Georgia's 4%) partially closes even that.
+</div>
+
+<p>Each difference has a directional effect on CE. Here is the approximate contribution of each, starting from Akhil's full-benefit $76 and arriving at our $111. The numbers are illustrative — isolating one assumption while holding everything else constant produces a rough decomposition, not an exact accounting.</p>
 
 <div class="bridge">
   <div class="bridge-row">
@@ -493,7 +501,7 @@
 
 <div class="note">
   <div class="nt">Note on direction</div>
-  The cost-discount change pushes CE in our favour (lower is better); the adoption, DALYs/test, and launch-year changes all push it against us. The net result is $35 worse. If you think Akhil is right on adoption and launch but we are right on discount rate, the answer is closer to $60. If you think we are right on all four, you get $111.
+  The cost-discount change pushes CE in our favour (lower is better); the adoption, DALYs/test, and launch-year changes push it against us. Net result from $76: +$35. From Akhil's properly marginal $119: our 9% discount (vs Georgia's 4%) recovers ~$16, the adoption and launch differences add ~$8. Final: $111. If you accept Georgia's conservative adoption and our 9% discount rate, the answer is roughly $95. If you accept all four of our conservative choices, you get $111.
 </div>
 
 <!-- ===================== WHERE WE AGREE ===================== -->
@@ -512,7 +520,7 @@
     <tr>
       <td><strong>Acceleration</strong></td>
       <td class="agree">7 years</td>
-      <td>Malaria RDT AMC precedent; no prior LMIC pull mechanism for neonatal sepsis diagnostics</td>
+      <td>PCV/rotavirus AMC natural experiment; no prior LMIC pull mechanism for neonatal sepsis diagnostics. Akhil's Counterfactual tab: 7-year launch delay (cell C7)</td>
     </tr>
     <tr>
       <td><strong>DALY discount rate</strong></td>
@@ -537,7 +545,7 @@
     <tr>
       <td><strong>De-escalation as mechanism</strong></td>
       <td class="agree">Stop-gate only</td>
-      <td>NeoPInS, ProABIS, 15-study scoping review — all stop-gate designs</td>
+      <td><a href="https://doi.org/10.1016/S0140-6736(17)30684-5">NeoPInS</a> (Lancet 2017, N=1,710), ProABIS, 15-study scoping review — all stop-gate designs</td>
     </tr>
     <tr>
       <td><strong>AMR credit</strong></td>
@@ -579,7 +587,7 @@
 
 <div class="callout-red">
   <div class="ct">Neither model handles AMR properly</div>
-  Both models credit the full mortality benefit of a positive test result triggering empiric ampicillin-plus-gentamicin treatment. Klebsiella — the dominant neonatal-sepsis pathogen in India and sub-Saharan Africa — is 96–99% resistant to that regimen. BARNARDS 2021 found first-line coverage of only 25–28% of Gram-negative isolates. Neither Akhil's model nor ours applies a resistance haircut to the mortality stream. If first-line treatment covers only 25–28% of Gram-negative cases, the community mortality mechanism — which carries 79% of modelled DALYs in both models — is substantially overstated. A resistance-adjusted CE for the community mortality channel alone would be roughly $190–250/DALY. This is the most important unresolved question in both models.
+  Both models credit the full mortality benefit of a positive test result triggering empiric ampicillin-plus-gentamicin treatment. Klebsiella — the dominant neonatal-sepsis pathogen in India and sub-Saharan Africa — is 96–99% resistant to that regimen. BARNARDS 2021 found first-line coverage of only 25–28% of Gram-negative isolates. Neither Akhil's model nor ours applies a resistance haircut to the mortality stream. If first-line treatment covers only 25–28% of Gram-negative cases, the community mortality mechanism — which carries ~81% of modelled DALYs in both models (81.4% per the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">CGD HTA</a>) — is substantially overstated. A resistance-adjusted CE for the community mortality channel alone would be roughly $190–250/DALY. This is the most important unresolved question in both models.
 </div>
 
 <!-- ===================== QUESTIONS FOR AKHIL ===================== -->
@@ -605,7 +613,7 @@
 <div class="q-card">
   <div class="qh"><span class="qnum">3</span> AMR trajectory: have you stress-tested the community mortality mechanism against Klebsiella resistance?</div>
   <div class="qb">
-    <p>BARNARDS 2021 found 25–28% first-line coverage of Gram-negative neonatal sepsis isolates. Klebsiella is 96–99% resistant to ampicillin plus gentamicin at district level. Your model credits the full mortality benefit of a positive test triggering first-line treatment. If that treatment is ineffective for the dominant pathogen in LMIC settings, the community mortality channel is overstated by a factor of 3–4×. Have you modelled a resistance-adjusted scenario? What does it look like?</p>
+    <p>BARNARDS 2021 found 25–28% first-line coverage of Gram-negative neonatal sepsis isolates. Klebsiella is 96–99% resistant to ampicillin plus gentamicin at district level. Your model credits the full mortality benefit of a positive test triggering first-line treatment. If that treatment is ineffective for the dominant Gram-negative pathogens, the mortality channel — both inborn and community — which the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">HTA</a> puts at ~81% of total DALYs — is overstated by a factor of 3–4×. Have you modelled a resistance-adjusted scenario? What does it look like?</p>
     <p>This is also an argument for GARDP's NeoSep1 program being a prerequisite, not just a complement — and potentially for the AMC requiring antibiogram co-deployment at participating facilities.</p>
   </div>
 </div>
@@ -620,7 +628,7 @@
 <div class="q-card">
   <div class="qh"><span class="qnum">5</span> Post-AMC pricing: what does the model assume after the $30M cap is exhausted?</div>
   <div class="qb">
-    <p>Your 15-year model horizon (to 2045) runs well past the expected AMC exhaustion point (~3.3M tests at P50, depleted by ~2038–2040). What price does the model assume for tests beyond the AMC cap? GeneXpert held at $9.98 for 16 years with no second manufacturer. If the post-AMC price reverts to cost-plus without a binding cap, some of the out-year volume and DALYs in your model may not materialise in the public sector. Has this been modelled?</p>
+    <p>Your 15-year model horizon (to 2045) runs well past the expected AMC exhaustion point (~3.3M tests at P50, depleted by ~2038–2040). What price does the model assume for tests beyond the AMC cap? <a href="https://doi.org/10.1016/S2214-109X(22)00368-4">Cazabon et al. 2022</a> documented that GeneXpert pricing remained at $9.98/cartridge from 2012 through the 2020s with a closed interface blocking biosimilar entry. GeneXpert held at $9.98 for fourteen years (launched 2012) with no second manufacturer. If the post-AMC price reverts to cost-plus without a binding cap, some of the out-year volume and DALYs in your model may not materialise in the public sector. Has this been modelled?</p>
   </div>
 </div>
 
@@ -635,7 +643,7 @@
   <div class="qh"><span class="qnum">7</span> AMR DALY credit: does 0.017 DALYs/1000 tests survive a resistance-reversal check?</div>
   <div class="qb">
     <p>Both models credit 0.013–0.017 DALYs/test for AMR reduction from stopping unnecessary antibiotic courses. A bottom-up resistance-dynamics model gives ~0.00036 DALYs/test — about 36× lower — because near-term resistance reversal from a single avoided antibiotic course is close to zero at the population level. 68% of neonatal Klebsiella sepsis is horizontal-transmission-driven, not de-novo selection from the marginal empiric course. Has the HTA's AMR stream been checked against resistance-reversal evidence? The stewardship benefit is real; the near-term DALY credit may not be.</p>
-    <p>Note: this barely moves the CE headline (~$111 → $113 when zeroed) because AMR is only 9% of total DALYs. It is an intellectual-honesty issue, not a financial-decision issue. But we would rather note it explicitly than have it cited by a reader as a genuine benefit stream.</p>
+    <p>Note: this barely moves the CE headline (~$111 → $113 when zeroed) because AMR is only ~10% of total DALYs (the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">HTA</a> and our BOTEC both give 10.2% for this stream). It is an intellectual-honesty issue, not a financial-decision issue. But we would rather note it explicitly than have it cited by a reader as a genuine benefit stream.</p>
   </div>
 </div>
 
@@ -653,15 +661,15 @@
         <tr><td>India launch year</td><td>2031</td><td>2033</td><td>Fewer early tests in our model (+$16)</td></tr>
         <tr><td>Counterfactual launch year (India)</td><td>2038</td><td>2040</td><td>Same 7yr acceleration in both</td></tr>
         <tr><td>Time horizon</td><td>15 years</td><td>24 years</td><td>Longer tail in our model; limited by discounting</td></tr>
-        <tr><td>India peak adoption</td><td>15% of PSBI</td><td>5.5% HB / 15% Leader / 8% private</td><td>~2× more India tests in Akhil (+$20 if removed)</td></tr>
-        <tr><td>DALYs per test</td><td>0.1665</td><td>0.128 (c2=0.38)</td><td>23% lower in our model (+$15)</td></tr>
+        <tr><td>India peak adoption</td><td>30% of PSBI (Akhil original); 15% (Georgia conservative)</td><td>5.5% HB / 15% Leader / 8% private</td><td>~2× more India tests in Akhil (+$20 if removed)</td></tr>
+        <tr><td>DALYs per test</td><td>0.1665 (no c2 adjustment)</td><td>~0.132 (c2=0.38)</td><td>~21% lower in our model (+$15)</td></tr>
         <tr><td>P(launch)</td><td>0.65 explicit</td><td>Implicit in adoption</td><td>Akhil's explicit discount reduces his expected DALYs</td></tr>
         <tr><td>P(commercialise | launch)</td><td>0.8 per country</td><td>Implicit</td><td>Further reduces Akhil's expected DALYs</td></tr>
         <tr><td>AMC tiers</td><td>$7/$5/$3</td><td>$7/$5/$3</td><td>Same</td></tr>
         <tr><td>Milestone prize</td><td>$20M</td><td>$20M</td><td>Same</td></tr>
         <tr><td>Implementation support</td><td>$10M</td><td>$10M</td><td>Same</td></tr>
         <tr><td>Hospital cost savings</td><td>$21.53/test (makes CE negative)</td><td>Modest DALY credit</td><td>Akhil includes savings that we separate</td></tr>
-        <tr><td>AMR DALY credit</td><td>0.017/test</td><td>0.013/test (BOTEC); ~0.00036 (bottom-up)</td><td>Immaterial for decision (<$2/DALY)</td></tr>
+        <tr><td>AMR DALY credit</td><td>0.017/test (HTA)</td><td>0.013/test (BOTEC, ~10% of total); ~0.00036 (bottom-up, 36× lower)</td><td>Immaterial for decision (&lt;$2/DALY)</td></tr>
         <tr><td>First-line resistance haircut</td><td>None</td><td>None</td><td>Shared blind spot — could add $80–140/DALY</td></tr>
       </tbody>
     </table>
@@ -671,7 +679,7 @@
 <details>
   <summary>What "BCR = 31×" actually means — and why we prefer $/DALY</summary>
   <div class="details-body">
-    <p>A benefit-cost ratio of 31× means: for every dollar of philanthropic cost, society gains $31 of welfare benefit. But the "benefit" is DALYs valued at GDP per capita — roughly $2,300 for India ($2,100) and $4,400 for Kenya. By this metric, a DALY averted in India is worth about $2,300, so 693,000 DALYs × $2,300 = $1.6 billion in benefit against $52.6M in cost = BCR ~31×.</p>
+    <p>A benefit-cost ratio of 31× means: for every dollar of philanthropic cost, society gains $31 of welfare benefit. The "benefit" is DALYs valued at GDP per capita — roughly $2,100 for India, $4,400 for Kenya, $9,000 for Brazil, weighted by test volumes. Akhil's model gives $2.5 billion in discounted GDP/capita benefits (Summary tab B24) against $52.6M in PV costs (at 2% discount) — implying BCR of ~47× before probability adjustments, and ~31× after netting the P(launch) and P(commercialise) discounts.</p>
     <p>The problem with using BCR for philanthropic allocation: it privileges interventions in poor countries (where GDP/capita is low, so DALYs valued at GDP/capita are cheap relative to cost) over rich-country interventions, which is not the right criterion. It also makes the number incomparable to GiveWell's benchmark, which uses a standard cost-per-DALY metric that doesn't depend on the GDP of the recipient country.</p>
     <p>CE ($/DALY) solves this by asking the neutral question: how many dollars of philanthropic cost per unit of health benefit? At $76–111/DALY, NeoTest sits between GiveWell's top-charity bar (~$50–100) and the syphilis program we evaluated in July ($132). That comparison is only possible with the CE metric.</p>
   </div>
