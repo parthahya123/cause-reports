@@ -171,20 +171,15 @@
 
 <div class="eyebrow">NeoTest Diligence · September 2026</div>
 <h1>Two BOTECs, One Grant</h1>
-<div class="dek">Akhil's model, properly computed on a marginal basis, says $119/DALY. Ours says $111. The often-cited $76 doesn't net out the counterfactual — it counts every test as marginal. When you compare apples to apples, the gap is $8, not $35. This page explains the real differences — and where both models genuinely agree.</div>
+<div class="dek">Akhil's model, properly computed on a marginal basis, says $119/DALY. Ours says $111. An $8 gap — not the larger numbers sometimes cited. This page explains what drives that gap, and where the two models genuinely agree.</div>
 
 <div class="verdict">
   <div class="vl">Bottom line</div>
   <p><strong>Both models support the investment.</strong> On a properly marginal basis — netting out tests that would have happened anyway in a delayed counterfactual — Akhil's model gives $119/DALY and ours gives $111. Both are well inside a reasonable philanthropic bar ($100–200/DALY). The $8 gap between them is not a reason to doubt the recommendation.</p>
-  <p><strong>The $76 figure</strong> that appears in Akhil's Summary tab counts every test over the 15-year horizon as marginal benefit, without deducting what would have occurred in a delayed-launch counterfactual. When Georgia applied a proper counterfactual plus conservative adjustments (4% discount, 7-year delay, same adoption profile, halved peak penetration from 30% to 15%), Akhil's own model gave $119 — nearly identical to ours.</p>
   <p><strong>The one number that matters most is not in either model:</strong> whether first-line ampicillin-plus-gentamicin actually works for the Klebsiella cases that dominate LMIC neonatal sepsis. <a href="https://doi.org/10.1016/S1473-3099(21)00131-7">BARNARDS 2021</a> found only 25–28% first-line coverage of Gram-negative isolates. Neither model applies a resistance haircut to the mortality stream — which carries ~81% of modelled DALYs in both models. That is the shared blind spot.</p>
 </div>
 
 <div class="metrics">
-  <div class="metric theirs" style="border-top: 3px solid #9ca3af;">
-    <div class="mv">$76</div>
-    <div class="ml">Akhil full-benefit CE (no CF deduction)</div>
-  </div>
   <div class="metric theirs" style="border-top: 3px solid #6b7280;">
     <div class="mv">$119</div>
     <div class="ml">Akhil marginal CE (proper counterfactual)</div>
@@ -206,10 +201,7 @@
 
 <p>Akhil built his model for this funder — to size the social return and stress-test it against conservative scenarios. His model produces two CE numbers depending on how you handle the counterfactual:</p>
 
-<ul class="bl">
-  <li><strong>$76/DALY</strong> (Summary tab): treats every test over the 15-year horizon as a marginal benefit of the AMC. No counterfactual deduction — as if without the AMC, zero tests would ever occur.</li>
-  <li><strong>$119/DALY</strong> (Counterfactual tab, Georgia's conservative run): properly nets out tests that would have happened anyway in a delayed-launch world. Georgia applied a 4% discount rate, 7-year launch delay, same adoption trajectory for counterfactual, and halved peak penetration from Akhil's original 30% to 15% for India. This is the right comparison to our model.</li>
-</ul>
+<p>Georgia ran Akhil's model with conservative adjustments: 4% discount rate, 7-year counterfactual launch delay, same adoption trajectory in the counterfactual, and halved peak penetration (India 30% → 15%). The Counterfactual tab (cell C71) gives <strong>$119/DALY</strong> — the right comparison to our $111.</p>
 
 <p>We built an independent model starting from scratch. Our structural choices:</p>
 
@@ -237,15 +229,15 @@
   <tbody>
     <tr>
       <td><strong>Output metric</strong></td>
-      <td class="theirs">BCR = 31× and $76/DALY (full benefit) or $119/DALY (properly marginal)</td>
+      <td class="theirs">BCR = 31× and $119/DALY (marginal CE, Georgia conservative run)</td>
       <td class="ours">$111/DALY</td>
-      <td>Different framing — $76 vs $111 are both CE</td>
+      <td>$76 omits counterfactual; $119 (marginal) vs $111 (ours) is the right comparison</td>
     </tr>
     <tr>
       <td><strong>Cost discount rate</strong></td>
       <td class="theirs">2% (social rate)</td>
       <td class="ours">9% (funder opportunity cost)</td>
-      <td>Our rate → higher PV costs → worse CE</td>
+      <td>Our higher discount rate → <em>lower</em> PV costs → better CE on costs side (offset by fewer DALYs)</td>
     </tr>
     <tr>
       <td><strong>DALY discount rate</strong></td>
@@ -261,7 +253,7 @@
     </tr>
     <tr>
       <td><strong>India peak adoption</strong></td>
-      <td class="theirs">15% of PSBI TAM</td>
+      <td class="theirs">15% of PSBI (Georgia's conservative version; Akhil original: 30%)</td>
       <td class="ours">5.5% HB + 15% Leader + 8% private</td>
       <td>Akhil's 15% generates ~2× more tests</td>
     </tr>
@@ -285,7 +277,7 @@
     </tr>
     <tr>
       <td><strong>P(launch) discount</strong></td>
-      <td class="theirs">0.65 × 0.72 = explicit (P(commercialise) = 1 − 0.28 = 0.72 weighted across markets)</td>
+      <td class="theirs">0.65 × 0.80 = explicit per-country P(commercialise); overall P(failure across markets) = 0.28</td>
       <td class="ours">Implicit in adoption rates</td>
       <td>Akhil's explicit P reduces expected value</td>
     </tr>
@@ -309,9 +301,9 @@
     </tr>
     <tr>
       <td><strong>Headline CE</strong></td>
-      <td class="theirs">$76 (full benefit) / $119 (marginal)</td>
+      <td class="theirs">$119/DALY (marginal)</td>
       <td class="ours">$111/DALY</td>
-      <td>Marginal gap = $8; full-benefit gap = $35</td>
+      <td>Gap = $8</td>
     </tr>
   </tbody>
 </table>
@@ -328,7 +320,7 @@
     <div class="side-by-side">
       <div class="sbs-box sbs-akhil">
         <div class="sl">Akhil</div>
-        <p>2% social discount rate on costs and benefits. "The rate a social planner should use for public welfare." PV costs: $52.6M.</p>
+        <p>2% social rate in base model (Summary tab; PV costs: $52.6M). Georgia's conservative run (the $119 CE) uses 4%. Both contrast with our 9% opportunity-cost rate.</p>
       </div>
       <div class="sbs-box sbs-ours">
         <div class="sl">Ours</div>
@@ -337,7 +329,7 @@
     </div>
     <p>The discount rate is not a technical parameter — it is a philosophical one. It answers the question: how much less do you value a dollar of impact that arrives in 2040 versus 2030?</p>
     <p>A social planner — someone optimizing for collective welfare across time — uses a low rate (2–3%) because future people's lives matter nearly as much as present ones. A funder with an investment portfolio uses a higher rate (8–10%) because the alternative use of that money is a portfolio earning real returns.</p>
-    <p>The counterintuitive effect: <strong>our higher cost-discount rate actually makes our PV costs lower</strong> ($21.2M vs Akhil's $52.6M at 2%; or roughly $38M at Georgia's 4%). Money disbursed as AMC payments in 2035–2045 is worth much less today at 9% than at 2%. But this doesn't improve our CE much, because we also model fewer DALYs (see differences 3 and 4). The cost-discount effect is more than offset by the adoption and DALYs differences.</p>
+    <p>The counterintuitive effect: <strong>our higher cost-discount rate actually makes our PV costs lower</strong> ($21.2M vs Akhil's $52.6M at 2%). Money disbursed as AMC payments in 2035–2045 is worth much less today at 9% than at 2%. But this doesn't improve our CE much, because we also model fewer DALYs (see differences 3 and 4). The cost-discount effect is more than offset by the adoption and DALYs differences.</p>
     <p><strong>Who is right?</strong> For comparing to GiveWell benchmarks — which use a similar opportunity-cost framing — our 9% is the right rate. For a policy audience arguing for government funding, Akhil's 2% is appropriate. Both can be correct for their intended audience.</p>
   </div>
 </div>
@@ -375,7 +367,7 @@
     <div class="side-by-side">
       <div class="sbs-box sbs-akhil">
         <div class="sl">Akhil</div>
-        <p>India peak penetration: 15% of PSBI TAM. 2 years to reach 50% of peak. Calibrated to malaria RDT rollout (48% of febrile U5s by 2017).</p>
+        <p>India peak penetration: 15% of PSBI TAM (Georgia's conservative version; Akhil's original model used 30%). 2 years to 50% of peak. Calibrated to <a href="https://www.who.int/teams/global-malaria-programme/reports/world-malaria-report-2024">malaria RDT rollout</a> (~48% of febrile U5s in Africa by 2017).</p>
       </div>
       <div class="sbs-box sbs-ours">
         <div class="sl">Ours</div>
@@ -410,7 +402,7 @@
       </div>
       <div class="sbs-box sbs-ours">
         <div class="sl">Ours</div>
-        <p>0.128 DALYs/test after applying c2 = 0.38 community adherence haircut. WHO PSBI programme data calibrates the referral-adherence central at 0.38, not the 0.50 the HTA implies.</p>
+        <p>~0.132 DALYs/test after applying c2 = 0.38 community adherence haircut. <a href="https://www.who.int/publications/i/item/9789241549912">WHO PSBI programme</a> field data calibrates the referral-adherence central at 0.38, not the 0.50 the HTA implies.</p>
       </div>
     </div>
     <p>The HTA's community DALY estimate rests on a specific assumption about how often a positive test result in a community setting actually leads to treatment. The HTA uses a referral rate parameter (Ref_M = 30%, Ref_H = 60%) that implies an effective community adherence of roughly 0.45–0.50.</p>
@@ -452,56 +444,41 @@
 </div>
 
 <!-- ===================== MATH BRIDGE ===================== -->
-<h2 id="bridge">Walking the math: how you get from $76 to $111</h2>
+<h2 id="bridge">Walking the math: $119 vs $111</h2>
 
-<div class="callout">
-  <strong>Note on the starting point.</strong> Akhil's model produces two CE numbers: $76 (full benefit, no counterfactual deduction) and $119 (properly marginal, Georgia's conservative run). The bridge below uses $76 as the starting point to illustrate the parameter-level differences. For the apples-to-apples marginal comparison, the gap is $8 ($119 vs $111), not $35 — and our higher 9% cost discount rate (vs Georgia's 4%) partially closes even that.
-</div>
+<p>The $8 gap between the two models has two offsetting forces. Our higher cost-discount rate (9% vs Georgia's 4%) makes our PV costs lower — improving our CE. Our lower adoption and c2 haircut increase CE (worsen it). These partially cancel.</p>
 
-<p>Each difference has a directional effect on CE. Here is the approximate contribution of each, starting from Akhil's full-benefit $76 and arriving at our $111. The numbers are illustrative — isolating one assumption while holding everything else constant produces a rough decomposition, not an exact accounting.</p>
-
-<div class="bridge">
-  <div class="bridge-row">
-    <span class="bridge-num bridge-start">$76</span>
-    <span class="bridge-arrow">→</span>
-    <span class="bridge-label"><strong>Akhil's central estimate</strong> (2% cost discount, 15% India adoption, 0.1665 DALYs/test, 2031 launch)</span>
-    <span class="bridge-delta flat"></span>
-  </div>
-  <div class="bridge-row">
-    <span class="bridge-num">~$60</span>
-    <span class="bridge-arrow">→</span>
-    <span class="bridge-label">Raise cost discount from 2% → 9%: PV costs fall from $52.6M to $21.2M, CE improves</span>
-    <span class="bridge-delta down">−$16</span>
-  </div>
-  <div class="bridge-row">
-    <span class="bridge-num">~$80</span>
-    <span class="bridge-arrow">→</span>
-    <span class="bridge-label">Lower adoption to our India mix (~130k peak vs ~285k): fewer marginal tests, fewer DALYs</span>
-    <span class="bridge-delta up">+$20</span>
-  </div>
-  <div class="bridge-row">
-    <span class="bridge-num">~$95</span>
-    <span class="bridge-arrow">→</span>
-    <span class="bridge-label">Apply c2 = 0.38 haircut: DALYs/test from 0.1665 → 0.128 (−23%)</span>
-    <span class="bridge-delta up">+$15</span>
-  </div>
-  <div class="bridge-row">
-    <span class="bridge-num">~$111</span>
-    <span class="bridge-arrow">→</span>
-    <span class="bridge-label">Push India launch from 2031 → 2033: fewer early marginal tests, discounting effects</span>
-    <span class="bridge-delta up">+$16</span>
-  </div>
-  <div class="bridge-row">
-    <span class="bridge-num bridge-end">$111</span>
-    <span class="bridge-arrow">→</span>
-    <span class="bridge-label"><strong>Our central estimate</strong> (9%/4%, 5.5% HB adoption, 0.128 DALYs/test, 2033 launch)</span>
-    <span class="bridge-delta flat"></span>
-  </div>
-</div>
+<table>
+  <thead>
+    <tr><th>Parameter change (Georgia → ours)</th><th>Direction</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cost discount 4% → 9%</td>
+      <td class="agree">Improves CE</td>
+      <td>PV costs fall further (future AMC payments worth less today)</td>
+    </tr>
+    <tr>
+      <td>India adoption 15% → ~6.8% blended (130k peak)</td>
+      <td class="red">Worsens CE</td>
+      <td>Fewer marginal tests → fewer marginal DALYs → higher $/DALY</td>
+    </tr>
+    <tr>
+      <td>c2: 0.50 → 0.38 (DALYs/test: 0.1665 → ~0.132)</td>
+      <td class="red">Worsens CE</td>
+      <td>Community adherence haircut reduces DALYs averted per test by ~21%</td>
+    </tr>
+    <tr>
+      <td>Launch 2031 → 2033</td>
+      <td class="red">Worsens CE</td>
+      <td>Fewer early marginal tests; earlier test-years are more valuable under discounting</td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="note">
-  <div class="nt">Note on direction</div>
-  The cost-discount change pushes CE in our favour (lower is better); the adoption, DALYs/test, and launch-year changes push it against us. Net result from $76: +$35. From Akhil's properly marginal $119: our 9% discount (vs Georgia's 4%) recovers ~$16, the adoption and launch differences add ~$8. Final: $111. If you accept Georgia's conservative adoption and our 9% discount rate, the answer is roughly $95. If you accept all four of our conservative choices, you get $111.
+  <div class="nt">Net effect</div>
+  The cost-discount improvement roughly cancels the launch-year worsening. The adoption and c2 differences together account for most of the $8 residual gap. If you accept Georgia's adoption and launch assumptions but apply our 9% discount rate and c2=0.38, you get close to $100. Accept all four of our conservative choices: $111.
 </div>
 
 <!-- ===================== WHERE WE AGREE ===================== -->
@@ -564,7 +541,7 @@
 
 <div class="callout-amber">
   <div class="ct">Disagreement 1 — Adoption rate calibration</div>
-  Akhil uses the malaria RDT as his primary adoption analogue. We use TNMSC tender histories for SNCU diagnostics. The malaria analogue is optimistic because it applies a community-level commodity rollout to a specialist clinical decision. The TNMSC analogue is conservative because Indian public procurement moves slowly and the CRP/blood-culture history is not a direct precedent for a novel POCT. Neither is right; neither is wrong. The honest range is probably 8–15% at peak. We use 5.5% for the HB cluster specifically because that tier represents the weakest institutional capacity, not the full India market.
+  Akhil uses the malaria RDT as his primary adoption analogue. We use TNMSC tender histories for SNCU diagnostics. The malaria analogue is optimistic because it applies a community-level commodity rollout to a specialist clinical decision. The TNMSC analogue is conservative because Indian public procurement moves slowly and the CRP/blood-culture history is not a direct precedent for a novel POCT. Neither is right; neither is wrong. The honest range is probably 8–30% at peak. Georgia halved Akhil's original 30% to 15% as a conservative adjustment; we use 5.5–15% segmented by SNCU tier. The models converge more than the raw numbers suggest — both agree on the Leader-tier ceiling (~15%).
 </div>
 
 <div class="callout-amber">
@@ -598,7 +575,7 @@
 <div class="q-card">
   <div class="qh"><span class="qnum">1</span> Adoption calibration: why the malaria RDT rather than SNCU-specific data? <span class="qtag">biggest CE impact</span></div>
   <div class="qb">
-    <p>Your model uses malaria RDT rollout (48% of febrile U5s) as the primary adoption analogue. The malaria RDT targets all febrile children presenting anywhere; NeoTest targets SNCU clinicians in specialist wards. Do you think the 15% peak penetration is defensible for the district HB-cluster SNCUs, or is it anchored primarily to the Leader-tier institutions?</p>
+    <p>Your model uses malaria RDT rollout (48% of febrile U5s) as the primary adoption analogue. The malaria RDT targets all febrile children presenting anywhere; NeoTest targets SNCU clinicians in specialist wards. The model Georgia shared with us has India at 15% (halved from your original 30%). Do you consider 15% the right central for the HB-cluster district SNCUs, or is that figure anchored to the Leader-tier institutions?</p>
     <p>If we segmented the India market the way we do — HB cluster (5.5%), Leader cluster (15%), private (8%) — what would your model produce? We suspect the aggregate isn't far from your 15% of the full PSBI TAM, but the distributional question matters for which years DALYs flow in.</p>
   </div>
 </div>
@@ -628,7 +605,7 @@
 <div class="q-card">
   <div class="qh"><span class="qnum">5</span> Post-AMC pricing: what does the model assume after the $30M cap is exhausted?</div>
   <div class="qb">
-    <p>Your 15-year model horizon (to 2045) runs well past the expected AMC exhaustion point (~3.3M tests at P50, depleted by ~2038–2040). What price does the model assume for tests beyond the AMC cap? <a href="https://doi.org/10.1016/S2214-109X(22)00368-4">Cazabon et al. 2022</a> documented that GeneXpert pricing remained at $9.98/cartridge from 2012 through the 2020s with a closed interface blocking biosimilar entry. GeneXpert held at $9.98 for fourteen years (launched 2012) with no second manufacturer. If the post-AMC price reverts to cost-plus without a binding cap, some of the out-year volume and DALYs in your model may not materialise in the public sector. Has this been modelled?</p>
+    <p>Your 15-year model horizon (to 2045) runs well past the expected AMC exhaustion point (~3.3M tests at P50, depleted by ~2038–2040). What price does the model assume for tests beyond the AMC cap? <a href="https://doi.org/10.1016/S2214-109X(22)00368-4">Cazabon et al. 2022</a> documented that GeneXpert pricing remained at $9.98/cartridge for fourteen years (launched 2012) with a closed interface blocking biosimilar entry. If the post-AMC price reverts to cost-plus without a binding cap, some of the out-year volume and DALYs in your model may not materialise in the public sector. Has this been modelled?</p>
   </div>
 </div>
 
@@ -681,7 +658,7 @@
   <div class="details-body">
     <p>A benefit-cost ratio of 31× means: for every dollar of philanthropic cost, society gains $31 of welfare benefit. The "benefit" is DALYs valued at GDP per capita — roughly $2,100 for India, $4,400 for Kenya, $9,000 for Brazil, weighted by test volumes. Akhil's model gives $2.5 billion in discounted GDP/capita benefits (Summary tab B24) against $52.6M in PV costs (at 2% discount) — implying BCR of ~47× before probability adjustments, and ~31× after netting the P(launch) and P(commercialise) discounts.</p>
     <p>The problem with using BCR for philanthropic allocation: it privileges interventions in poor countries (where GDP/capita is low, so DALYs valued at GDP/capita are cheap relative to cost) over rich-country interventions, which is not the right criterion. It also makes the number incomparable to GiveWell's benchmark, which uses a standard cost-per-DALY metric that doesn't depend on the GDP of the recipient country.</p>
-    <p>CE ($/DALY) solves this by asking the neutral question: how many dollars of philanthropic cost per unit of health benefit? At $76–111/DALY, NeoTest sits between GiveWell's top-charity bar (~$50–100) and the syphilis program we evaluated in July ($132). That comparison is only possible with the CE metric.</p>
+    <p>CE ($/DALY) solves this by asking the neutral question: how many dollars of philanthropic cost per unit of health benefit? At $111–119/DALY (marginal CE range across both models), NeoTest is just above GiveWell's top-charity bar (~$50–100) and below the syphilis program we evaluated in July ($132). That comparison is only possible with the CE metric.</p>
   </div>
 </details>
 
