@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pan-African Farm Lending — Evaluation</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #14532d;
+    --accent-light: #f0fdf4;
+    --accent-border: #bbf7d0;
+    --text: #1a1a1a;
+    --muted: #555;
+    --border: #e0deda;
+    --bg: #fafaf8;
+    --surface: #fff;
+    --surface-alt: #f7f6f4;
+    --red: #b91c1c;
+    --red-light: #fef2f2;
+    --green: #059669;
+    --green-light: #f0fdf4;
+    --amber: #92400e;
+    --amber-light: #fffbeb;
+  }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.88; color: var(--text); background: var(--bg); }
+  .layout { display: flex; min-height: 100vh; }
+  nav { width: 232px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2.25rem 1.5rem; background: var(--surface-alt); border-right: 1px solid var(--border); }
+  nav .home { display: block; font-family: system-ui, sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: #999; text-decoration: none; margin-bottom: 1.5rem; }
+  nav .home:hover { color: #333; }
+  nav h5 { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #bbb; margin-bottom: .6rem; margin-top: 1.5rem; }
+  nav ul { list-style: none; }
+  nav ul li a { font-family: system-ui, sans-serif; font-size: 12.5px; color: #666; text-decoration: none; display: block; padding: .22rem .6rem; border-left: 2px solid transparent; }
+  nav ul li a:hover { color: var(--text); }
+  nav ul li a.active { color: var(--text); border-left-color: var(--accent); font-weight: 600; }
+  nav .sep { height: 1px; background: var(--border); margin: 1.5rem 0; }
+  main { flex: 1; max-width: 800px; padding: 4rem 3.5rem 7rem; }
+  .eyebrow { font-family: system-ui, sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin-bottom: .6rem; }
+  h1 { font-size: 2.5rem; line-height: 1.15; font-weight: 700; letter-spacing: -.025em; margin-bottom: .45rem; color: #0f0f0f; }
+  .dek { font-family: system-ui, sans-serif; font-size: 15.5px; color: #666; margin-bottom: 2.75rem; line-height: 1.5; }
+  .verdict { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 1.3rem 1.6rem; margin-bottom: 3.25rem; }
+  .verdict .vl { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #aaa; margin-bottom: .5rem; }
+  .verdict p { font-family: system-ui, sans-serif; font-size: 13.5px; color: #333; line-height: 1.65; margin-bottom: .55rem; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .metrics { display: flex; gap: 1.25rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
+  .metric { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.25rem; flex: 1; min-width: 120px; }
+  .metric .mv { font-size: 1.45rem; font-weight: 700; color: #0f0f0f; font-family: system-ui, sans-serif; letter-spacing: -.02em; line-height: 1.1; }
+  .metric .ml { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: #aaa; margin-top: .3rem; }
+  .metric.hl .mv { color: var(--accent); }
+  .metric.warn .mv { color: var(--amber); }
+  .metric.red .mv { color: var(--red); }
+  h2 { font-size: 1.6rem; font-weight: 700; margin-top: 4rem; margin-bottom: 1.25rem; letter-spacing: -.015em; padding-bottom: .5rem; border-bottom: 1px solid var(--border); scroll-margin-top: 1.5rem; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: .7rem; color: #222; }
+  p { margin-bottom: 1.2rem; }
+  a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: #1e3a8a; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.25rem; font-family: system-ui, sans-serif; font-size: 13px; }
+  th { text-align: left; padding: .6rem .85rem; background: var(--surface-alt); border: 1px solid var(--border); font-weight: 600; color: #333; }
+  td { padding: .55rem .85rem; border: 1px solid var(--border); color: #444; vertical-align: top; line-height: 1.5; }
+  tr:nth-child(even) td { background: #faf9f7; }
+  td.good { background: #f0fdf4 !important; color: #065f46; font-weight: 600; }
+  td.warn { background: #fffbeb !important; color: #92400e; }
+  td.red { background: #fef2f2 !important; color: #991b1b; }
+  td.neu { color: #444; }
+  .callout { background: var(--accent-light); border: 1px solid var(--accent-border); padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; line-height: 1.72; font-family: system-ui, sans-serif; }
+  .callout strong { color: var(--accent); }
+  .callout-amber { background: var(--amber-light); border: 1px solid #fcd34d; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-amber .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--amber); margin-bottom: .5rem; font-weight: 700; }
+  .callout-red { background: var(--red-light); border: 1px solid #fca5a5; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-red .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--red); margin-bottom: .5rem; font-weight: 700; }
+  .callout-green { background: var(--green-light); border: 1px solid #6ee7b7; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-green .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--green); margin-bottom: .5rem; font-weight: 700; }
+  ul, ol { margin-left: 1.5rem; margin-bottom: 1.2rem; }
+  ul li, ol li { margin-bottom: .4rem; }
+  .tag { display: inline-block; font-family: system-ui, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: .07em; padding: .15em .5em; border-radius: 3px; font-weight: 700; }
+  .tag-red { background: #fee2e2; color: #b91c1c; }
+  .tag-amber { background: #fef3c7; color: #92400e; }
+  .tag-green { background: #d1fae5; color: #065f46; }
+  sup a { font-family: system-ui, sans-serif; font-size: 11px; color: #1d4ed8; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <a class="home" href="../index.html">← All Causes</a>
+  <h5>Navigation</h5>
+  <ul>
+    <li><a href="#verdict">Verdict</a></li>
+    <li><a href="#model">The lending model</a></li>
+    <li><a href="#dcy">DCY model</a></li>
+    <li><a href="#vcr">VCR assumption</a></li>
+    <li><a href="#capital">Capital recycling</a></li>
+    <li><a href="#comparators">Comparators</a></li>
+    <li><a href="#concerns">Open concerns</a></li>
+    <li><a href="#research">Research runs</a></li>
+  </ul>
+  <div class="sep"></div>
+  <h5>Cause pages</h5>
+  <ul>
+    <li><a href="neotest-botec-comparison.html">NeoTest</a></li>
+    <li><a href="passage-africa-pathways.html">Passage</a></li>
+    <li><a href="len-hiv-lenacapavir.html">LEN/HIV</a></li>
+    <li><a href="farm-lending-africa.html" class="active">Farm Lending</a></li>
+  </ul>
+</nav>
+<main>
+
+<div class="eyebrow">Evaluation — Sep 2026</div>
+<h1>Pan-African Farm Lending</h1>
+<p class="dek">FinCo (TechnoServe spin-out) proposes a direct-to-farm AI-native lending entity for smallholder farmers in sub-Saharan Africa. Central claim: $33/DCY (<abbr title="Doubled Consumption Year — the welfare unit used by GiveWell. One DCY represents doubling one person's consumption for one year, e.g. raising someone from $500 to $1,000/year. The GiveWell bar is roughly $40–80/DCY.">DCY</abbr>) at 1× capital turn, falling to $6.5/DCY if capital recycles 5× as claimed. 6 deep-research runs launched Sep 22, 2026. Findings pending.</p>
+
+<div class="verdict" id="verdict">
+  <div class="vl">Provisional verdict — research in progress</div>
+  <p><strong>Intriguing model, but three load-bearing assumptions are unvalidated and each alone could double the $/DCY.</strong></p>
+  <p>FinCo's headline of $6.5–33/DCY is derived from a clean model: a $400 farm loan generates $580 net farmer income gain (via <abbr title="Value-Cost Ratio: the extra crop revenue produced by an input, divided by the cost of that input. A VCR of 3.0 means $1 of fertilizer or seed generates $3 of extra revenue. The minimum threshold for rational smallholder investment is typically 2.0.">VCR</abbr> 3.0), which translates to 2.44 <abbr title="Doubled Consumption Year">DCY</abbr>s per loan, with $80 of philanthropic capital (20% of the capital stack) per loan deployed. The model is internally coherent. What is not established: (1) whether VCR 3.0 holds at portfolio scale or reflects cherry-picked programs; (2) whether capital actually recycles without significant FX erosion in African currencies; (3) whether 4% default is achievable vs. the 10–20% seen at comparable lenders. Research runs are active on all three questions.</p>
+  <p>The strongest comparable, One Acre Fund's agroforestry program, offers $31–47/DCY with two RCTs and 2.6M adopters. FinCo matches this headline only if VCR stays near 3.0 <em>and</em> capital recycles at least 3–5× — neither of which is demonstrated. The early-stage risk is substantial: Phase 0 is a Tanzania prototype starting 2026. A philanthropist should treat this as a catalytic bet on infrastructure, not a proven vehicle.</p>
+</div>
+
+<div class="metrics">
+  <div class="metric hl">
+    <div class="mv">$6.5–33</div>
+    <div class="ml">$/DCY range (1× to 5× turns)</div>
+  </div>
+  <div class="metric warn">
+    <div class="mv">VCR 3.0</div>
+    <div class="ml">Core assumption (CASA avg; challenged)</div>
+  </div>
+  <div class="metric warn">
+    <div class="mv">4%</div>
+    <div class="ml">Target default rate (vs 10–20% comparable)</div>
+  </div>
+  <div class="metric">
+    <div class="mv">$400</div>
+    <div class="ml">Average farm loan, 5-month tenor</div>
+  </div>
+  <div class="metric hl">
+    <div class="mv">$80</div>
+    <div class="ml">Philanthropic capital per loan (20% stack)</div>
+  </div>
+  <div class="metric warn">
+    <div class="mv">2026</div>
+    <div class="ml">Phase 0: Tanzania prototype only</div>
+  </div>
+</div>
+
+<h2 id="model">The lending model</h2>
+
+<p>FinCo, being spun out of TechnoServe's Strategic Initiatives Group, proposes to bridge a structural gap in African agricultural finance. The problem is straightforward: sub-Saharan Africa has roughly $3B in annual farm lending against an estimated $80B in medium-term need. Capital exists — from development finance institutions (<abbr title="Development Finance Institutions: quasi-governmental investors that provide concessional or below-market capital for development purposes. Examples: FMO (Netherlands), BII (UK), Norfund (Norway), IFC (World Bank Group).">DFIs</abbr>) like FMO, BII, and Norfund — but it tends to pile up at commercial banks and agri-business buyers rather than reaching the smallholder farmer who actually needs $400 for improved seed and fertilizer before planting season.</p>
+
+<p>The mechanics: an agri-business (say, a rice mill with 5,000 farmer suppliers) provides a "first-loss" guarantee covering the first ~5% of loan losses. FinCo lends $400 per farmer, the agri-business distributes inputs and deducts repayment from harvest proceeds. The farmer never touches cash — repayment is structural, not behavioral. FinCo uses <abbr title="TechnoServe's CASA (Commercial Agriculture for Smallholders and Agribusiness) Technical Assistance Facility, which has worked with 100+ agri-businesses across 20 African markets, reaching 185,000 farmers and facilitating $400M in investment.">CASA</abbr>-derived data on agri-business quality to underwrite the supply chain, not the individual farmer.</p>
+
+<p>The phased strategy starts with a 2026 Tanzania prototype (Phase 0), expands to 5–7 banks across multiple markets (Phase 1, 2027), scales to commercial fee-per-loan revenue (Phase 2, 2029), and eventually transitions to a licensed balance-sheet lender (Phase 3, 2030+). The historical analogue cited is <a href="https://www.procredit-holding.com/">ProCredit Holding</a>, which grew from a 1980s IPC consultancy advising Latin American banks into a licensed banking group with a €7.75B portfolio today.</p>
+
+<h2 id="dcy">The DCY model — how $80 gets to $33/DCY</h2>
+
+<p>The CE calculation is unusually transparent. Starting from a $400 five-month loan at VCR 3.0:</p>
+
+<table>
+  <thead>
+    <tr><th>Line item</th><th>Amount</th><th>Basis</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Extra crop revenue (VCR 3.0)</td><td>$1,200</td><td>$400 inputs × 3.0</td></tr>
+    <tr><td>Less: inputs purchased</td><td>−$400</td><td>Loan principal</td></tr>
+    <tr><td>Less: incremental labour and harvest costs</td><td>−$180</td><td>15% of extra revenue (field data)</td></tr>
+    <tr><td>Less: interest and fees</td><td>−$40</td><td>$39.60 on 5-month loan</td></tr>
+    <tr><td class="good"><strong>Net farmer income gain per loan</strong></td><td class="good"><strong>$580</strong></td><td class="good"></td></tr>
+  </tbody>
+</table>
+
+<p>The $580 gain is then translated into <abbr title="Doubled Consumption Year: doubling one person's consumption for one year. A household earning $485/person/year doubling to $970 = 1 DCY.">DCY</abbr>s using Kenya World Bank <abbr title="Poverty and Inequality Platform (World Bank): a database of household consumption surveys used to set consumption baselines for welfare calculations.">PIP</abbr> data. A FinCo farmer household consumes approximately $485/person/year ($2,039/household of 4.2). The $580 income gain represents a 28.5% proportional increase, which yields log₂(1.285) = 0.36 doublings per person per year. Across 4.2 household members, that's <strong>1.52 DCY per loan</strong> for the farmer household.</p>
+
+<p>FinCo also counts spillover to rural labourers who earn wages from the additional harvest activity ($162 in wages spread across ~2 labourer households), adding <strong>0.93 DCY</strong> in spillover — bringing the total to <strong>2.44 DCY/loan</strong>. Philanthropic capital per loan is $80 (20% of the $400 loan, with the other 80% from DFI debt). That gives <strong>$33/DCY at one capital turn</strong>.</p>
+
+<p>The multiplier from recycling is large: if capital turns 5× (FinCo's central assumption, implying 20% annual erosion from FX and credit losses), the same $80 generates 5 × 2.44 = 12.2 DCY, or <strong>$6.5/DCY</strong>. This would be among the most cost-effective philanthropic interventions in agriculture. The question is whether it is real.</p>
+
+<h2 id="vcr">The VCR 3.0 assumption: most contested number in the model</h2>
+
+<p>VCR (<abbr title="Value-Cost Ratio: extra crop revenue ÷ input cost. A risk-averse smallholder will invest when VCR ≥ 2.0, meaning $1 of input generates at least $2 of extra revenue.">Value-Cost Ratio</abbr>) is the pivot on which the whole model turns. The $580 income gain requires VCR = 3.0. At VCR = 2.0 (the minimum threshold), the gain collapses to $180 (net income = $800 revenue − $400 inputs − $180 labour − $40 cost), and the $/DCY approximately triples to ~$100+.</p>
+
+<p>FinCo sources VCR 3.0 from its own <abbr title="CASA: Commercial Agriculture for Smallholders and Agribusiness — TechnoServe's Technical Assistance Facility, which has provided advisory services to 100+ agri-businesses across 20 African markets.">CASA</abbr> program data, where the average observed VCR was 2.98 across engagements where all "enablers" (market access, extension, input bundling) were in place. This is a plausible number given the enabling conditions — but it is drawn from programs TechnoServe chose to engage with, which presumably had the best underlying conditions. This is selection bias, not a portfolio-wide average.</p>
+
+<div class="callout-amber">
+  <div class="ct">The Duflo-Kremer challenge</div>
+  FinCo cites Duflo, Kremer &amp; Robinson (2008) in a footnote — but the paper cuts against their VCR claim. The study found fertiliser in Kenya produced 69.5% returns at very low doses (½ teaspoon per plant) but <em>negative</em> returns at the full Ministry-recommended package. FinCo's model assumes farmers receive the optimal input bundle. The evidence suggests that at scale, many borrowers will be at sub-optimal points on the return curve — which compresses portfolio VCR below 3.0.
+</div>
+
+<p>The "Bold et al. lemon technologies" problem is analogous: agricultural inputs that perform well in supervised trials consistently underperform when scaled without intensive advisory support. FinCo's Phase 0 will use the same intensive CASA-quality engagement that produced VCR 2.98. Phase 2 at 100,000+ farmers will not.</p>
+
+<h2 id="capital">Capital recycling: the 5× turn assumption</h2>
+
+<p>FinCo's most distinctive philanthropic claim is that capital is "recyclable" — not a grant, but a self-replenishing vehicle. A five-month crop loan repays at harvest, and the same dollar can be re-lent next season. In theory, $1M of philanthropic capital could turn 2.4× per year (365 ÷ 150 days), implying 12 turns over five years rather than 5. FinCo uses 5× as conservative.</p>
+
+<p>The erosion mechanism is threefold: defaults eating into principal, currency depreciation converting local-currency repayments back to USD, and operational costs. The 20% annual loss assumption (implied by 5 turns over 5+ years) looks manageable in a normal year. It may not be in African currency reality.</p>
+
+<p>In 2022, the Ghanaian cedi depreciated 55% against the dollar. In 2023, the Kenyan shilling lost 25%; the Nigerian naira lost ~40% after the Tinubu float. If FinCo's Tanzania portfolio is denominated in Tanzanian shillings, an average year erodes capital by 8–12% via FX alone before any credit losses. A tail year (25% depreciation + 10% defaults) erodes 35% in a single season — turning 5 cycles of capital into 3 effective ones and pushing $/DCY above $10.</p>
+
+<p>The DFI leverage assumption (80% of the capital stack from DFI debt) is also aspirational at this stage. DFIs typically take 2–5 years to approve a new counterparty. FinCo's Phase 0 is a 2026 Tanzania prototype. Expecting formal DFI partnership at scale by 2029 (Phase 2) is optimistic but not impossible given TechnoServe's existing DFI relationships.</p>
+
+<h2 id="comparators">Comparators</h2>
+
+<table>
+  <thead>
+    <tr><th>Program</th><th>$/DCY</th><th>Evidence quality</th><th>Donor subsidy type</th><th>Scale (2024–26)</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FinCo (optimistic)</strong></td>
+      <td class="good">$6.5–33</td>
+      <td class="warn">None — pre-Phase 0</td>
+      <td>Recyclable capital (claimed)</td>
+      <td>0 farms deployed</td>
+    </tr>
+    <tr>
+      <td><strong>FinCo (VCR 2.0 + 1× turn)</strong></td>
+      <td class="warn">~$100+</td>
+      <td class="warn">None</td>
+      <td>Grant-equivalent if FX erodes capital</td>
+      <td>0 farms deployed</td>
+    </tr>
+    <tr>
+      <td><a href="https://oneacrefund.org/programs/tree-seedlings">OAF Agroforestry</a></td>
+      <td class="good">$31–47</td>
+      <td class="good">2 RCTs (Laterite 2020, 2025)</td>
+      <td>Grant ($7–12/adopter/yr)</td>
+      <td>2.6M adopters, 8 countries</td>
+    </tr>
+    <tr>
+      <td><a href="https://oneacrefund.org">OAF Core (marginal)</a></td>
+      <td class="neu">$80–120</td>
+      <td class="good">Multiple RCTs</td>
+      <td>Grant (~$43/farm/yr)</td>
+      <td>7M+ families</td>
+    </tr>
+    <tr>
+      <td><a href="https://apolloagriculture.com">Apollo Agriculture</a></td>
+      <td class="warn">Unknown</td>
+      <td class="warn">No published CE data</td>
+      <td>Commercial equity + impact capital</td>
+      <td>150K+ farms, Kenya</td>
+    </tr>
+    <tr>
+      <td><a href="https://emata.ug">Emata</a></td>
+      <td class="warn">Unknown</td>
+      <td class="warn">No published CE data</td>
+      <td>Impact capital</td>
+      <td>65K farms, Uganda</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>One Acre Fund's agroforestry program is the honest benchmark. It offers a similar headline CE ($31–47/DCY), is backed by two RCTs, and operates at 2.6M adopters. The difference: OAF requires ongoing grant subsidy ($7–12/adopter/year), whereas FinCo claims recycling capital. If FinCo's recyclability claim holds, it eventually becomes cheaper per DCY. If it doesn't — if FX erosion and defaults consume capital at grant-equivalent rates — OAF agroforestry is strictly better on current evidence.</p>
+
+<h2 id="concerns">Open concerns — research in progress</h2>
+
+<p>Six research runs launched September 22, 2026 are investigating the following questions. This section will be updated as syntheses come in.</p>
+
+<h3>1. VCR selection bias</h3>
+<p>Does the CASA average VCR of 2.98 represent a genuine portfolio expectation, or the top decile of supply chains TechnoServe chose to engage? Duflo et al. suggest input returns are highly sensitive to dose and enabling conditions. At scale, average VCR is likely lower than CASA's program average. We are investigating the distribution of VCRs across CASA engagements and the academic literature on input return rates in SSA.</p>
+
+<h3>2. Default rates at comparable lenders</h3>
+<p>FinCo targets 4% default with 1% credit loss (after agri-business first-loss cover). Comparable agricultural MFIs in SSA typically report 10–20% NPL. Apollo Agriculture and Emata do not publish default rates — their silence is itself informative. Supply-chain anchoring (harvest deduction) structurally reduces defaults vs. general-purpose MFI loans, but weather correlation risk is acute: a regional drought hits all borrowers in a supply chain simultaneously, potentially exceeding the 5% first-loss cover in a single bad season.</p>
+
+<h3>3. FX and capital preservation</h3>
+<p>East African currencies depreciate 8–25% annually against the dollar in normal-to-bad years. FinCo plans to lend in local currency (Tanzanian shillings, Kenyan shillings). Without hedging instruments (expensive and often unavailable for sub-$10M positions in frontier markets), the "20% annual erosion" assumption that implies 5× capital turns could be right in a good year but catastrophic in a bad one. We are investigating the hedging landscape and comparable agricultural fund capital preservation track records.</p>
+
+<h3>4. Credit counterfactual</h3>
+<p>FinCo assumes no counterfactual — that target farmers currently have zero credit access. But FinCo targets supply-chain-integrated farmers (those supplying commercial agri-businesses), who are among the better-connected farmers in their regions. In Kenya, Apollo Agriculture already serves 150,000+ farmers in similar supply chains. In Tanzania, SACCO networks and input dealer credit reach a meaningful fraction of value-chain-integrated farmers. The counterfactual fraction matters: if 30–50% of borrowers could have accessed credit anyway (at worse terms), the CE haircut is significant.</p>
+
+<h3>5. DFI leverage timeline</h3>
+<p>The model's 4:1 DFI-to-philanthropic ratio is aspirational for Phase 0 and probably Phase 1. DFIs typically require 2–5 years of counterparty relationship before committing capital. TechnoServe has relationships with FMO, BII, and Norfund — but those relationships belong to TechnoServe, not yet to FinCo as an independent entity. Whether they transfer is an open question.</p>
+
+<h3>6. Competitive landscape</h3>
+<p>Apollo Agriculture, Emata, and OAF already operate supply-chain-anchored farm lending in FinCo's target markets. The question is whether FinCo fills a genuine gap (country markets or supply chains no one serves) or enters a market where better-funded incumbents are already operating. If the former, its AI-native underwriting and TechnoServe data moat are real differentiators. If the latter, it faces a headwind that typical ag-fintech entrants haven't navigated well.</p>
+
+<h2 id="research">Research runs</h2>
+
+<table>
+  <thead>
+    <tr><th>Run</th><th>Status</th><th>Key question</th><th>Report</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FinCo VCR validation and selection bias</td>
+      <td class="warn">Running</td>
+      <td>Is VCR 3.0 representative at scale, or CASA selection bias?</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Farm loan default rates: SSA comparators</td>
+      <td class="warn">Running</td>
+      <td>What NPL rates do Apollo, Emata, and comparable SSA ag-lenders actually achieve?</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Capital preservation and FX currency risk</td>
+      <td class="warn">Running</td>
+      <td>Is 20%/year capital erosion conservative or optimistic given African FX volatility?</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>One Acre Fund CE deep dive</td>
+      <td class="warn">Running</td>
+      <td>Is OAF agroforestry durably better than FinCo on risk-adjusted CE?</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Farm credit counterfactual in SSA</td>
+      <td class="warn">Running</td>
+      <td>What fraction of FinCo target farmers currently have credit access?</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Competitive landscape: Apollo, Emata, ag-fintech</td>
+      <td class="warn">Running</td>
+      <td>Does FinCo fill a genuine gap, or compete with established players?</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+
+</main>
+</div>
+</body>
+</html>
