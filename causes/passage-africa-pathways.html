@@ -147,10 +147,10 @@
 
 <p>The financial structure is unusually self-hedging: the 11.95% APR generates CAD $28,872 in interest per performing loan, which absorbs defaults up to ~32.5% before the capital pool begins to shrink. At the model's base case (10% default), capital returns with a 41% surplus. This is the structural advantage the evaluation turns on.</p>
 
-<p>The CE model claims 165 DCYs/migrant (weighted average across four countries) at near-zero net cost. 75% of that benefit is claimed to flow to origin communities via remittances and spillover — both heavily contested assumptions. The deep-research runs below systematically evaluate each major model input.</p>
+<p>The CE model claims 165 DCYs/migrant — weighted average across four countries — at near-zero net cost. (A DCY, or Doubling of Consumption Year, means one person's annual consumption doubled for one year. It's GiveWell's standard unit for measuring economic impact from income-lifting programs.) 75% of that benefit is claimed to flow to origin communities via remittances and spillover — both disputed.</p>
 
 <div class="callout">
-  <strong>The key insight from six research runs:</strong> This is a bet on loan repayment, not on DCY magnitude. At realistic DCYs (~103) and realistic defaults (~15%), the money still comes back with a 26% surplus and CE is strongly negative (surplus = benefit at negative cost). The case breaks only if defaults exceed ~42% — which requires correlated systemic failure, not normal credit deterioration.
+  <strong>The key insight from six research runs:</strong> This is a bet on loan repayment, not on DCY magnitude. At realistic DCYs (~103) and realistic defaults (~15%), the money still comes back with a 26% surplus — meaning the program has negative net cost at realistic defaults. The case breaks only if defaults exceed ~42% — which requires correlated systemic failure, not normal credit deterioration.
 </div>
 
 <!-- ===================== DCY MODEL ===================== -->
@@ -158,7 +158,7 @@
 
 <p><em>Run: Passage_CE_DCY_model_validation — 4 phases, Sep 22 2026</em></p>
 
-<p>The published 165 DCYs/migrant figure is overstated by ~30–45%. A defensible central estimate is <strong>~92–115 DCYs/migrant</strong>, driven by two corrections: the remittance rate (9% → ~7% lifetime) and the spillover multiplier (1.65× → ~1.25×). The counterfactual income and attribution assumptions are reasonable and barely change the result.</p>
+<p>The published 165 DCYs/migrant figure is overstated by ~30–45%. Best estimate: <strong>~92–115 DCYs/migrant</strong>, driven by two corrections: the remittance rate (9% → ~7% lifetime) and the spillover multiplier (1.65× → ~1.25×). The counterfactual income and attribution assumptions are reasonable and barely change the result.</p>
 
 <table>
   <thead><tr><th>Scenario</th><th>Dest. income</th><th>Remit rate</th><th>HHs</th><th>Spillover</th><th>DCYs</th><th>vs published</th></tr></thead>
@@ -187,7 +187,7 @@
   </tbody>
 </table>
 
-<p><strong>The remittance critique:</strong> StatCan SIMT 2017 shows SSA remitters in Canada average 4.5% of $60K income ($2,710/yr). The LSIC 2008 shows 7.5% in year 2 declining to 5.9% by year 4. Malengo uses 8% (already below Passage's 9%). A realistic lifetime average: ~7% weighted at 4% discount. Additionally, the "2 households" assumption is generous — effective coverage is ~1.3 equivalent households. Loan repayment at 11.95% (~$5–8K/yr in debt service early in the loan) directly competes with remittance capacity.</p>
+<p><strong>The remittance critique:</strong> Statistics Canada's SIMT survey (2017) shows SSA remitters in Canada average 4.5% of $60K income ($2,710/yr). The LSIC (Longitudinal Survey of Immigrants to Canada, 2008) shows 7.5% in year 2 declining to 5.9% by year 4. Malengo uses 8% (already below Passage's 9%). A realistic lifetime average: ~7% weighted at 4% discount. Additionally, the "2 households" assumption is generous — effective coverage is ~1.3 equivalent households. Loan repayment at 11.95% (~$5–8K/yr in debt service early in the loan) directly competes with remittance capacity.</p>
 
 <p><strong>The spillover critique:</strong> The 1.65× multiplier transplants Egger et al. (2022) — a concentrated one-time cash transfer injecting >15% of local GDP into 653 rural Kenyan villages — to dispersed monthly remittances of ~$450 to 1–2 urban/peri-urban households across four different countries over 40 years. GiveWell's own adjustments for Uganda/Malawi imply an effective spillover addition of only ~0.10–0.13×, not 0.65×. Revised central: <strong>~1.25×</strong>.</p>
 
@@ -203,7 +203,7 @@
 
 <p><em>Run: Passage_default_rate_comparable_lenders — 3 phases, Sep 22 2026</em></p>
 
-<p>No true comparable exists: Passage combines $60K unsecured loans at 11.95% for SSA international students with no government backstop, no income-contingent repayment, no grace period, and payments beginning from Month 1. Every comparable lender with <10% default has at least one of these protective features; Passage has none.</p>
+<p>No true comparable exists: Passage combines $60K unsecured loans at 11.95% for SSA (Sub-Saharan African) international students with no government backstop, no income-contingent repayment, no grace period, and payments beginning from Month 1. Every comparable lender with <10% default has at least one of these protective features; Passage has none.</p>
 
 <p><strong>Central default estimate: ~15% (range 12–19%), above Passage's 10% base case.</strong> Derived by starting from Canada's 6.7–8% domestic student loan benchmark and applying risk adjustments:</p>
 
@@ -303,12 +303,12 @@
 
 <p>Three independent methods converge on ~44–54%:</p>
 <ul>
-  <li><strong>Bottom-up 7-gate chain:</strong> 44% — diploma completion × REx-PN pass × PGWP × employment × PNP nomination × PR approval × chooses to stay</li>
+  <li><strong>Bottom-up 7-gate chain:</strong> 44% — diploma completion × REx-PN pass × PGWP × employment × PNP nomination (Provincial Nominee Program — Canada's main route where provinces sponsor skilled workers for permanent residency) × PR approval × chooses to stay</li>
   <li><strong>Adjusted StatCan healthcare TFW anchor:</strong> 54% — StatCan 2025 shows 58% of healthcare TFWs from 2000–2022 obtained Canadian PR; haircut −4pp for immigration retrenchment</li>
   <li><strong>Scenario-weighted (including correlated tail):</strong> 45%</li>
 </ul>
 
-<p><strong>The PNP gate is the decisive bottleneck.</strong> A typical Passage LPN graduate scores ~330–380 CRS points. Healthcare Express Entry draws in 2026 required 462–476 — the gap is unbridgeable without a PNP nomination (+600 CRS). PNP IS the pathway. If PNP allocation is exhausted or streams are paused, the student has no viable PR route.</p>
+<p><strong>The PNP gate is the decisive bottleneck.</strong> A typical Passage LPN graduate scores ~330–380 CRS points (Comprehensive Ranking System — Canada's points-based immigration score combining age, education, language, and work experience). Healthcare Express Entry draws in 2026 required 462–476 — the gap is unbridgeable without a PNP nomination (+600 CRS). PNP IS the pathway. If PNP allocation is exhausted or streams are paused, the student has no viable PR route.</p>
 
 <p>Ontario PNP reached its 2025 allocation in December 2025. Ontario then terminated all 8 OINP streams on May 30, 2026 and replaced them with a single Workforce Priority stream (June 26, 2026) — with healthcare-specific rules not yet published as of September 2026. This is live regulatory uncertainty for Passage's 2026–2028 cohorts.</p>
 
@@ -334,11 +334,11 @@
 
 <p><em>Run: Passage_company_risk_financial_health — 3 phases, Sep 22 2026</em></p>
 
-<p>Verdict: <strong>Fund-with-conditions — company risk is HIGH but structurally fixable</strong> with standard investment safeguards imposed before capital is committed.</p>
+<p>Company risk is <strong>high but structurally fixable</strong> — standard investment safeguards, imposed before capital commitment, address all of it.</p>
 
 <p>Passage is a 3.5-year-old VC-backed startup founded by Martin Basiri (co-founder of ApplyBoard, $1.4B+ valuation). The company raised C$40M seed funding led by Drive Capital. It has no disclosed board of directors, no published audited financials, no prudential regulator, and approximately 2 years of operating runway. At $50M portfolio scale, the net margin is ~$0–1.5M/yr — barely enough to operate, with no cushion against a bad year.</p>
 
-<p><strong>P(organizational failure within 5 years): ~25–40%</strong>, driven by thin margins, single-founder dependency, unseasoned portfolio, and PGWP correlated risk.</p>
+<p><strong>P(organizational failure within 5 years): ~25–40%</strong>, driven by thin margins, single-founder dependency, unseasoned portfolio, and PGWP (Post-Graduation Work Permit — the authorization that lets international graduates stay in Canada to work after finishing their degree) correlated risk.</p>
 
 <h3>Portfolio recovery with and without SPV</h3>
 
@@ -356,7 +356,7 @@
 <!-- ===================== GRANT CONDITIONS ===================== -->
 <h2 id="conditions">Grant conditions (non-negotiable)</h2>
 
-<p>Based on the six research runs, the following conditions are recommended before any capital commitment. Grouped by priority:</p>
+<p>Twelve conditions based on six research runs. Require all before committing capital:</p>
 
 <div class="concern-card" style="border:1px solid #b91c1c;background:#fef2f2">
   <h3 style="margin-top:0;color:#991b1b">Structural (prevent catastrophic loss)</h3>
@@ -435,7 +435,7 @@
     <li>Which specific PNP streams are graduates using? What is their nomination success rate?</li>
     <li>Does an SPV structure already exist? (If yes, reduces structural risk significantly)</li>
     <li>Delinquency rates by program month — specifically months 13–20 (clinical placement period)</li>
-    <li>CPNRE/REx-PN pass rate for Passage graduates specifically</li>
+    <li>CPNRE/REx-PN (Canadian nursing licensing exam) pass rate for Passage graduates specifically</li>
     <li>Is Passage providing immigration advisory services? Do they track PR outcomes?</li>
   </ol>
 </div>
