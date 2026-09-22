@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passage Africa Pathways — Evaluation</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #0c4a6e;
+    --accent-light: #f0f9ff;
+    --accent-border: #bae6fd;
+    --text: #1a1a1a;
+    --muted: #555;
+    --border: #e0deda;
+    --bg: #fafaf8;
+    --surface: #fff;
+    --surface-alt: #f7f6f4;
+    --red: #b91c1c;
+    --red-light: #fef2f2;
+    --green: #059669;
+    --green-light: #f0fdf4;
+    --amber: #92400e;
+    --amber-light: #fffbeb;
+  }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.88; color: var(--text); background: var(--bg); }
+  .layout { display: flex; min-height: 100vh; }
+  nav { width: 232px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2.25rem 1.5rem; background: var(--surface-alt); border-right: 1px solid var(--border); }
+  nav .home { display: block; font-family: system-ui, sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: #999; text-decoration: none; margin-bottom: 1.5rem; }
+  nav .home:hover { color: #333; }
+  nav h5 { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #bbb; margin-bottom: .6rem; margin-top: 1.5rem; }
+  nav ul { list-style: none; }
+  nav ul li a { font-family: system-ui, sans-serif; font-size: 12.5px; color: #666; text-decoration: none; display: block; padding: .22rem .6rem; border-left: 2px solid transparent; }
+  nav ul li a:hover { color: var(--text); }
+  nav ul li a.active { color: var(--text); border-left-color: var(--accent); font-weight: 600; }
+  nav .sep { height: 1px; background: var(--border); margin: 1.5rem 0; }
+  main { flex: 1; max-width: 800px; padding: 4rem 3.5rem 7rem; }
+  .eyebrow { font-family: system-ui, sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin-bottom: .6rem; }
+  h1 { font-size: 2.5rem; line-height: 1.15; font-weight: 700; letter-spacing: -.025em; margin-bottom: .45rem; color: #0f0f0f; }
+  .dek { font-family: system-ui, sans-serif; font-size: 15.5px; color: #666; margin-bottom: 2.75rem; line-height: 1.5; }
+  .verdict { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 1.3rem 1.6rem; margin-bottom: 3.25rem; }
+  .verdict .vl { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #aaa; margin-bottom: .5rem; }
+  .verdict p { font-family: system-ui, sans-serif; font-size: 13.5px; color: #333; line-height: 1.65; margin-bottom: .55rem; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .metrics { display: flex; gap: 1.25rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
+  .metric { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.25rem; flex: 1; min-width: 120px; }
+  .metric .mv { font-size: 1.45rem; font-weight: 700; color: #0f0f0f; font-family: system-ui, sans-serif; letter-spacing: -.02em; line-height: 1.1; }
+  .metric .ml { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: #aaa; margin-top: .3rem; }
+  .metric.hl .mv { color: var(--accent); }
+  .metric.warn .mv { color: var(--amber); }
+  .metric.red .mv { color: var(--red); }
+  h2 { font-size: 1.6rem; font-weight: 700; margin-top: 4rem; margin-bottom: 1.25rem; letter-spacing: -.015em; padding-bottom: .5rem; border-bottom: 1px solid var(--border); scroll-margin-top: 1.5rem; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: .7rem; color: #222; }
+  p { margin-bottom: 1.2rem; }
+  a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: #1e3a8a; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.25rem; font-family: system-ui, sans-serif; font-size: 13px; }
+  th { text-align: left; padding: .6rem .85rem; background: var(--surface-alt); border: 1px solid var(--border); font-weight: 600; color: #333; }
+  td { padding: .55rem .85rem; border: 1px solid var(--border); color: #444; vertical-align: top; line-height: 1.5; }
+  tr:nth-child(even) td { background: #faf9f7; }
+  td.good { background: #f0fdf4 !important; color: #065f46; font-weight: 600; }
+  td.warn { background: #fffbeb !important; color: #92400e; }
+  td.red { background: #fef2f2 !important; color: #991b1b; }
+  td.neu { color: #444; }
+  .callout { background: var(--accent-light); border: 1px solid var(--accent-border); padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; line-height: 1.72; font-family: system-ui, sans-serif; }
+  .callout strong { color: var(--accent); }
+  .callout-amber { background: var(--amber-light); border: 1px solid #fcd34d; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-amber .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--amber); margin-bottom: .5rem; font-weight: 700; }
+  .callout-red { background: var(--red-light); border: 1px solid #fca5a5; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-red .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--red); margin-bottom: .5rem; font-weight: 700; }
+  .callout-green { background: var(--green-light); border: 1px solid #6ee7b7; padding: 1.1rem 1.5rem; margin: 2rem 0; font-size: .94rem; font-family: system-ui, sans-serif; line-height: 1.72; }
+  .callout-green .ct { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--green); margin-bottom: .5rem; font-weight: 700; }
+  .concern-card { border-radius: 8px; padding: 1.2em 1.5em; margin: 1.5em 0; }
+  ul, ol { margin-left: 1.5rem; margin-bottom: 1.2rem; }
+  ul li, ol li { margin-bottom: .4rem; }
+  .tag { display: inline-block; font-family: system-ui, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: .07em; padding: .15em .5em; border-radius: 3px; font-weight: 700; }
+  .tag-red { background: #fee2e2; color: #b91c1c; }
+  .tag-amber { background: #fef3c7; color: #92400e; }
+  .tag-green { background: #d1fae5; color: #065f46; }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <a class="home" href="../index.html">← All Causes</a>
+  <h5>Navigation</h5>
+  <ul>
+    <li><a href="#verdict">Verdict</a></li>
+    <li><a href="#model">The investment model</a></li>
+    <li><a href="#dcy">DCY model validation</a></li>
+    <li><a href="#default">Default rate analysis</a></li>
+    <li><a href="#income">LPN income outcomes</a></li>
+    <li><a href="#year2">Year 2 cash crunch</a></li>
+    <li><a href="#pr">Canada PR pathway</a></li>
+    <li><a href="#company">Company risk</a></li>
+    <li><a href="#conditions">Grant conditions</a></li>
+    <li><a href="#research">Research runs</a></li>
+  </ul>
+  <div class="sep"></div>
+  <h5>Cause pages</h5>
+  <ul>
+    <li><a href="neotest-botec-comparison.html">NeoTest</a></li>
+    <li><a href="passage-africa-pathways.html" class="active">Passage</a></li>
+    <li><a href="len-hiv-lenacapavir.html">LEN/HIV</a></li>
+  </ul>
+</nav>
+<main>
+
+<div class="eyebrow">Evaluation — Sep 2026</div>
+<h1>Passage Africa Pathways</h1>
+<p class="dek">$50M loan facility for African LPN students in Canada. 3,200 loans over 5 years at 11.95% APR, recycled into new cohorts. Proposed by Renaissance Philanthropy / AJF. 9 deep-research runs completed Sep 22, 2026.</p>
+
+<div class="verdict" id="verdict">
+  <div class="vl">Provisional verdict</div>
+  <p><strong>Fund with conditions — the investment case is real but the model is wrong about what makes it work.</strong></p>
+  <p>The CE case does not depend on 165 DCYs/migrant. It depends on loan repayment. If loans repay at ≤32.5% default, capital comes back with surplus at any defensible DCY estimate. The philanthropic value is the recycling structure, not the benefit accounting. At realistic DCYs (~103 central) and realistic defaults (~15% central), every scenario except correlated systemic failure (immigration policy collapse) clears the GiveWell bar.</p>
+  <p>Three findings require grant conditions before capital is committed: (1) the 85% stay-rate assumption is indefensible — central is ~50%, which would raise $/DCY by ~62% and potentially break the case at higher default rates; (2) the Year 2 cash crunch is real and structurally preventable with a simple interest-only deferral; (3) the company has no ring-fenced SPV, no audited financials, and no board of directors — standard exposure for a startup, but unacceptable for a $50M philanthropic commitment.</p>
+</div>
+
+<div class="metrics">
+  <div class="metric warn">
+    <div class="mv">~103</div>
+    <div class="ml">Revised DCYs/migrant (central)</div>
+  </div>
+  <div class="metric hl">
+    <div class="mv">32.5%</div>
+    <div class="ml">Default breakeven (money-return)</div>
+  </div>
+  <div class="metric warn">
+    <div class="mv">~15%</div>
+    <div class="ml">Central default estimate (vs 10% base)</div>
+  </div>
+  <div class="metric red">
+    <div class="mv">~50%</div>
+    <div class="ml">Revised stay-rate (vs 85% assumed)</div>
+  </div>
+  <div class="metric warn">
+    <div class="mv">25–40%</div>
+    <div class="ml">P(org failure, 5yr)</div>
+  </div>
+</div>
+
+<!-- ===================== THE MODEL ===================== -->
+<h2 id="model">The investment model</h2>
+
+<p>Passage lends <strong>CAD $60K per student</strong> at 11.95% APR over 7 years (CAD $1,058/month) to students from Uganda, Malawi, Burundi, and Madagascar pursuing a 20-month Licensed Practical Nurse diploma at accredited Canadian colleges. Renaissance proposes a $50M award ($30M from AJF + $20M co-funders), funding ~3,200 students over 5 years. Repayments are recycled into new cohorts.</p>
+
+<p>The financial structure is unusually self-hedging: the 11.95% APR generates CAD $28,872 in interest per performing loan, which absorbs defaults up to ~32.5% before the capital pool begins to shrink. At the model's base case (10% default), capital returns with a 41% surplus. This is the structural advantage the evaluation turns on.</p>
+
+<p>The CE model claims 165 DCYs/migrant — weighted average across four countries — at near-zero net cost. (A DCY, or Doubling of Consumption Year, means one person's annual consumption doubled for one year. It's GiveWell's standard unit for measuring economic impact from income-lifting programs.) 75% of that benefit is claimed to flow to origin communities via remittances and spillover — both disputed.</p>
+
+<div class="callout">
+  <strong>The key insight from six research runs:</strong> This is a bet on loan repayment, not on DCY magnitude. At realistic DCYs (~103) and realistic defaults (~15%), the money still comes back with a 26% surplus — meaning the program has negative net cost at realistic defaults. The case breaks only if defaults exceed ~42% — which requires correlated systemic failure, not normal credit deterioration.
+</div>
+
+<!-- ===================== DCY MODEL ===================== -->
+<h2 id="dcy">DCY model validation</h2>
+
+<p><em>Run: Passage_CE_DCY_model_validation — 4 phases, Sep 22 2026</em></p>
+
+<p>The published 165 DCYs/migrant figure is overstated by ~30–45%. Best estimate: <strong>~92–115 DCYs/migrant</strong> <sup><a href="https://docs.google.com/document/d/1Szx6FUhR1aiPiyrbqhb4i3IocqhE7o41Mh6l9Idqp9o/edit" target="_blank" style="color:#1d4ed8;font-size:0.75em;text-decoration:none">[run]</a></sup>, driven by two corrections: the remittance rate (9% → ~7% lifetime) and the spillover multiplier (1.65× → ~1.25×). The counterfactual income and attribution assumptions are reasonable and barely change the result.</p>
+
+<table>
+  <thead><tr><th>Scenario</th><th>Dest. income</th><th>Remit rate</th><th>HHs</th><th>Spillover</th><th>DCYs</th><th>vs published</th></tr></thead>
+  <tbody>
+    <tr><td><strong>(a) Published</strong></td><td>$60K</td><td>9%</td><td>2.0</td><td>1.65×</td><td>165</td><td>—</td></tr>
+    <tr class="warn"><td><strong>(b) Remittance adj</strong></td><td>$60K</td><td>7%</td><td>1.3</td><td>1.65×</td><td class="warn">~124</td><td>−25%</td></tr>
+    <tr class="warn"><td><strong>(c) Spillover adj</strong></td><td>$60K</td><td>9%</td><td>2.0</td><td>1.25×</td><td class="warn">~140</td><td>−15%</td></tr>
+    <tr><td><strong>(d) Both adj</strong></td><td>$60K</td><td>7%</td><td>1.3</td><td>1.25×</td><td class="warn">~109</td><td>−34%</td></tr>
+    <tr><td><strong>(e) Full revised central</strong></td><td>$58K</td><td>7%</td><td>1.3</td><td>1.25×</td><td class="warn"><strong>~103</strong></td><td>−38%</td></tr>
+    <tr><td><strong>(f) Revised low</strong></td><td>$56K</td><td>6%</td><td>1.3</td><td>1.10×</td><td class="red">~92</td><td>−44%</td></tr>
+    <tr><td><strong>(g) Migrant-only (floor)</strong></td><td>$60K</td><td>0%</td><td>0</td><td>n/a</td><td class="red">~44</td><td>−73%</td></tr>
+  </tbody>
+</table>
+
+<h3>What drives the reduction</h3>
+
+<table>
+  <thead><tr><th>Rank</th><th>Parameter</th><th>Published → revised</th><th>Share of reduction</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Remittance rate</td><td>9% → 7%</td><td>~35%</td></tr>
+    <tr><td>2</td><td>Effective households</td><td>2.0 → 1.3</td><td>~30%</td></tr>
+    <tr><td>3</td><td>Spillover multiplier</td><td>1.65× → 1.25×</td><td>~20%</td></tr>
+    <tr><td>4</td><td>Attribution × retention</td><td>0.816 → 0.77</td><td>~8%</td></tr>
+    <tr><td>5</td><td>Destination income</td><td>$60K → $58K</td><td>~5%</td></tr>
+    <tr><td>6</td><td>Counterfactual income</td><td>2× GNI → 2× GNI</td><td>~2%</td></tr>
+  </tbody>
+</table>
+
+<p><strong>The remittance critique:</strong> Statistics Canada's SIMT survey (2017) shows SSA remitters in Canada average 4.5% of $60K income ($2,710/yr). The LSIC (Longitudinal Survey of Immigrants to Canada, 2008) shows 7.5% in year 2 declining to 5.9% by year 4. Malengo uses 8% (already below Passage's 9%). A realistic lifetime average: ~7% weighted at 4% discount. Additionally, the "2 households" assumption is generous — effective coverage is ~1.3 equivalent households. Loan repayment at 11.95% (~$5–8K/yr in debt service early in the loan) directly competes with remittance capacity.</p>
+
+<p><strong>The spillover critique:</strong> The 1.65× multiplier transplants Egger et al. (2022) — a concentrated one-time cash transfer injecting >15% of local GDP into 653 rural Kenyan villages — to dispersed monthly remittances of ~$450 to 1–2 urban/peri-urban households across four different countries over 40 years. GiveWell's own adjustments for Uganda/Malawi imply an effective spillover addition of only ~0.10–0.13×, not 0.65×. Revised central: <strong>~1.25×</strong>.</p>
+
+<p><strong>The CE implication:</strong> At near-zero net cost (loans recycled), ALL scenarios clear the GiveWell bar. The DCY reduction matters primarily if defaults are high enough to create positive net cost. At $5K net cost per migrant (modest default losses): revised central ($49/DCY) just barely exceeds GiveWell's $40/DCY bar. The margin of safety is thin.</p>
+
+<div class="callout-amber">
+  <div class="ct">Reframe recommendation</div>
+  The honest case is: "a large, robust income gain for the migrant (~$44 DCYs defensible floor) with modest and uncertain community spillover." The migrant's own income gain is the load-bearing asset. The community benefit story (75% of value to origin households) is the weak part. Lead with the revolving fund economics, not the DCY headline.
+</div>
+
+<!-- ===================== DEFAULT RATE ===================== -->
+<h2 id="default">Default rate analysis</h2>
+
+<p><em>Run: Passage_default_rate_comparable_lenders — 3 phases, Sep 22 2026</em></p>
+
+<p>No true comparable exists: Passage combines $60K unsecured loans at 11.95% for SSA (Sub-Saharan African) international students with no government backstop, no income-contingent repayment, no grace period, and payments beginning from Month 1. Every comparable lender with <10% default has at least one of these protective features; Passage has none.</p>
+
+<p><strong>Central default estimate: ~15% (range 12–19%), above Passage's 10% base case.</strong> <sup><a href="https://docs.google.com/document/d/1QG0yiEkcpDcBi6bCS6WYEiNEmAZ-h6wkSIw4PbabrNM/edit" target="_blank" style="color:#1d4ed8;font-size:0.75em;text-decoration:none">[run]</a></sup> Derived by starting from Canada's 6.7–8% domestic student loan benchmark and applying risk adjustments:</p>
+
+<ul>
+  <li>No income-based repayment / no deferral during study: +5–10pp</li>
+  <li>$60K loan size (6× Windmill, 2–3× OSAP average): +2–3pp</li>
+  <li>11.95% APR vs 0–6.7% for comparables: +1–2pp</li>
+  <li>No grace period + full payment during study: +3–5pp</li>
+  <li>Cross-border collection risk for non-completers: +1–2pp</li>
+  <li>Near-certain nursing employment (downward): −5–8pp</li>
+  <li>Strong migration motivation / positive self-selection (downward): −2–3pp</li>
+</ul>
+
+<h3>The investment case is remarkably robust to defaults</h3>
+
+<table>
+  <thead><tr><th>Default rate</th><th>Net position (CAD/loan)</th><th>$/DCY (base 165)</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>10% (Passage base)</td><td>+$19,985 surplus</td><td>−$93 (surplus)</td><td class="good">Strong</td></tr>
+    <tr><td><strong>15% (our central)</strong></td><td><strong>+$15,541 surplus</strong></td><td><strong>−$72 (surplus)</strong></td><td class="good">Comfortable</td></tr>
+    <tr><td>25% (pessimistic)</td><td>+$6,654 surplus</td><td>−$31 (surplus)</td><td class="good">Modest</td></tr>
+    <tr><td><strong>32.5%</strong></td><td><strong>$0</strong></td><td><strong>$0</strong></td><td class="warn">Money-return breakeven</td></tr>
+    <tr><td>40% (very pessimistic)</td><td>−$6,677 cost</td><td>$31</td><td class="warn">Beats GiveWell $40</td></tr>
+    <tr><td><strong>42.2%</strong></td><td>—</td><td><strong>$40</strong></td><td class="warn">GiveWell bar breakeven</td></tr>
+    <tr><td>50%</td><td>−$11,362 cost</td><td>$72</td><td class="red">Fails</td></tr>
+  </tbody>
+</table>
+
+<p><strong>The structural reason:</strong> The 11.95% APR generates $28,872 in surplus per performing loan. Each default consumes $60,000 in principal. Performing-loan surpluses absorb defaults until one-third of the portfolio fails — a self-hedging revolving loan. Default is NOT the right reason to decline the investment. The case fails, if at all, on stay-rate (see below) or systemic immigration risk — not on credit defaults.</p>
+
+<p><strong>The Year 2 mechanism:</strong> The Year 2 clinical placement creates a payment/income ratio of 102–203% (payment of $1,058 on $520–1,039 monthly income). This is the discrete mechanism by which 10% becomes 15–20% — not because graduates can't eventually afford the payments, but because a 6–8 month forced-arrears period during clinical creates compounding interest and normalized non-payment that some fraction never escapes.</p>
+
+<!-- ===================== LPN INCOME ===================== -->
+<h2 id="income">LPN income outcomes</h2>
+
+<p><em>Run: Passage_LPN_income_international_graduates — 3 phases, Sep 22 2026</em></p>
+
+<p>The $60K base case is <strong>defensible as a Year 2–3 full-time estimate but optimistic as a Year 1 expected-value figure</strong>. <sup><a href="https://docs.google.com/document/d/1NnrbWs8IVdo-DCKI3kKtzEibk2SMy6Y-AePKOcj1xC4/edit" target="_blank" style="color:#1d4ed8;font-size:0.75em;text-decoration:none">[run]</a></sup> The model's $60K sits in the middle of the new-grad LPN collective-agreement wage grid ($56–62K annualized at $27–30/hr). The national LPN median is $65.1K — slightly above the model's base.</p>
+
+<p><strong>Critical distinction:</strong> Passage graduates are <em>Canadian-educated international students</em>, not internationally-educated nurses (IENs) arriving with foreign credentials. 86–93% of Canadian-educated immigrant nurses hold health occupations matching their education, vs only 42–50% for foreign-educated IENs. The Health Canada IEHP mean of $56,500 is the WRONG benchmark — it includes foreign-educated, underemployed, and part-time workers. The correct benchmark is the new-grad LPN wage grid ($56–62K FT).</p>
+
+<h3>Probability-weighted Year 1 income</h3>
+
+<table>
+  <thead><tr><th>Scenario</th><th>Year 1 income</th><th>Probability</th><th>Contribution</th></tr></thead>
+  <tbody>
+    <tr><td>FT, passes exam, on-time start</td><td>$55–62K</td><td>55–65%</td><td>~$33K</td></tr>
+    <tr><td>Passes exam, starts PT/casual</td><td>$35–45K</td><td>15–20%</td><td>~$7K</td></tr>
+    <tr><td>Fails exam first attempt, delayed</td><td>$25–35K</td><td>15–20%</td><td>~$5K</td></tr>
+    <tr><td>Drops out, non-nursing work</td><td>$0–20K</td><td>3–5%</td><td>~$0.5K</td></tr>
+    <tr><td><strong>Expected Year 1</strong></td><td></td><td></td><td><strong>~$42–50K</strong></td></tr>
+  </tbody>
+</table>
+
+<p>The $60K base case is approximately the <strong>Year 3 probability-weighted income</strong>, not the Year 1 expected value. This matters primarily for the Year 2 cash crunch analysis (students earning $42–50K in Year 1 while repaying $1,058/month face significant stress) and for the stay-rate calculation (students who fail the exam or start part-time are more likely to exit Canada).</p>
+
+<p><strong>African-origin specific:</strong> African-origin immigrant nurses show above-average nursing employment: 70.2% in nursing occupations vs 63% for all immigrant nurses (StatCan Sep 2025). LPN-specific alignment: 74%. However, a documented racial wage penalty (~5–10% effective income penalty through hours and scheduling, not hourly rate) applies in the Canadian nursing context. Union collective agreements partially mitigate this at the wage level.</p>
+
+<!-- ===================== YEAR 2 ===================== -->
+<h2 id="year2">Year 2 cash crunch</h2>
+
+<p><em>Run: Passage_year2_affordability_student_protection — 3 phases, Sep 22 2026</em></p>
+
+<p>The Year 2 cash crunch is <strong>real, severe, and the single most likely point of failure</strong> <sup><a href="https://docs.google.com/document/d/1uY3AQYD8iwGeTgykji_BrHMP1hDKAEd5vWP_bylL3LQ/edit" target="_blank" style="color:#1d4ed8;font-size:0.75em;text-decoration:none">[run]</a></sup> in Passage's loan-and-graduation model. The concept note's CAD $56/month residual before food is an optimistic ceiling that requires continuous 20-month disbursement, $500/month rent, and zero miscellaneous spending.</p>
+
+<h3>Monthly cash flows during clinical placement</h3>
+
+<table>
+  <thead><tr><th>Scenario</th><th>Income</th><th>Payment</th><th>Living costs</th><th>Net</th></tr></thead>
+  <tbody>
+    <tr><td>Best case (disbursement continues, PT work 12h/wk)</td><td>+$1,939</td><td>−$518 (after auto-deduct)</td><td>−$1,575</td><td class="warn">−$154 to +$364</td></tr>
+    <tr><td>Disbursement stops at Month 12</td><td>+$779 (PT work only)</td><td>−$1,058</td><td>−$1,575</td><td class="red">−$1,854</td></tr>
+    <tr><td>8-week Term 5 intensive (zero work)</td><td>+$0</td><td>−$1,058</td><td>−$1,575</td><td class="red">−$2,633</td></tr>
+  </tbody>
+</table>
+
+<div class="callout-red">
+  <div class="ct">Decisive unknown</div>
+  <strong>Whether living-cost disbursement runs 12 or 20 months is the single most important factual question for the CE model.</strong> Passage's FAQ states disbursement is "12: once a month for a year." If this means disbursement stops when clinical placement begins, the Year 2 problem is not a budget crunch — it is structurally impossible without external support, and the model's default adjustment should be +10–15pp (total 20–25% default rate), not +3pp.
+</div>
+
+<p>Every comparator lender offers protection during study: Canada Student Loans charge $0 during study with a 6-month grace period; Windmill charges interest-only during study (up to 27 months); MPOWER charges interest-only with 24 months of forbearance. Passage is the sole exception among comparable lenders.</p>
+
+<h3>Recommended structural fix</h3>
+
+<p><strong>Interest-only payments during 8-month clinical placement:</strong> This frees CAD $519/month per student, costs Passage only ~$4,150 in temporarily deferred principal (fully recovered post-graduation), is revenue-positive for Passage (more total interest), and pays for itself if it prevents just 1 dropout per ~6.4 students offered the deferral. This is the single highest-ROI structural fix.</p>
+
+<!-- ===================== PR PATHWAY ===================== -->
+<h2 id="pr">Canada PR pathway reliability</h2>
+
+<p><em>Run: Passage_Canada_PR_pathway_reliability — 3 phases, Sep 22 2026</em></p>
+
+<div class="callout-red">
+  <div class="ct">Most important model error</div>
+  <strong>The 85% stay-rate assumption is not defensible. Central estimate ~50% (band 35–65%), well below the model's assumption.</strong> <sup><a href="https://docs.google.com/document/d/1qyF0qbHcsexyRxbbgYlcRar1TifheVqZLjRt7RgqfMg/edit" target="_blank" style="color:#1d4ed8;font-size:0.75em;text-decoration:none">[run]</a></sup> At 50% instead of 85%, the model overstates income-based DCYs by ~38% (1.62× $/DCY). This is a top-3 CE parameter and interacts multiplicatively with income gain, default rate, and program cost.
+</div>
+
+<p>Three independent methods converge on ~44–54%:</p>
+<ul>
+  <li><strong>Bottom-up 7-gate chain:</strong> 44% — diploma completion × REx-PN pass × PGWP × employment × PNP nomination (Provincial Nominee Program — Canada's main route where provinces sponsor skilled workers for permanent residency) × PR approval × chooses to stay</li>
+  <li><strong>Adjusted StatCan healthcare TFW anchor:</strong> 54% — StatCan 2025 shows 58% of healthcare TFWs from 2000–2022 obtained Canadian PR; haircut −4pp for immigration retrenchment</li>
+  <li><strong>Scenario-weighted (including correlated tail):</strong> 45%</li>
+</ul>
+
+<p><strong>The PNP gate is the decisive bottleneck.</strong> A typical Passage LPN graduate scores ~330–380 CRS points (Comprehensive Ranking System — Canada's points-based immigration score combining age, education, language, and work experience). Healthcare Express Entry draws in 2026 required 462–476 — the gap is unbridgeable without a PNP nomination (+600 CRS). PNP IS the pathway. If PNP allocation is exhausted or streams are paused, the student has no viable PR route.</p>
+
+<p>Ontario PNP reached its 2025 allocation in December 2025. Ontario then terminated all 8 OINP streams on May 30, 2026 and replaced them with a single Workforce Priority stream (June 26, 2026) — with healthcare-specific rules not yet published as of September 2026. This is live regulatory uncertainty for Passage's 2026–2028 cohorts.</p>
+
+<h3>CE impact of stay-rate revision</h3>
+
+<table>
+  <thead><tr><th>Stay rate</th><th>E[DCY] relative to 85%</th><th>$/DCY inflation</th></tr></thead>
+  <tbody>
+    <tr><td>85% (Passage assumed)</td><td>1.00×</td><td>baseline</td></tr>
+    <tr><td>65% (optimistic)</td><td>0.78×</td><td class="warn">+28%</td></tr>
+    <tr><td><strong>50% (central)</strong></td><td><strong>0.62×</strong></td><td class="red"><strong>+62%</strong></td></tr>
+    <tr><td>35% (pessimistic)</td><td>0.45×</td><td class="red">+122%</td></tr>
+    <tr><td>15% (severe — policy shock)</td><td>0.23×</td><td class="red">+335%</td></tr>
+  </tbody>
+</table>
+
+<p>At 50% stay rate combined with 15% default, $/DCY rises to ~$80–90 — still below the GiveWell bar ($40/DCY is the bar using published 165 DCYs). But at 50% stay + revised 103 DCYs + 15% default, the CE lands at ~$100–120/DCY — borderline. <strong>The combination of DCY revision + stay-rate revision is the case that is most likely to break GiveWell-competitiveness.</strong></p>
+
+<p>Default risk is correlated with stay-rate risk — students who fail to obtain PR are the same students who default. The model should not treat these as independent.</p>
+
+<!-- ===================== COMPANY RISK ===================== -->
+<h2 id="company">Company risk and financial health</h2>
+
+<p><em>Run: Passage_company_risk_financial_health — 3 phases, Sep 22 2026</em></p>
+
+<p>Company risk is <strong>high but structurally fixable</strong> — standard investment safeguards, imposed before capital commitment, address all of it.</p>
+
+<p>Passage is a 3.5-year-old VC-backed startup founded by Martin Basiri (co-founder of ApplyBoard, $1.4B+ valuation). The company raised C$40M seed funding led by Drive Capital. It has no disclosed board of directors, no published audited financials, no prudential regulator, and approximately 2 years of operating runway. At $50M portfolio scale, the net margin is ~$0–1.5M/yr — barely enough to operate, with no cushion against a bad year.</p>
+
+<p><strong>P(organizational failure within 5 years): ~25–40%</strong> <sup><a href="https://docs.google.com/document/d/1TsJBXCPk2ayz1XIsbsEZJ-D2ziDJFjvwZ4mO_h0TwrM/edit" target="_blank" style="color:#1d4ed8;font-size:0.75em;text-decoration:none">[run]</a></sup>, driven by thin margins, single-founder dependency, unseasoned portfolio, and PGWP (Post-Graduation Work Permit — the authorization that lets international graduates stay in Canada to work after finishing their degree) correlated risk.</p>
+
+<h3>Portfolio recovery with and without SPV</h3>
+
+<table>
+  <thead><tr><th>Scenario</th><th>Without SPV (current)</th><th>With SPV (recommended)</th></tr></thead>
+  <tbody>
+    <tr><td>Orderly wind-down, portfolio performing</td><td class="warn">50–70% recovery</td><td class="good">70–90% recovery</td></tr>
+    <tr><td>Failure mid-program, mixed portfolio</td><td class="red">30–60% recovery</td><td class="warn">60–80% recovery</td></tr>
+    <tr><td>Correlated failure (PGWP change + defaults)</td><td class="red">20–40% recovery</td><td class="red">30–50% recovery</td></tr>
+  </tbody>
+</table>
+
+<p>The SPV transforms the risk from "will this startup survive?" to "will these loans repay?" — a much easier question to answer and control for. Without the SPV, Renaissance's $30M is unsecured exposure to a startup. With it, Renaissance owns the loan portfolio directly and Passage is merely the servicer.</p>
+
+<!-- ===================== GRANT CONDITIONS ===================== -->
+<h2 id="conditions">Grant conditions (non-negotiable)</h2>
+
+<p>Twelve conditions based on six research runs. Require all before committing capital:</p>
+
+<div class="concern-card" style="border:1px solid #b91c1c;background:#fef2f2">
+  <h3 style="margin-top:0;color:#991b1b">Structural (prevent catastrophic loss)</h3>
+  <ol>
+    <li><strong>Ring-fenced SPV</strong>: All $50M deployed through a dedicated Special Purpose Vehicle with Renaissance as primary beneficiary. Passage operates as servicer. <em>(Single most important condition.)</em></li>
+    <li><strong>Backup servicer agreement</strong>: Standby contract with Nelnet Canada or equivalent to step in if Passage cannot service.</li>
+    <li><strong>Priority waterfall</strong>: Documented payment priority: borrower payments → servicing costs → default reserve → Renaissance capital return → Passage margin.</li>
+  </ol>
+</div>
+
+<div class="concern-card" style="border:1px solid #d97706;background:#fffbeb">
+  <h3 style="margin-top:0;color:#92400e">Student protection (reduce default risk)</h3>
+  <ol start="4">
+    <li><strong>Confirm 20-month disbursement</strong>: Require Passage to confirm in writing whether living-cost disbursement runs 12 or 20 months. If 12 months, extending to 20 is a non-negotiable condition at zero additional cost to Passage.</li>
+    <li><strong>Interest-only payments during clinical placement</strong>: Require interest-only (not full P+I) during the 8-month clinical placement period. Saves students CAD $519/month at ~$4,150 temporary deferral per student — revenue-positive for Passage through extended amortization.</li>
+    <li><strong>Provincial diversification</strong>: Require Passage to place students across ≥3 provinces to diversify PNP allocation risk. Single-province concentration (Ontario only) maximizes correlated immigration risk.</li>
+  </ol>
+</div>
+
+<div class="concern-card" style="border:1px solid #2563eb;background:#eff6ff">
+  <h3 style="margin-top:0;color:#1e40af">Governance and transparency</h3>
+  <ol start="7">
+    <li><strong>Annual audit</strong>: Both Passage Inc. and Passage (Funding) Inc. audited annually, delivered within 90 days of year-end.</li>
+    <li><strong>Quarterly portfolio reporting</strong>: Delinquency by vintage, defaults/write-offs, cash position, PGWP/employment outcomes — within 30 days of quarter-end.</li>
+    <li><strong>Performance triggers</strong>: If 90+ day delinquency exceeds 10%, new disbursements pause. If cumulative write-offs exceed 5%, Renaissance can halt further commitments.</li>
+    <li><strong>Board observer seat</strong>: Renaissance representative attends all board meetings with full information access.</li>
+    <li><strong>Key-person provision</strong>: If Martin Basiri ceases as CEO, Renaissance can pause further disbursements until a successor is approved.</li>
+    <li><strong>Minimum operating reserve</strong>: Passage maintains at least 12 months of operating expenses in cash reserves, separate from portfolio capital.</li>
+  </ol>
+</div>
+
+<!-- ===================== RESEARCH ===================== -->
+<h2 id="research">Research runs (9 runs, Sep 22 2026)</h2>
+
+<table>
+  <thead><tr><th>Run</th><th>Key finding</th><th>Decision impact</th><th>Report</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>DCY model validation</td>
+      <td>165 → ~103 DCYs/migrant central (−38%). Remittance (9%→7%) and spillover (1.65×→1.25×) drive ~65% of reduction. Counterfactual/attribution defensible. CE survives at near-zero cost.</td>
+      <td class="warn">Reduces $/DCY margin of safety. Does not break the case.</td>
+    <td><a href="https://docs.google.com/document/d/1Szx6FUhR1aiPiyrbqhb4i3IocqhE7o41Mh6l9Idqp9o/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Default rate comparables</td>
+      <td>Central ~15% (vs 10% base). Year 2 cash crunch is the mechanism. Money returns to 32.5% default; GiveWell bar holds to 42%. Structural interest-only fix available.</td>
+      <td class="good">Case robust to realistic defaults. Fix the Year 2 crunch.</td>
+    <td><a href="https://docs.google.com/document/d/1QG0yiEkcpDcBi6bCS6WYEiNEmAZ-h6wkSIw4PbabrNM/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>LPN income outcomes</td>
+      <td>$60K defensible for Y2-3 FT. Year 1 expected ~$42–50K. 65–75% achieve FT employment in Y1. African-origin graduates show above-average nursing employment (70.2%).</td>
+      <td class="warn">Year 1 income lower than modeled. Minor correction overall.</td>
+    <td><a href="https://docs.google.com/document/d/1NnrbWs8IVdo-DCKI3kKtzEibk2SMy6Y-AePKOcj1xC4/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Year 2 affordability</td>
+      <td>Cash crunch real and severe. Disbursement duration (12 vs 20 months) is the decisive unknown. Interest-only fix is revenue-positive for Passage.</td>
+      <td class="red">Priority grant condition. High default impact if unresolved.</td>
+    <td><a href="https://docs.google.com/document/d/1uY3AQYD8iwGeTgykji_BrHMP1hDKAEd5vWP_bylL3LQ/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Canada PR pathway</td>
+      <td>85% stay rate indefensible. Central ~50% (three independent methods: 44%, 54%, 45%). PNP gate is decisive bottleneck. Ontario PNP overhaul creates live uncertainty.</td>
+      <td class="red">Single largest model error. At 50%, $/DCY rises ~62%.</td>
+    <td><a href="https://docs.google.com/document/d/1qyF0qbHcsexyRxbbgYlcRar1TifheVqZLjRt7RgqfMg/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Company risk</td>
+      <td>P(org failure 5yr) ~25–40%. No SPV, no audit, no board. SPV is the critical fix. 12 governance conditions identified.</td>
+      <td class="red">Non-negotiable: require SPV before capital commitment.</td>
+    <td><a href="https://docs.google.com/document/d/1TsJBXCPk2ayz1XIsbsEZJ-D2ziDJFjvwZ4mO_h0TwrM/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Immigration tail risk (correlated)</td>
+      <td>P(catastrophic) revised to 3–5% — Liberal majority under Carney won April 2025, not a Poilievre Conservative government. PNP healthcare allocations up 31–66%. EV-weighted CE multiplier = 1.85× (fat tail: 4% probability contributes 39% of EV degradation). The 40% pessimistic scenario is inadequate — it misses the correlated stay-rate collapse when PGWP fails.</td>
+      <td class="warn">Lower catastrophic P than assumed, but tail is fatter than modeled. Require 15–20% reserve fund and cohort-gated deployment.</td>
+    <td><a href="https://docs.google.com/document/d/1v2Qrz0q-Hdg5FQEDxJJG42HWDYQ2CGVhifj_uqcrSDI/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Cohort 1 early outcomes evidence</td>
+      <td>Zero empirical data from Passage — no completion rates, exam passes, employment rates, or repayment data published. IEN employment worsening: 31.4% seeking work at first renewal (up from 16.1% in 2024). Compound chain probability ~25–30% implies default well above 10%. No Series A ~3 years post-seed. NCLEX-PN first-time pass rate for internationally educated nurses: 37.2% (vs 80.8% Ontario-educated).</td>
+      <td class="red">Model is entirely unvalidated. Do not commit before receiving audited cohort outcome data. Recommend delay pending Q2–Q3 2026 Cohort 1 graduation data.</td>
+    <td><a href="https://docs.google.com/document/d/1N8z5bwLXcroTcjDMaKNvS8mKa1JknAPFqpqxCP-EtKo/edit" target="_blank">↗ Full report</a></td></tr>
+    <tr>
+      <td>Brain drain: origin-country nursing impact</td>
+      <td>MODEST CONCERN — not a deal-breaker. Revised net benefit ~87 DCYs/migrant (Nigeria) / ~98–103 DCYs/migrant (Kenya) after brain drain adjustment (0–15% reduction). P(brain drain eliminates benefit): &lt;5% Nigeria, &lt;1% Kenya. Binding constraint on SSA health systems is governance/fiscal capacity, not workforce numbers (Clemens 2007). Kenya has ~27,000 unemployed HCWs — clinical-harm argument nearly moot for Kenyan recruits. Strongest concern: fiscal training-cost externality (~$43,180/nurse), addressable via offset fee in grant agreement.</td>
+      <td class="warn">Modest downward adjustment to DCY estimate. Recommend training-cost offset fee as grant condition.</td>
+      <td><a href="https://docs.google.com/document/d/1GARqa7PGvUU5Osb4g4GDRPqhLcOW-J_5J4IjpDkr06c/edit" target="_blank">↗ Full report</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout-amber">
+  <div class="ct">Due diligence asks for Passage</div>
+  <ol style="margin-left:1.2em">
+    <li>Confirm disbursement duration: 12 or 20 months? (Decisive for default modeling)</li>
+    <li>What is the actual PR success rate for graduated cohorts? (Most decision-relevant data point)</li>
+    <li>Which specific PNP streams are graduates using? What is their nomination success rate?</li>
+    <li>Does an SPV structure already exist? (If yes, reduces structural risk significantly)</li>
+    <li>Delinquency rates by program month — specifically months 13–20 (clinical placement period)</li>
+    <li>CPNRE/REx-PN (Canadian nursing licensing exam) pass rate for Passage graduates specifically</li>
+    <li>Is Passage providing immigration advisory services? Do they track PR outcomes?</li>
+    <li><strong>Total loans disbursed</strong> (count and C$ value), by program and cohort — even Cohort 1 partial data</li>
+    <li><strong>Completion data</strong>: number enrolled, dropped out, graduated by program and cohort</li>
+    <li><strong>6-month employment rate</strong> post-graduation by position type (hospital vs. LTC vs. other)</li>
+    <li><strong>PGWP application and approval rate</strong> for Passage graduates</li>
+    <li><strong>Audited financial statements</strong> showing loan book size, provisions, and write-offs</li>
+  </ol>
+</div>
+
+<p style="color:#999;font-family:system-ui,sans-serif;font-size:12px;margin-top:4rem">Analysis by Claude Opus 4.6 · 8 research runs · Sep 22, 2026 · Renaissance Philanthropy evaluation</p>
+
+</main>
+</div>
+</body>
+</html>
