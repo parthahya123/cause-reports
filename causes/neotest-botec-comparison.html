@@ -205,7 +205,7 @@
 <!-- ===================== WHAT IS A BOTEC ===================== -->
 <h2 id="what-is-botec">What is a BOTEC, and why did we build our own?</h2>
 
-<p>A BOTEC — back-of-the-envelope calculation — is a model that takes a set of assumptions about the world and produces a single number: how much does it cost to avert one DALY? The number is not the point. The assumptions are.</p>
+<p>A BOTEC — back-of-the-envelope calculation — is a model that takes a set of assumptions about the world and produces a single number: how much does it cost to avert one DALY? (A DALY — Disability-Adjusted Life Year — is one year of healthy life lost to death or disability. A child who dies at age 1 in a country where life expectancy is 70 costs ~69 DALYs.) The number is not the point. The assumptions are.</p>
 
 <p>Akhil built his model for this funder — to size the social return and stress-test it against conservative scenarios. His model produces two CE numbers depending on how you handle the counterfactual:</p>
 
@@ -215,7 +215,7 @@
 
 <ul class="bl">
   <li>9% cost discount rate (our portfolio opportunity cost) vs Akhil's 2% social rate or Georgia's 4%.</li>
-  <li>Community-adherence haircut (c2 = 0.38, calibrated to <a href="https://www.who.int/publications/i/item/9789241549912">WHO PSBI programme field data</a>) applied to the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">HTA preprint</a>'s DALYs-per-test.</li>
+  <li>Community-adherence haircut (c2 = 0.38, calibrated to <a href="https://www.who.int/publications/i/item/9789241549912">WHO PSBI programme field data</a>) applied to the <a href="https://www.cgdev.org/publication/cost-effectiveness-target-point-care-triage-test-neonatal-sepsis-low-and-middle-income">HTA (Health Technology Assessment) preprint</a>'s DALYs-per-test.</li>
   <li>Launch year updated to 2033 based on regulatory pathway analysis (India first meaningful public-sector uptake, not first commercial sale).</li>
   <li>India peak adoption 5.5% (HB cluster) / 15% (Leader cluster) / 8% (private) — more conservative than Akhil's original 30%, though similar to Georgia's halved 15%.</li>
 </ul>
@@ -255,7 +255,7 @@
     </tr>
     <tr>
       <td><strong>TAM definition</strong></td>
-      <td class="theirs">PSBI presentations (~1.9M India/yr)</td>
+      <td class="theirs">PSBI (Possible Serious Bacterial Infection — the WHO danger-sign category for sick neonates) presentations (~1.9M India/yr)</td>
       <td class="ours">SNCU admissions (~1.9M India/yr)</td>
       <td>Similar volumes; different conceptual frame</td>
     </tr>
@@ -356,7 +356,7 @@
       </div>
       <div class="sbs-box sbs-ours">
         <div class="sl">Ours</div>
-        <p>SNCU admissions: neonates already in specialist wards. India: 1.9M headline, 265–500k functional (workup-relevant). The TAM is already inside the facility.</p>
+        <p>SNCU (Special Newborn Care Unit — India's specialist neonatal wards) admissions: neonates already in specialist wards. India: 1.9M headline, 265–500k functional (workup-relevant). The TAM is already inside the facility.</p>
       </div>
     </div>
     <p>At first glance these look like very different populations. In practice, the headline TAM figures are almost identical — both are roughly 1.9M for India. That is not a coincidence: SNCU admissions and PSBI presentations in India are closely related, because ~89% of births are institutional (<a href="https://main.mohfw.gov.in/sites/default/files/NFHS-5_Phase-II_0.pdf">NFHS-5</a>), and most PSBI cases present to or through the same facilities.</p>
@@ -417,13 +417,13 @@
     </div>
     <p>The HTA's community DALY estimate rests on a specific assumption about how often a positive test result in a community setting actually leads to treatment. The HTA uses a referral rate parameter (Ref_M = 30%, Ref_H = 60%) that implies an effective community adherence of roughly 0.45–0.50.</p>
     <p>When we calibrate this parameter to <a href="https://www.who.int/publications/i/item/9789241549912">WHO PSBI programme field data</a>, the empirical central is 0.38 — about 24% below the HTA's implied 0.50. Since the community arm carries roughly half of modelled DALYs, the effect on total DALYs/test is about 12%: from 0.1665 (Akhil, no c2 adjustment) to approximately 0.132 in our model after applying c2 = 0.38. This is a 21% reduction relative to Akhil's 0.1665.</p>
-    <p>This is the most debatable difference. Akhil's HTA is the only published quantitative framework for this technology — it is the natural starting point. Our c2 haircut is a judgment that real-world community adherence in LMIC settings runs lower than the HTA's parameters assume. Both positions can be defended. The empirical answer will require field data from early deployments.</p>
+    <p>Akhil's HTA is the only published quantitative framework for this technology — it's the natural starting point. Our c2 haircut is a judgment that real-world community adherence in LMIC settings runs lower than the HTA's parameters assume. The answer is empirical. Field data from the first real deployment will settle it.</p>
     <details>
       <summary>What c2 actually means — and why it matters so much</summary>
       <div class="details-body">
         <p>c2 is the community adherence parameter: the fraction of test-positive infants in community settings who actually receive the treatment the test result recommends. It captures everything between "the test gives a positive result" and "the baby gets antibiotics": does the health worker tell the family? Does the family believe it? Can they get to a facility? Does the facility have stock?</p>
         <p>In the 50/50 inborn/community model, c2 only applies to the community half. The inborn (SNCU) half has structural adherence near 1.0 — the clinician is already there, the baby is already admitted, the antibiotics are already available.</p>
-        <p>Moving c2 from 0.50 (HTA implied) to 0.38 (WHO PSBI empirical central) reduces the community mortality stream by about 24%, which cuts total DALYs/test from 0.1665 to approximately 0.132 — a 21% reduction. This is a significant driver of our higher CE versus Akhil's.</p>
+        <p>Moving c2 from 0.50 (HTA implied) to 0.38 (WHO PSBI empirical central) reduces the community mortality stream by about 24%, cutting total DALYs/test from 0.1665 to approximately 0.132 — a 21% reduction. This is the largest single driver of our higher CE versus Akhil's.</p>
         <p>After the care-seeking chain analysis we conducted, we confirmed that c2 (clinician/family adherence to test result) is now the binding constraint — not L1/L2 (care-seeking and reaching a facility), which the denominator correction showed was a wrong-denominator artifact. The question is not whether PSBI babies reach a testing facility; in India, 89% of births are institutional. The question is whether a positive result at 48–72 hours changes the treatment decision. Field evidence from Indian NICUs is promising but limited to a few sites.</p>
       </div>
     </details>
@@ -448,7 +448,7 @@
       </div>
     </div>
     <p>Two years seems small. But under a pure-acceleration model — where the marginal DALYs are only those that happen earlier because of the AMC — a 2-year shift in launch date moves the starting point of the accumulation window and has a compounding effect through discounting.</p>
-    <p>Akhil's 2030 regulatory approval requires NeoSep-SAA to complete its culture-confirmed pivotal study, achieve WHO prequalification, and clear CDSCO registration in about four years from now. The regulatory pathway analysis we commissioned found that across 47 novel diagnostics, the median from WHO PQ to national LMIC scale is ten years, and the fastest feasible path (embedding Indian SNCU sites in the global pivotal, compressing the NEDL nomination) produces a 2031 NEDL listing — not a 2030 regulatory clearance.</p>
+    <p>Akhil's 2030 regulatory approval requires NeoSep-SAA to complete its culture-confirmed pivotal study, achieve WHO prequalification, and clear CDSCO registration in about four years from now. The regulatory pathway analysis we commissioned found that across 47 novel diagnostics, the median from WHO PQ (prequalification) to national LMIC (Low- and Middle-Income Country) scale is ten years, and the fastest feasible path (embedding Indian SNCU sites in the global pivotal, compressing the NEDL nomination) produces a 2031 NEDL (National Essential Diagnostics List — India's official formulary that triggers government procurement) listing — not a 2030 regulatory clearance.</p>
     <p><strong>Sep 2026 call — Akhil's three counterpoints:</strong> (1) A $60M facility meaningfully accelerates timelines by improving commercial return visibility, compressing firm R&D cycles. (2) Direct NEDL relationship: Akhil meets monthly with the person who writes India's NEDL, and has discussed listing NeoTest "in italics" preemptively before a product exists — a first-mover advantage that could compress the listing clock significantly. (3) Direct visibility into 12–16 Carb-X–shortlisted firms via a committee seat gives real-time pipeline intelligence unavailable to external modelers. These are substantive rather than hand-wavy rebuttals. The NEDL pre-listing conversation in particular could cut years off the regulatory gate if it materialises. Akhil offered to share the firm pipeline spreadsheet and confidential meeting notes.</p>
     <p>That said, Akhil's optimism is not baseless. His 2031 launch year maps to India's NEDL 2031 gate, which is also our central. The difference is subtle: Akhil counts commercial sales from 2031; we count meaningful public-sector uptake from 2033 (reflecting that NEDL listing does not immediately translate to procurement). This is a matter of what "launch" means in a public-sector context.</p>
   </div>
@@ -493,7 +493,7 @@
 </div>
 
 <div class="callout">
-  <strong>Payment timing structure (Sep 2026 call):</strong> The $21.2M PV cost figure is not a rounding artifact — it reflects a deliberate back-loaded payment structure. The model has approximately $21M disbursed in 2030 (the milestone prize) and ~$33M in AMC top-up payments over 2031–2035 as adoption grows. At 9% cost discount, that $33M shrinks to PV ~$19–20M. Total PV costs ≈ $34–35M nominal-but-discounted, which is what feeds the $111/DALY CE figure.
+  <strong>Payment timing structure (Sep 2026 call):</strong> The $21.2M PV cost figure is not a rounding artifact — it reflects a deliberate back-loaded payment structure. The model has approximately $21M disbursed in 2030 (the milestone prize) and ~$33M in AMC (Advance Market Commitment — per-test subsidies paid to manufacturers only after a qualifying product is sold) top-up payments over 2031–2035 as adoption grows. At 9% cost discount, that $33M shrinks to PV ~$19–20M. Total PV costs ≈ $34–35M nominal-but-discounted, which is what feeds the $111/DALY CE figure.
   <br><br>
   Preferred MSA/Akhil structure: full funder commitment triggered at the first milestone (~2030), held by MedAccess at 7.5–10% interest, disbursed as adoption grows through ~2045. If MedAccess earns ≥9% on held funds, the funder's opportunity cost is neutralised — the capital is not sitting idle. Alternative: $1–2M/year tranches matching adoption growth. The full-upfront structure improves CE because early commitment reduces future disbursement uncertainty; purely lump-sum upfront in 2026 would worsen CE modestly under 9% discounting.
 </div>
@@ -503,7 +503,7 @@
 
 <div class="callout-green">
   <div class="ct">Strong agreement</div>
-  Seven things both models treat the same way — and which represent the most defensible parts of the analysis.
+  Seven shared assumptions — the parts both models get right.
 </div>
 
 <table>
@@ -676,7 +676,7 @@
 <!-- ===================== CLINICAL MODE DEBATE ===================== -->
 <h2 id="open-concerns">Open concerns — and how to resolve them</h2>
 
-<p>Nine additional research runs (20 total) surfaced three concerns that are not fully settled by the existing analysis. Each concern has a quantitative stake and at least one concrete path to resolution. We present them here honestly — not as confirmed corrections, but as live questions that should inform the funding decision and the conversation with Akhil.</p>
+<p>Three concerns aren't fully settled by the existing analysis. Each has a quantitative stake and a concrete path to resolution. They're open questions, not confirmed corrections — but they should inform the funding decision and the conversation with Akhil.</p>
 
 <div class="concern-card" style="border:1px solid #d97706;border-radius:8px;padding:1.2em 1.5em;margin:1.5em 0;background:#fffbeb">
   <h3 style="margin-top:0;color:#92400e">Concern 1 — Do Indian SNCUs actually use this test in initiation-gate mode? <span style="font-size:0.75em;background:#fee2e2;color:#991b1b;padding:0.15em 0.5em;border-radius:3px;font-weight:700">SETTLED — worse than expected</span></h3>
@@ -797,7 +797,7 @@
 
 <div class="callout-amber">
   <div class="ct">Mortality mechanism — f_cf-dependent; two settings, two outcomes</div>
-  <p>The mortality mechanism debate reduces to a single quantity: <strong>f_cf</strong>, the fraction of at-risk neonates who would receive empiric antibiotics without the test. The break-even rule is <strong>Se* = f_cf</strong> (exactly, when treatment efficacy equals withholding harm). If the device operates as an <em>initiation gate</em> (test decides START), net benefit requires Se &gt; f_cf; below that line it causes more harm from false-negative withholding than it saves from true-positive detection.</p>
+  <p>The mortality mechanism debate reduces to a single quantity: <strong>f_cf</strong> — the counterfactual antibiotic rate, meaning the fraction of at-risk neonates who would receive empiric antibiotics <em>without</em> the test. High f_cf (≥0.85) means doctors already treat everyone, so a test that tells them to stop is useful; a test that tells them to start is redundant or harmful. The break-even rule is <strong>Se* = f_cf</strong> (exactly, when treatment efficacy equals withholding harm). If the device operates as an <em>initiation gate</em> (test decides START), net benefit requires Se &gt; f_cf; below that line it causes more harm from false-negative withholding than it saves from true-positive detection.</p>
 
   <p><strong>Community/PHC arm (f_cf ≈ 0.45–0.65) — mechanism is valid and strong.</strong> A CHW or PHC clinician sees a danger-sign neonate. Most would go untreated without the test. The break-even Se is only 0.45–0.65 — even a 65%-sensitive device is net-beneficial. This IS a treatment pathway tool. A positive result triggers first-dose antibiotics + referral; a negative result safely watches and waits. CE in this arm: <strong>~$65–112/DALY at Se = 0.85–0.90.</strong> This is where the large mortality claim lives.</p>
 
