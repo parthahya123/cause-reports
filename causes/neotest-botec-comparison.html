@@ -163,6 +163,14 @@
     <li><a href="#agree">Where we agree</a></li>
     <li><a href="#disagree">Where we disagree</a></li>
     <li><a href="#questions">Questions for Akhil</a></li>
+    <li><a href="#open-concerns">Open concerns</a></li>
+    <li><a href="#research">Research runs (23)</a></li>
+  </ul>
+  <div class="sep"></div>
+  <h5>Other causes</h5>
+  <ul>
+    <li><a href="passage-africa-pathways.html">Passage Africa</a></li>
+    <li><a href="len-hiv-lenacapavir.html">CHAI LEN/HIV</a></li>
   </ul>
 </nav>
 
@@ -671,15 +679,23 @@
 <p>Nine additional research runs (20 total) surfaced three concerns that are not fully settled by the existing analysis. Each concern has a quantitative stake and at least one concrete path to resolution. We present them here honestly — not as confirmed corrections, but as live questions that should inform the funding decision and the conversation with Akhil.</p>
 
 <div class="concern-card" style="border:1px solid #d97706;border-radius:8px;padding:1.2em 1.5em;margin:1.5em 0;background:#fffbeb">
-  <h3 style="margin-top:0;color:#92400e">Concern 1 — Do Indian SNCUs actually use this test in initiation-gate mode?</h3>
+  <h3 style="margin-top:0;color:#92400e">Concern 1 — Do Indian SNCUs actually use this test in initiation-gate mode? <span style="font-size:0.75em;background:#fee2e2;color:#991b1b;padding:0.15em 0.5em;border-radius:3px;font-weight:700">SETTLED — worse than expected</span></h3>
 
   <p><strong>Why it matters:</strong> The CGD c1 dominant result (206 DALYs/1,000, dominant in 93% of PSA iterations) rests on initiation-gate deployment — the test decides whether to <em>start</em> antibiotics. But India's NHM FBNC protocol mandates empiric antibiotics for ALL danger-sign admissions on day 0. In practice, ~70–80% of neonates already have antibiotics before any test result is available. If Indian SNCUs instead use the test to decide whether to <em>stop</em> (de-escalation mode), the large mortality benefit disappears and the value becomes stewardship-only.</p>
 
   <p><strong>What we found:</strong> Maheshwara NICU (N=200, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12991650/">PMC12991650</a>) — the only Indian real-world data point — shows 70% empiric initiation pre-test, rising to 50% de-escalation post-rapid-dx (vs 20% baseline). This is de-escalation, not initiation-gate. The CGD model's 89% POCT-guided fraction implies most Indian SNCUs use a "test before first dose" workflow that conflicts with FBNC mandate.</p>
 
-  <p><strong>The possible resolution:</strong> At Indian SNCU f_cf ≈ 0.80, de-escalation and initiation-gate may converge to ~0.04 DALYs/test anyway — initiation-gate value is haircut to ~0.04 by high counterfactual coverage; de-escalation stewardship value (HAI/NEC averted) also lands at ~0.04. If this convergence is real, the clinical mode debate is second-order for the SNCU funding case. But we have only one Indian data point (Maheshwara) to anchor this, and the convergence depends critically on how high the HAI CFR is in Indian SNCUs (0.25–0.37 in district data vs CGD's 0.12).</p>
+  <div style="background:#fee2e2;border:1px solid #f87171;border-radius:6px;padding:0.9em 1.1em;margin:0.75em 0 1em">
+    <strong style="color:#991b1b">SETTLED — Sep 22 2026 deep-dive run (NeoTest_India_f_cf_day0_empirical):</strong> The convergence claim is <strong>FALSE</strong>. f_cf at Indian SNCUs is <strong>~0.87</strong> (band 0.80–0.92), not 0.80 — 5 independent data points converge: Maheshwara NICU 95%, Ujjain NICUs 94–97%, Kodagu NICU >80%, and Heys 2025 (Neotree) showing 77–91% guideline-indicated antibiotic rate among danger-sign neonates.
+    <br><br>
+    At f_cf = 0.87, Mode A (initiation-gate) = <strong>−0.147 DALYs/test (net harm)</strong>, Mode B (de-escalation) = +0.003 DALYs/test. These are on opposite sides of zero — 50× apart. They do NOT converge. The convergence result assumed f_cf = 0.80; the empirical value is 0.87, above the break-even of 0.75.
+    <br><br>
+    Additionally, Indian SNCUs do NOT apply H/M/L risk stratification. FBNC protocol mandates binary: danger sign → empiric antibiotics. The CGD's f_cf = 0.56 (used in its HTA) applies risk-stratification that does not exist in Indian district SNCUs, making the CGD's f_cf empirically wrong for the SNCU setting.
+    <br><br>
+    <strong>Mode B $/DALY (correct mode, correct f_cf): ~$527 SNCU-only, ~$199 full-TAM.</strong> The BOTEC's $111/DALY was ~5× optimistic for SNCU because it credited Mode A initiation-gate benefits that are clinically prohibited and net-harmful at empirical SNCU f_cf.
+  </div>
 
-  <p><strong>Uncertainty level:</strong> Medium — the convergence finding is analytically robust but empirically underanchored. It could fall apart if Indian SNCU HAI rates or s_stop diverge from the model's assumptions.</p>
+  <p><strong>Uncertainty level:</strong> <span style="color:#b91c1c;font-weight:600">SETTLED — concerns confirmed at higher severity than anticipated.</span> The clinical mode matters more, not less, than prior runs concluded.</p>
 
   <div style="background:#fef3c7;border-radius:6px;padding:0.9em 1.1em;margin-top:1em">
     <strong>How to dig in:</strong>
@@ -723,20 +739,25 @@
 </div>
 
 <div class="concern-card" style="border:1px solid #dc2626;border-radius:8px;padding:1.2em 1.5em;margin:1.5em 0;background:#fef2f2">
-  <h3 style="margin-top:0;color:#991b1b">Concern 3 — Is the community arm volume real, or does it assume a PSBI infrastructure that doesn't exist? <span class="qtag" style="color:#b91c1c">highest stake</span></h3>
+  <h3 style="margin-top:0;color:#991b1b">Concern 3 — Is the community arm volume real, or does it assume a PSBI infrastructure that doesn't exist? <span style="font-size:0.75em;background:#fee2e2;color:#991b1b;padding:0.15em 0.5em;border-radius:3px;font-weight:700">SETTLED — 130–480× overstatement confirmed</span></h3>
 
   <p><strong>Why it matters:</strong> The CGD c2 community cohort (127 DALYs/1,000 PSBI) accounts for a large share of global DALYs and volume in the model. It assumes that CHWs and PHC nurses already operate a functional WHO PSBI simplified-regimen programme — identifying danger-sign neonates, administering oral amoxicillin + IM gentamicin, and using the test to guide referral decisions. If that infrastructure doesn't exist, the test has no pathway to create value at community level.</p>
 
   <p><strong>What we found:</strong> Effective PSBI implementation coverage appears far below what the model assumes:</p>
   <ul>
-    <li><strong>Nigeria (72% of global community-arm volume):</strong> Only ~3.5% of PHCs implement the simplified regimen with a functional supply chain (<a href="https://doi.org/10.1371/journal.pone.0228718">Dada 2020, PLOS One</a>). Applied as a correction factor (~0.06×), Nigeria's community arm falls from ~294k to ~18k deployable tests/yr. Community arm DALYs in Nigeria reduced ~40–125×.</li>
-    <li><strong>Ethiopia:</strong> ~5% effective coverage, constrained by IM gentamicin supply chains. After correction: ~6k effective community tests/yr. CE ≈ $152/DALY only if PSBI is assumed operational — P(feasible with current infrastructure) ≈ 0.55.</li>
+    <li><strong>Nigeria (72% of global community-arm volume):</strong> <strong>~0.1% effective national PSBI coverage</strong> (range 0.03–0.3%). The earlier 3.5% figure was a misread — that was the case fatality rate within a pilot, not coverage. Nigeria's PSBI pilot covers 2 of 774 LGAs (0.26% geographic coverage). Nigeria's own 5-year child survival plan does not mention PSBI. CHWs are not authorized to administer injectable gentamicin. Corrected tests/yr: ~300–3,000 vs 294,000 modeled = <strong>~100–1,000× overstatement</strong>.</li>
+    <li><strong>Ethiopia:</strong> ~1–3% effective coverage (best case of any target country). 104-district evaluation found 15% guideline-compliant dual therapy and 35% gentamicin availability. Corrected tests/yr: ~4,400–13,200 vs 42,000 modeled = ~3–10× overstatement.</li>
+    <li><strong>Uganda:</strong> ~0%. VHTs are explicitly not authorized for PSBI treatment — community neonatal treatment is excluded from Uganda's iCCM scope.</li>
+    <li><strong>Kenya:</strong> ~2–5%. Ghana: ~0%.</li>
+    <li><strong>All 7 countries combined:</strong> ~900–3,400 realistic community-arm tests/yr vs ~433,000 modeled = <strong>130–480× overstatement</strong>.</li>
   </ul>
+
+  <div style="background:#fee2e2;border:1px solid #f87171;border-radius:6px;padding:0.9em 1.1em;margin:0.75em 0 1em">
+    <strong style="color:#991b1b">SETTLED — Sep 22 2026 deep-dive run (NeoTest_PSBI_global_effective_coverage):</strong> The CGD community cohort engine (Chevalier OFID ofaf652) starts after all upstream filters are cleared. It contains no parameter for effective PSBI coverage. The CGD volume projection converts national PSBI incidence directly to test volume with an implicit 100% effective coverage assumption. No country has achieved routine national-scale PSBI implementation in the 11 years since WHO guidelines were issued. The community arm is a rounding error under current infrastructure — AMC disbursement at community level would be ~$3,000–24,000/yr vs the modeled millions. The hospital arm (SNCU, FRU/SDH) is entirely unaffected.
+  </div>
+
   <p>Critically: the hospital/SNCU arm (c1 cohort) is entirely unaffected by this concern. This is purely about the c2 community arm.</p>
-
-  <p><strong>Why we're not certain:</strong> Dada 2020 is a single cross-sectional survey in one Nigerian state. CGD's model may already discount for low PSBI coverage in its adoption assumptions — we haven't seen the full Fedorov et al. WP744 appendices. It's possible CGD ran sensitivity analyses on community arm PSBI coverage and concluded it was robust. We don't know.</p>
-
-  <p><strong>Uncertainty level:</strong> High on the raw PSBI coverage number; unclear on whether CGD already accounts for it. This is the single highest-stakes unresolved question in the analysis.</p>
+  <p><strong>Uncertainty level:</strong> <span style="color:#b91c1c;font-weight:600">SETTLED — community arm volume is ~zero under current PSBI infrastructure. Recommendation: restructure AMC as hospital/facility-only.</span></p>
 
   <div style="background:#fee2e2;border-radius:6px;padding:0.9em 1.1em;margin-top:1em">
     <strong>How to dig in:</strong>
@@ -751,7 +772,7 @@
 </div>
 
 <!-- ===================== RESEARCH UPDATES ===================== -->
-<h2 id="research">Research loop findings (20 runs, Sep 2026)</h2>
+<h2 id="research">Research loop findings (23 runs, Sep 2026)</h2>
 
 <p>Twenty dedicated research runs interrogated the key BOTEC sensitivities. The first 11 covered structural parameters; 9 additional deep-dives (Sep 21 batch) resolved the clinical mode debate, community arm volumes, and country-specific CE. Summary of first 11 below; deep-dive findings summarised in the section above.</p>
 
@@ -784,7 +805,7 @@
 
   <p><strong>The Se distribution risk.</strong> Deep loop analysis (NeoSep-SAA Phase 3) found P(neonatal capillary Se ≥ 0.85 under stringent prospective culture-anchored validation) ≈ 0.20. Most probability mass sits at Se 0.50–0.65 (MeMed-BV cautionary case: adult Se 89.9% → neonatal Se 37.5%). Integrating over the realistic distribution: <strong>E[DALYs/test | initiation-gate, SNCU] = −0.080 → net harm in expectation.</strong> This is why the AMC milestone must be validated on neonatal capillary blood pre-antibiotic against a culture-anchored composite reference — not transferred from adult or older-child studies.</p>
 
-  <p><strong>The Se achievability question.</strong> The TPP requires ≥90% Se (essential). The HTA confirms the minimum safety floor is 72% (c1)/66% (c2) — well below TPP. But the question is whether any test achieves ≥90% Se on neonatal capillary blood pre-antibiotic under prospective validation. Prior analysis (NeoSep-SAA cautionary case, MeMed-BV adult→neonatal transfer) suggests P(Se≥90% neonatal capillary) is uncertain. The AMC milestone correctly requires ≥90% Se (full TPP compliance); the open question is whether the validation protocol specifies the right matrix (neonatal capillary blood, pre-antibiotic exposure, culture-anchored composite reference). This is the #1 technical risk.</p>
+  <p><strong>The Se achievability question.</strong> The TPP requires ≥90% Se (essential). The HTA confirms the minimum safety floor is 72% (c1)/66% (c2) — well below TPP. A dedicated deep-dive run (NeoTest_Se90_neonatal_capillary_achievability, Sep 22 2026) now <strong>confirms P(Se≥90% on neonatal capillary blood pre-antibiotic vs CRS) ≈ 10% (range 5–18%)</strong>, consistent with prior estimates. P(Se≥85%, hospital TPP) ≈ 30%. P(Se≥80%, existing NeoSep-SAA territory) ≈ 55%. The decisive uncertainties are reference standard definition (~60% of total uncertainty) and multi-analyte POC translation (~30%). <strong>Recommendation from that run: gate the AMC primarily on the hospital TPP (≥85%/≥80%) and treat ≥90% as the aspirational bonus tier.</strong></p>
 
   <p><strong>Bottom line on the 0.1098.</strong> Partially valid under the correct initiation-gate framing. The CGD HTA finds 0.167 DALYs/test (50/50 c1/c2 weighted), slightly higher than the BOTEC's 0.1392, because CGD includes additional cost savings in the benefit numerator. The BOTEC's 0.1098 DALYs/test from mortality alone is defensible but incomplete — the test also averts HAIs, AMR burden, and NEC, which add ~0.039 DALYs/test. The open questions are: (1) Is CGD's 50/50 c1/c2 weighting realistic for near-term deployment, or should it be more c1-weighted? (2) Does the dm_tx (treatment efficacy) in CGD's RR=0.35 assumption hold under BARNARDS-calibrated resistance data? These are ongoing research questions, not confirmed overstatements.</p>
 </div>
@@ -805,12 +826,12 @@
 </table>
 
 <div class="callout-amber" style="margin-top:1em">
-  <div class="ct">What the open concerns would do to the BOTEC's $111 — if confirmed</div>
-  <p>The BOTEC's current central estimate is <strong>$111/DALY</strong> (0.1098 DALYs/test). This number is not being updated pending resolution of the three open concerns above. Here is what each concern would do to it IF confirmed:</p>
+  <div class="ct">What the settled concerns do to the BOTEC's $111 — now confirmed</div>
+  <p>The BOTEC's current standing estimate is <strong>$111/DALY</strong> (0.1098 DALYs/test). The three concerns above have now been resolved by dedicated deep-dive runs (Sep 22 2026). Concerns 1 and 3 were confirmed at <em>higher severity</em> than the prior runs anticipated. A BOTEC update is warranted; the $111 headline is being held pending discussion. Here is what each settled finding does:</p>
   <ul>
-    <li><strong>Concern 1 (India clinical mode — de-escalation):</strong> IF Indian SNCUs use de-escalation rather than initiation-gate, per-test value at SNCU level could be ~0.004–0.007 (stewardship-only). The full 0.1098 requires initiation-gate at PHC/community (f_cf≈0.45–0.62) where Se ≥ 0.90 unlocks the mortality mechanism. Impact on CE: potentially large, but depends on Se validation outcome — resolve Concern 1 first.</li>
+    <li><strong>Concern 1 (India clinical mode — SETTLED):</strong> f_cf at Indian SNCUs is ~0.87, not 0.80. Mode A (initiation-gate) is net-harmful (−0.147 DALYs/test). Mode B (de-escalation, the correct clinical mode) = +0.003 DALYs/test. The BOTEC's 0.1098 credits Mode A benefits that are clinically prohibited at SNCU level. <strong>Corrected SNCU $/DALY: ~$527 (Mode B, SNCU-only) or ~$199 (full TAM weighted).</strong> The BOTEC is ~5× optimistic for SNCU.</li>
     <li><strong>Concern 2 (non-SNCU tier mix):</strong> IF FRU/CHC f_cf is well-calibrated, the tier expansion adds volume at intermediate per-test value (0.015–0.045). Could improve or be neutral to CE depending on adoption pace. Impact: second-order relative to Concerns 1 and 3.</li>
-    <li><strong>Concern 3 (community PSBI coverage):</strong> IF Nigeria PHC PSBI coverage is only ~3.5% (not 100% assumed), the community arm contribution to global DALYs collapses by ~40–125×. The hospital/SNCU arm is unaffected. Impact: if confirmed, community arm volumes in the BOTEC are overstated and the blended DALYs/test would be lower. How much lower depends on Akhil's c2 cohort assumptions — see Q9.</li>
+    <li><strong>Concern 3 (community PSBI coverage — SETTLED):</strong> Nigeria effective PSBI coverage is ~0.1% (not 3.5% as earlier estimated — that was a CFR, not coverage). Global community-arm volume is overstated 130–480×: ~900–3,400 realistic tests/yr vs ~433,000 modeled. Uganda: ~0% (VHTs not authorized). The community arm contributes ~zero to the AMC under current PSBI infrastructure. Hospital arm unaffected. Impact: blended DALYs/test for the AMC drops proportionally to the hospital-arm-only value.</li>
   </ul>
   <p>None of these concerns changes the $111/DALY until the underlying questions are answered. The right next step is to ask Akhil Q8–Q10 and get the Fedorov et al. WP744 appendices, not to update the BOTEC number unilaterally.</p>
 </div>
@@ -822,7 +843,7 @@
 <table>
   <thead><tr><th>Status</th><th>Parameter</th><th>Current BOTEC</th><th>Concern / confirmed update</th><th>CE impact if confirmed</th></tr></thead>
   <tbody>
-    <tr><td class="warn"><strong>Open concern — do not update yet</strong></td><td>DALYs/test: clinical mode and arm-split</td><td>0.1098 blended (initiation-gate assumed throughout, 50/50 c1/c2 arm split)</td><td>See Concerns 1–3 above. IF Indian SNCUs use de-escalation: SNCU arm value ~0.004–0.007/test. IF community PSBI coverage is ~3–5% (not 100%): community arm volume collapses ~40–125×. IF both confirmed: blended DALYs/test could be ~0.007–0.023 depending on arm-split. <strong>Not incorporated until Q8–Q10 resolved with Akhil and WP744 appendices reviewed.</strong></td><td>Potentially large — could move CE from $111 to $500–2,500+/DALY. Magnitude depends on resolving Concerns 1 and 3.</td></tr>
+    <tr><td class="red"><strong>Update warranted — pending discussion</strong></td><td>DALYs/test: clinical mode and arm-split</td><td>0.1098 blended (Mode A assumed; community arm at 100% PSBI coverage)</td><td>Concerns 1 and 3 SETTLED by dedicated runs (Sep 22). <strong>India SNCU f_cf = 0.87 → Mode A is net-harmful; Mode B (correct mode) = +0.003/test → $527 SNCU / $199 full-TAM.</strong> Community arm: 130–480× overstatement confirmed; ~900–3,400 realistic tests/yr vs 433,000 modeled. Combined: BOTEC at hospital-only Mode B = ~$199–527/DALY. Standing $111 held pending discussion.</td><td><strong>Large — BOTEC is 2–5× optimistic. $199–527/DALY is the evidence-based range. Recommend BOTEC update.</strong></td></tr>
     <tr><td class="red"><strong>P1 — Major</strong></td><td>India public NEDL launch</td><td>2031 gate, track from 2033</td><td>Central: 2037. Optimistic (pre-listing relationship): 2031–2033. Model both as scenarios.</td><td>Large PV DALY reduction in central case</td></tr>
     <tr><td class="red"><strong>P1 — Major</strong></td><td>Brazil peak adoption</td><td>35%</td><td>12% central (8–18%). PHC TAM expansion could justify higher — pending loop.</td><td>+$10–15/DALY</td></tr>
     <tr><td class="red"><strong>P1 — Major</strong></td><td>SSA peak adoption (Ethiopia/Kenya/Ghana)</td><td>20–25%</td><td>6–8% central (4–12%).</td><td>+$25–30/DALY</td></tr>
