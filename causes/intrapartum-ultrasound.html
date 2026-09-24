@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intrapartum Sensing & Low-Cost Ultrasound — Philanthropic Diligence</title>
+<style>
+  :root {
+    --text: #1a1917;
+    --muted: #6b7280;
+    --accent: #0369a1;
+    --surface: #fafaf8;
+    --border: #e5e2db;
+    --green: #059669;
+    --red: #b91c1c;
+    --amber: #d97706;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; font-size: 15px; line-height: 1.75; color: var(--text); background: #fff; }
+  .layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar { border-right: 1px solid var(--border); padding: 2rem 1.2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; font-family: system-ui, sans-serif; font-size: 12.5px; }
+  .sidebar h2 { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .9rem; font-family: system-ui; font-weight: 600; }
+  .sidebar ul { list-style: none; }
+  .sidebar li { margin-bottom: .35rem; }
+  .sidebar a { color: var(--text); text-decoration: none; opacity: .75; }
+  .sidebar a:hover { opacity: 1; text-decoration: underline; }
+  .sidebar .section-label { font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 1.2rem; margin-bottom: .3rem; display: block; }
+  .sidebar .sub { padding-left: .85rem; font-size: 11.5px; }
+  .sidebar .back-link { font-size: 11px; opacity: .6; margin-bottom: 1.5rem; display: block; }
+
+  /* Main */
+  .main { padding: 3.5rem 3.5rem 5rem; max-width: 780px; }
+  .eyebrow { font-family: system-ui, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .5rem; }
+  h1 { font-size: 2rem; line-height: 1.22; font-weight: 700; margin-bottom: .6rem; }
+  .dek { font-family: system-ui, sans-serif; font-size: 14.5px; color: #444; line-height: 1.6; margin-bottom: 2.2rem; max-width: 640px; }
+  h2 { font-size: 1.22rem; font-weight: 700; margin: 3rem 0 .85rem; border-bottom: 1px solid var(--border); padding-bottom: .35rem; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 1.8rem 0 .5rem; }
+  p { margin-bottom: .9rem; }
+  ul.bl { margin: .4rem 0 .9rem 1.4rem; }
+  ul.bl li { margin-bottom: .3rem; }
+  a { color: var(--accent); }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 12.5px; margin: 1rem 0 1.5rem; }
+  th { background: var(--surface); padding: .45em .7em; border: 1px solid var(--border); text-align: left; font-weight: 600; }
+  td { padding: .4em .7em; border: 1px solid var(--border); vertical-align: top; }
+  .agree { color: var(--green); font-weight: 600; }
+  .red { color: var(--red); font-weight: 600; }
+  .ours { font-weight: 700; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Callouts */
+  .callout-green { background: #f0fdf4; border-left: 4px solid var(--green); border-radius: 0 4px 4px 0; padding: 1rem 1.2rem; margin: 1.3rem 0; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.6; }
+  .callout-amber { background: #fffbeb; border-left: 4px solid var(--amber); border-radius: 0 4px 4px 0; padding: 1rem 1.2rem; margin: 1.3rem 0; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.6; }
+  .callout-red { background: #fff1f2; border-left: 4px solid var(--red); border-radius: 0 4px 4px 0; padding: 1rem 1.2rem; margin: 1.3rem 0; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.6; }
+  .callout-blue { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: .8em 1.1em; font-family: system-ui, sans-serif; font-size: 12.5px; line-height: 1.65; margin: 1rem 0; }
+  .ct { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--muted); margin-bottom: .4rem; }
+
+  /* Verdict */
+  .verdict { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 1.3rem 1.6rem; margin-bottom: 3.25rem; }
+  .verdict .vl { font-family: system-ui, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: #aaa; margin-bottom: .5rem; }
+  .verdict p { font-family: system-ui, sans-serif; font-size: 13.5px; color: #333; line-height: 1.65; margin-bottom: .55rem; }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  /* Metrics */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: .85rem; margin: 1.5rem 0 2.5rem; }
+  .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: .9rem 1rem; }
+  .metric.hl { background: #eff6ff; border-color: #bfdbfe; }
+  .mv { font-size: 1.55rem; font-weight: 700; line-height: 1.1; margin-bottom: .25rem; }
+  .ml { font-family: system-ui, sans-serif; font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* Note box */
+  .note { font-family: system-ui, sans-serif; font-size: 12px; background: #f9f9f7; border: 1px solid var(--border); border-radius: 4px; padding: .7em 1em; margin: 1rem 0 1.5rem; color: #555; line-height: 1.55; }
+  .nt { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: .25rem; color: var(--muted); }
+
+  /* Run table */
+  .run-tag { display: inline-block; font-family: system-ui, sans-serif; font-size: 10px; padding: .1em .45em; border-radius: 3px; font-weight: 600; }
+  .tag-done { background: #dcfce7; color: #065f46; }
+  .tag-run { background: #dbeafe; color: #1e40af; }
+  .tag-pending { background: #f3f4f6; color: #6b7280; }
+
+  /* Section divider */
+  .topic-divider { border: none; border-top: 2px solid var(--border); margin: 3rem 0; }
+
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { padding: 2rem 1.2rem; }
+    .metrics { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <a href="neotest-botec-comparison.html" class="back-link">← NeoTest diligence</a>
+
+  <h2>Topics</h2>
+  <span class="section-label">Intrapartum sensing</span>
+  <ul>
+    <li><a href="#intrapartum-problem">The problem</a></li>
+    <li><a href="#sbbc">The SBBC solution</a></li>
+    <li><a href="#csection">C-section misallocation</a></li>
+    <li><a href="#intrapartum-verdict">Where we land</a></li>
+    <li><a href="#intrapartum-cruxes">Open cruxes</a></li>
+  </ul>
+
+  <span class="section-label">Low-cost ultrasound</span>
+  <ul>
+    <li><a href="#us-problem">The problem</a></li>
+    <li><a href="#us-constraint">The binding constraint</a></li>
+    <li><a href="#us-verdict">Where we land</a></li>
+    <li><a href="#us-cruxes">Open cruxes</a></li>
+  </ul>
+
+  <span class="section-label">Research</span>
+  <ul>
+    <li><a href="#research">All runs (10+)</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<div class="eyebrow">Philanthropic Diligence · September 2026 · 10 research runs (in progress)</div>
+<h1>Intrapartum Sensing &amp; Low-Cost Ultrasound</h1>
+<div class="dek">Two adjacent causes in maternal and neonatal health. Both are underfunded relative to burden. But the investment thesis is different in each case — and the evidence base varies dramatically. Here's what 10 research runs found.</div>
+
+<div class="callout-blue">
+  <strong>Jargon guide:</strong> <strong>DALY</strong> = one year of healthy life lost to death or disability. <strong>$/DALY</strong> = cost per healthy year saved; GiveWell's bar for exceptional is ~$50–100. <strong>HIE</strong> = hypoxic-ischemic encephalopathy (brain injury from oxygen deprivation at birth). <strong>SBBC</strong> = Safer Births Bundle of Care. <strong>POCUS</strong> = point-of-care ultrasound. <strong>CTG</strong> = cardiotocography (continuous fetal heart rate monitoring). <strong>FHR</strong> = fetal heart rate.
+</div>
+
+<!-- ===== INTRAPARTUM SENSING ===== -->
+<hr class="topic-divider">
+
+<h2 id="intrapartum-problem">The problem: birth asphyxia</h2>
+
+<p>Birth asphyxia — oxygen deprivation to the baby during labor — kills or permanently injures roughly 2 million children per year globally. About 1 million die as intrapartum stillbirths or in the first 28 days from hypoxic-ischemic encephalopathy (HIE). Another 1 million survive with cerebral palsy, cognitive impairment, or severe epilepsy. The burden is concentrated almost entirely in low- and middle-income countries.</p>
+
+<table>
+  <thead><tr><th>Measure</th><th>Global estimate</th><th>Where concentrated</th></tr></thead>
+  <tbody>
+    <tr><td>Intrapartum stillbirths/yr</td><td>~1.02 million</td><td>SSA (54%), South Asia (30%)</td></tr>
+    <tr><td>Intrapartum-related neonatal deaths/yr</td><td>~904,000</td><td>Nigeria, India, Pakistan, Ethiopia</td></tr>
+    <tr><td>HIE survivors with neurodisability/yr</td><td>~1.0–1.5 million</td><td>SSA + South Asia</td></tr>
+    <tr><td>DALY burden</td><td>~50–70M DALYs/yr</td><td>Top 5 global DALY causes</td></tr>
+    <tr><td>Fraction occurring at facility deliveries</td><td>~40–60%</td><td>Rising with facility birth rates</td></tr>
+  </tbody>
+</table>
+
+<p>The core clinical problem is straightforward: fetal distress — reduced oxygen supply causing abnormal fetal heart rate patterns — is detectable during labor if you have monitoring equipment. In high-income countries, electronic fetal monitoring (cardiotocography) is universal and intrapartum-related deaths are rare. In LMIC district hospitals, monitoring is a Pinard stethoscope every 30 minutes at best. A baby can slip into irreversible brain injury between checks.</p>
+
+<p>But detection alone doesn't save babies. The evidence shows consistently that the binding constraint is the <em>decision-to-action chain</em> — does the midwife recognize the abnormal reading, interpret it correctly, escalate to a physician, and trigger emergency delivery before injury becomes irreversible? In settings with CTG but no training, CTG uptake, or emergency obstetric capacity, detection equipment sits idle or creates noise without response.</p>
+
+<h2 id="sbbc">The solution that works: Safer Births Bundle of Care</h2>
+
+<p>Of all the technologies and interventions mapped across 10 research runs, one stands out with the clearest evidence and most compelling CE: the <strong>Safer Births Bundle of Care (SBBC)</strong>, developed by Laerdal Global Health with Norwegian funding and validated in a large NEJM trial.</p>
+
+<div class="callout-green">
+  <div class="ct">Key finding — NEJM 2025, N=281,165 mothers, 30 facilities in Tanzania</div>
+  <p><strong>18% reduction in 24-hour perinatal mortality</strong> (aRR 0.82, 95% CI 0.73–0.92, p=0.001)<br>
+  <strong>40% reduction in early newborn deaths</strong><br>
+  <strong>75% reduction in in-hospital maternal deaths</strong> (aRR 0.25, 95% CI 0.14–0.46)<br>
+  Cost: <strong>$144/DALY | BCR 36 | $4,669 per life saved</strong></p>
+  <p style="margin-bottom:0;font-size:12px;color:#555">Source: <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2406295">Mduma et al., NEJM 2025</a>; CE from <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13123973/">Mduma/Lie et al., PLOS ONE 2025</a></p>
+</div>
+
+<p>The SBBC is not a single device — it's a four-pillar bundle that addresses both the detection gap <em>and</em> the action gap together:</p>
+
+<ul class="bl">
+  <li><strong>Continuous FHR monitoring</strong> — Moyo fetal monitor (~$198/unit), a traffic-light device designed for LMIC midwives, not specialist interpretation</li>
+  <li><strong>Simulation training</strong> — NeoNatalie Live (neonatal resuscitation), MamaNatalie (PPH management), MamaBirthie (delivery simulation); targeting decision speed, not just skill</li>
+  <li><strong>Continuous quality improvement</strong> — facility dashboards, death audits, peer learning cycles every 2 months</li>
+  <li><strong>Sustainability systems</strong> — government integration, local ownership, mentorship networks</li>
+</ul>
+
+<p>The key insight is that the bundle <em>must</em> be deployed together. Deploying Moyo without the training and QI creates CTG paradox — detection without action. The 281k-mother trial is the only large-scale LMIC RCT of intrapartum sensing that shows mortality outcomes. No other intrapartum technology has this evidence.</p>
+
+<div class="metrics">
+  <div class="metric" style="border-top:3px solid var(--green)">
+    <div class="mv">$144</div>
+    <div class="ml">$/DALY — SBBC, measured Tanzania (PLOS ONE 2025)</div>
+  </div>
+  <div class="metric hl" style="border-top:3px solid var(--accent)">
+    <div class="mv">$28</div>
+    <div class="ml">$/DALY — projected at scale (500+ facilities)</div>
+  </div>
+  <div class="metric" style="border-top:3px solid #d1d5db">
+    <div class="mv">281k</div>
+    <div class="ml">Mothers enrolled in NEJM validation trial</div>
+  </div>
+  <div class="metric" style="border-top:3px solid #b91c1c">
+    <div class="mv">150+</div>
+    <div class="ml">Facilities in Tanzania, expanding to 10+ countries</div>
+  </div>
+</div>
+
+<h3>Technology landscape: what doesn't work in LMICs</h3>
+
+<p>Eleven other technologies were mapped. Almost none are deployable at scale in LMIC district hospitals:</p>
+
+<table>
+  <thead><tr><th>Technology</th><th>Price</th><th>LMIC evidence</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Standard CTG</strong></td><td>$500–$30,000</td><td>None for mortality in LMICs</td><td class="red">Fails — interpretation burden, power, staffing</td></tr>
+    <tr><td><strong>Moyo (standalone)</strong></td><td>~$198</td><td>Observational; part of SBBC</td><td class="agree">Works as part of SBBC bundle only</td></tr>
+    <tr><td><strong>STAN (fetal ECG ST analysis)</strong></td><td>$15k–40k + electrodes</td><td>None in LMICs; NNT=441 in HICs</td><td class="red">Irrelevant</td></tr>
+    <tr><td><strong>AI-CTG (K2/PeriGen)</strong></td><td>$10,000+/site</td><td>One Malawi before-after study; not replicated</td><td class="amber">Promising but unproven; HIC-priced</td></tr>
+    <tr><td><strong>DopFone (smartphone Doppler)</strong></td><td>~$0 marginal</td><td>23-patient validation only</td><td class="amber">Potentially transformative; TRL 4–5, years from deployment</td></tr>
+    <tr><td><strong>Fetal pulse oximetry</strong></td><td>—</td><td>NEJM RCT: null</td><td class="red">Abandoned</td></tr>
+    <tr><td><strong>Monica AN24 wireless fetal ECG</strong></td><td>$5,000–15k + $15–30/delivery</td><td>None in LMICs</td><td class="red">HIC-only</td></tr>
+  </tbody>
+</table>
+
+<h2 id="csection">The c-section misallocation: a separate opportunity</h2>
+
+<p>Global c-section rates are severely misallocated. India's private sector runs at 54% (NFHS-6); Telangana reaches 62% urban. Meanwhile sub-Saharan Africa averages 3.5% population-level — a 15× gap. The WHO recommends 10–15%.</p>
+
+<div class="callout-amber">
+  <div class="ct">The asymmetry that shapes the investment thesis</div>
+  <p><strong>ARM A — reducing over-use (private sector):</strong> ~8.5M excess c-sections/yr globally; ~$5B/yr in unnecessary surgical costs; ~0.1–0.3 DALYs of harm per case (SSI, TTN, PAS risk). Total: ~360k DALYs/yr. A sensing technology operating here saves money and averts morbidity — but achieves ~$1,000+/DALY on health outcomes alone. It's a financial instrument, not a mortality buy.</p>
+  <p><strong>ARM B — enabling timely c-section (LMIC public sector):</strong> ~1.6M deliveries/yr in SSA need but don't get c-sections; ~500k avoidable HIE cases + stillbirths/yr; ~25 DALYs per case. Total: ~20M DALYs/yr. A sensing technology operating here could reach <strong>$80–160/DALY — GiveWell-competitive</strong>.</p>
+  <p style="margin-bottom:0"><strong>ARM B has ~55× more DALYs per case than ARM A.</strong> The commercial market (ARM A) can cross-subsidize the philanthropic opportunity (ARM B).</p>
+</div>
+
+<p>The market failure is structural: payers are in ARM A (private hospitals that can afford devices), while the DALYs are in ARM B (public facilities that cannot). This creates a natural cross-subsidy model: sell devices at commercial prices in India's private sector, use margin to fund deployment in SSA public hospitals.</p>
+
+<h2 id="intrapartum-verdict">Where we land on intrapartum sensing</h2>
+
+<div class="verdict">
+  <div class="vl">After 5 research runs — Sep 2026 (3 complete, 2 in progress)</div>
+  <p><strong>SBBC is the most cost-effective intervention we have found across all our cause evaluations.</strong> At $144/DALY measured and projected $28/DALY at scale, it beats GiveWell's bar and has a 281k-mother RCT behind it. The binding constraint is not technology — it is funding and implementation capacity to scale from 150 facilities to 500+.</p>
+
+  <table style="margin:0.8em 0 1em;font-size:13px;">
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8;width:40%">Best evidence base</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">SBBC ($144/DALY, NEJM 2025) — only LMIC intrapartum RCT with mortality outcomes</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">What $30–60M buys</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">Scale SBBC from 150 → 500+ facilities in India, Nigeria, DRC, Ethiopia, Pakistan. Small R&D allocation for AI-CTG validation and smartphone monitoring. GFF is already funding but has a pipeline gap.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">C-section misallocation play</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">Complementary to SBBC. ARM B (enable timely CS in SSA) at $80–160/DALY if monitoring enables faster CS decisions. Requires surgical capacity investment alongside sensing.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Compared to NeoTest</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">SBBC at $144/DALY is 8× better than NeoTest's optimistic case ($1,218 central / $400–600 optimistic). Different disease, different mechanism, much stronger evidence.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Who else is funding</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">GFF ($15M 2026 innovations challenge for SBBC expansion to 10+ countries). Norway. Laerdal co-invests. <em>Pending runs will map the full funder landscape.</em></td></tr>
+  </table>
+</div>
+
+<h2 id="intrapartum-cruxes">Open cruxes — intrapartum sensing</h2>
+
+<table>
+  <thead><tr><th>Crux</th><th>Direction if resolved favorably</th><th>Direction if not</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Is the SBBC effect replicable outside Tanzania?</strong> The NEJM trial was in 5 regions of Tanzania with a strong research team. Nigeria, Ethiopia, DRC have different health system quality, staffing ratios, and management capacity. Does the 18% mortality reduction hold?</td>
+      <td class="agree">Still GiveWell-competitive at even 50% effect size ($288/DALY)</td>
+      <td class="red">If attenuation is severe (e.g., 5% effect), CE falls to ~$1,400+/DALY</td>
+    </tr>
+    <tr>
+      <td><strong>Can 500+ facilities absorb the implementation load?</strong> SBBC requires intense training, QI cycles, and ongoing mentorship. The research team executing Tanzania was unusually high-capacity. What does scale-up look like when delivered by ministry staff?</td>
+      <td class="agree">If Laerdal/GFF model scales, $28/DALY projection is plausible</td>
+      <td class="red">Implementation bottleneck limits scale; cost per DALY rises</td>
+    </tr>
+    <tr>
+      <td><strong>Does ARM B (timely CS) require parallel surgical capacity investment?</strong> If SBBC correctly identifies fetal distress but the hospital can't perform an emergency c-section within 30 minutes (theatre, anesthesia, blood), detection doesn't avert the injury.</td>
+      <td class="agree">Framing SBBC + surgical capacity as a bundled investment unlocks $80–160/DALY in ARM B</td>
+      <td class="red">Pure sensing investment without surgical capacity yields null results</td>
+    </tr>
+    <tr>
+      <td><strong>AI-CTG: is the one Malawi result real?</strong> PeriGen claimed 75–82% reduction in intrapartum deaths in a single before-after study. If this replicates, it's transformative. If not, AI-CTG remains HIC-only.</td>
+      <td class="agree">AI-CTG could be a lower-cost SBBC analogue if validated</td>
+      <td class="red">Likely a regression-to-mean artifact; not the investment case</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== LOW-COST ULTRASOUND ===== -->
+<hr class="topic-divider">
+
+<h2 id="us-problem">The problem: absent ultrasound in LMICs</h2>
+
+<p>Ultrasound is a cornerstone diagnostic in high-income obstetric and emergency care. In LMICs, ~99 million births per year — 76% of all LMIC births — occur without any antenatal ultrasound. The gap is even starker at the primary care level: only ~1.2% of basic LMIC primary care facilities have a functioning ultrasound.</p>
+
+<p>The conditions that ultrasound can diagnose and triage carry substantial mortality burden:</p>
+
+<table>
+  <thead><tr><th>Condition</th><th>Avoidable deaths/yr (conditional)</th><th>POCUS feasible?</th><th>Confidence</th></tr></thead>
+  <tbody>
+    <tr><td>Malpresentation (breech, transverse at term)</td><td>~20,000</td><td>Yes — 1–2 days training</td><td>Moderate</td></tr>
+    <tr><td>Ectopic pregnancy triage</td><td>~2,500</td><td>Yes — 1–2 weeks training</td><td>Moderate-high</td></tr>
+    <tr><td>FAST exam (trauma)</td><td>~34,000</td><td>Yes — 1–2 days training</td><td>Low (single-center)</td></tr>
+    <tr><td>FGR/SGA → stillbirth prevention</td><td>~51,000</td><td>Partially (biometry requires more training)</td><td>Very low — action chain unproven</td></tr>
+    <tr><td>Placenta previa / APH</td><td>~2,100</td><td>Yes</td><td>Low — requires surgical capacity</td></tr>
+    <tr><td><strong>Total (central estimate)</strong></td><td><strong>~30,000–60,000</strong></td><td>—</td><td>Low-moderate</td></tr>
+  </tbody>
+</table>
+
+<p>The implied DALY burden: 30,000–60,000 deaths × ~30 DALYs/death = <strong>~0.9–1.8M DALYs/yr</strong> attributable to absent LMIC ultrasound — conditional on downstream capacity to act on findings.</p>
+
+<h2 id="us-constraint">The binding constraint: the First Look lesson</h2>
+
+<div class="callout-red">
+  <div class="ct">Critical finding — First Look RCT, N=46,838, 5 LMICs (Goldenberg et al., BJOG 2018)</div>
+  <p><strong>Result: NULL on all mortality endpoints from routine antenatal ultrasound.</strong></p>
+  <p>The trial deployed trained sonographers with portable ultrasound at antenatal care visits in 5 LMICs. Diagnoses were made. Referrals were recommended. But only ~9% of women with a US-diagnosed condition were actually referred, and only 71% of those attended. Effective completion rate: ~6.4% of the at-risk population. When diagnosis doesn't reliably trigger treatment, detection equipment saves ~0 lives.</p>
+  <p style="margin-bottom:0">Implication: <strong>the binding constraint is the system downstream of the scan, not the scan itself</strong>. Deploying ultrasound without referral chains and surgical capacity is unlikely to reduce mortality in most LMIC settings.</p>
+</div>
+
+<p>The workforce arithmetic compounds this. To close the ultrasound access gap in the 8 highest-burden countries (~70M births/yr without ultrasound), assuming ~3,750 scans/operator/year, you need <strong>~18,700 additional trained operators</strong>. The current training pipeline produces ~1,000–2,000/yr across all countries. Time to close the gap: <strong>10–19 years</strong> — and that ignores emigration of trained staff to HICs.</p>
+
+<p>Equipment cost — once considered the binding constraint — is no longer the primary barrier. Handheld ultrasound (Butterfly IQ, GE Vscan Air, Clarius) now costs $1,500–$3,500. At 3,750 scans/year, device amortization is <strong>$0.13/scan</strong>. The economic barrier is training and system integration, not hardware.</p>
+
+<table>
+  <thead><tr><th>Barrier</th><th>% facilities citing</th><th>Is it solvable with a philanthropic grant?</th></tr></thead>
+  <tbody>
+    <tr><td>Referral/surgical capacity (system can't ACT)</td><td>Primary in evidence</td><td>Requires health system investment beyond ultrasound</td></tr>
+    <tr><td>Trained operators</td><td>60%</td><td>Partially — AI-guided POCUS reduces training burden</td></tr>
+    <tr><td>Equipment maintenance</td><td>47%</td><td>Yes — service contracts, local repair training</td></tr>
+    <tr><td>Equipment cost</td><td>45%</td><td>No longer the primary issue at $0.13/scan</td></tr>
+    <tr><td>Regulatory barriers (India PCPNDT)</td><td>India-specific</td><td>Policy change needed, not funding</td></tr>
+  </tbody>
+</table>
+
+<h2 id="us-verdict">Where we land on low-cost ultrasound</h2>
+
+<div class="verdict">
+  <div class="vl">After 1 complete run, 4 in progress — Sep 2026</div>
+  <p><strong>Ultrasound access is a real problem with a large DALY burden, but the investment thesis is harder than it appears.</strong> The First Look null result is a decisive warning: adding diagnosis without adding referral-and-treatment capacity does not save lives. Any philanthropic investment in ultrasound scale-up needs to be bundled with downstream capacity or targeted at the conditions where the referral chain is already functional (ectopic in district hospitals; malpresentation where c-section capacity exists).</p>
+
+  <table style="margin:0.8em 0 1em;font-size:13px;">
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8;width:40%">Best case for investment</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">AI-guided POCUS training (reduces operator training time from months to days) at district hospitals with functioning c-section capacity. Malpresentation + ectopic are the tractable applications.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Concern</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">CE depends entirely on whether the downstream system can act. Without evidence from a bundled intervention (ultrasound + referral + surgical), the $/DALY is deeply uncertain.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Compared to SBBC</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">SBBC has the RCT. Ultrasound scale-up doesn't. If you can only fund one, SBBC is the clearer bet. Ultrasound is a longer-horizon investment requiring system-building.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Runs still in progress</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">Technology landscape, AI task-shifting, CE model, and integrated intrapartum platform runs are still running. CE estimates pending.</td></tr>
+  </table>
+</div>
+
+<h2 id="us-cruxes">Open cruxes — low-cost ultrasound</h2>
+
+<table>
+  <thead><tr><th>Crux</th><th>Direction if resolved favorably</th><th>Direction if not</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Does AI-guided POCUS actually enable non-specialists to achieve diagnostic-quality scans?</strong> Caption Health (GE) claims AI guidance reduces training time to competency. If a nurse can perform diagnostic-quality obstetric POCUS after 8 hours rather than 3 months, the training bottleneck is transformed.</td>
+      <td class="agree">Training cost per operator drops from $500–1,000 to $50–200; workforce gap becomes solvable</td>
+      <td class="red">Training bottleneck remains; 10–19yr deployment horizon unchanged</td>
+    </tr>
+    <tr>
+      <td><strong>Is there a bundled-intervention model (ultrasound + referral) that replicates the First Look failure mechanism?</strong> The null result was for standalone antenatal US. A targeted intervention (US at ectopic-presentation facilities with laparoscopy capacity) might have completely different results.</td>
+      <td class="agree">CE of targeted deployment could reach $100–500/DALY for ectopic alone</td>
+      <td class="red">If the system barrier generalizes, ultrasound is infrastructure investment with uncertain CE</td>
+    </tr>
+    <tr>
+      <td><strong>Can intrapartum ultrasound + fetal heart rate monitoring create a combined platform?</strong> The integrated platform run (in progress) is evaluating whether there's a product opportunity for combined intrapartum sensing + POCUS at under $1,500 total.</td>
+      <td class="agree">Combined platform could address both position confirmation and FHR monitoring together</td>
+      <td class="red">Simpler to deploy SBBC (Moyo bundle) than wait for integrated platform development</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== RESEARCH RUNS ===== -->
+<hr class="topic-divider">
+
+<h2 id="research">Research runs</h2>
+
+<div class="note"><div class="nt">Status</div>10 runs launched September 2026. 3 complete at time of publication; 7 in progress. Website updated as findings come in.</div>
+
+<table>
+  <thead><tr><th>Run</th><th>Topic</th><th>Status</th><th>Key finding</th></tr></thead>
+  <tbody>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-done">Done</span></td>
+      <td>Intrapartum sensing technology landscape</td>
+      <td>Complete</td>
+      <td>SBBC = only intrapartum technology with LMIC mortality RCT; $144/DALY measured</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-done">Done</span></td>
+      <td>Rational c-section economics</td>
+      <td>Complete</td>
+      <td>ARM B (enable timely CS in SSA) has 55× more DALYs/case than ARM A; $80–160/DALY potential</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-done">Done</span></td>
+      <td>LCU burden and diagnostic value</td>
+      <td>Complete</td>
+      <td>~0.9–1.8M DALYs/yr attributable; First Look RCT null; binding constraint is system downstream of scan</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>Birth asphyxia burden and TAM</td>
+      <td>Phase 2 of 3</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>Birth asphyxia CE model</td>
+      <td>Phase 1 of 2</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>Intrapartum funders and programs</td>
+      <td>Phase 1 of 2</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>LCU technology landscape</td>
+      <td>Phase 1 of 2</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>LCU AI task-shifting</td>
+      <td>Phase 0 of 2</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>LCU CE model</td>
+      <td>Phase 0 of 2</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td style="white-space:nowrap"><span class="run-tag tag-run">Running</span></td>
+      <td>Intrapartum ultrasound integrated platform</td>
+      <td>Phase 0 of 2</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+
+</main>
+</div>
+</body>
+</html>
