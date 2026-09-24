@@ -152,19 +152,19 @@
   <h5>This report</h5>
   <ul>
     <li><a href="#headline">The headline gap</a></li>
-    <li><a href="#what-is-botec">What is a BOTEC</a></li>
-    <li><a href="#scorecard">Side-by-side scorecard</a></li>
-    <li><a href="#diff1">1. Discount rate</a></li>
-    <li><a href="#diff2">2. TAM definition</a></li>
-    <li><a href="#diff3">3. Adoption rates</a></li>
-    <li><a href="#diff4">4. DALYs per test</a></li>
-    <li><a href="#diff5">5. Launch year</a></li>
-    <li><a href="#bridge">Walking the math</a></li>
-    <li><a href="#agree">Where we agree</a></li>
-    <li><a href="#disagree">Where we disagree</a></li>
-    <li><a href="#questions">Questions for Akhil</a></li>
-    <li><a href="#open-concerns">Open concerns</a></li>
+    <li><a href="#problem">The problem</a></li>
+    <li><a href="#solution">The solution</a></li>
+    <li><a href="#investment">The investment</a></li>
+    <li><a href="#verdict">Our verdict</a></li>
+    <li><a href="#disagreements">Key disagreements</a></li>
+    <li><a href="#open-questions">Open questions</a></li>
     <li><a href="#research">Research runs (62)</a></li>
+    <div class="sep"></div>
+    <h5>Technical detail</h5>
+    <li><a href="#what-is-botec">How the modelling works</a></li>
+    <li><a href="#scorecard">Model scorecard</a></li>
+    <li><a href="#agree">Where we agree</a></li>
+    <li><a href="#open-concerns">Settled concerns</a></li>
   </ul>
   <div class="sep"></div>
   <h5>Other causes</h5>
@@ -181,15 +181,54 @@
 <h1>NeoTest: A $60M Bet on Neonatal Sepsis Diagnostics</h1>
 <div class="dek">The Gates Foundation is considering a $60M commitment to incentivize development of a rapid blood test for newborn sepsis. We spent 62 research iterations — plus a formal back-and-forth with the lead modeller at CGD — stress-testing whether it's worth it. Here's the honest verdict.</div>
 
-<div style="background:#f8f7f5;border:1px solid #e5e1db;border-radius:6px;padding:1.1em 1.4em;font-family:system-ui,sans-serif;font-size:13.5px;line-height:1.72;margin-top:1.4em;margin-bottom:0.5em">
-<strong style="display:block;margin-bottom:0.5em;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#888">What this is about — plain English</strong>
-<p style="margin-bottom:0.6em"><strong>The problem:</strong> ~3 million newborns worldwide are suspected of having sepsis (a life-threatening bacterial infection) every year. The treatment is antibiotics — but doctors often can't tell which babies actually have sepsis and which just look sick. So many get treated anyway, some who need it don't get it, and many who don't need antibiotics receive them.</p>
-<p style="margin-bottom:0.6em"><strong>The proposed solution:</strong> A cheap, fast blood test — like a pregnancy test but for sepsis — that gives a result in 15 minutes from a finger-prick. A positive result means "treat now." A negative result means "safe to watch and wait." Deployed at hospitals across India, Nigeria, Kenya, and other high-burden countries, it could save lives and reduce unnecessary antibiotic use.</p>
-<p style="margin-bottom:0.6em"><strong>The mechanism:</strong> No such test exists yet. The Gates Foundation would commit $60M as an Advance Market Commitment (AMC) — a conditional prize paid only if a qualifying test is developed and actually sold to LMIC health systems. Think: "we guarantee a buyer at a good price, which makes the R&D worth doing."</p>
-<p style="margin-bottom:0"><strong>The question we're answering:</strong> Is $60M the right bet, on the right terms, at the right scale? The foundation's consultants (CGD) say the test could save a healthy year of life for every ~$89 spent. After 62 deep-dive runs and primary data from 25+ physicians, our honest central is $1,218/DALY — still within WHO's cost-effectiveness threshold for India but 13× less favorable than advertised. We recommend $10–15M staged, not $60M upfront, and specific design fixes before any commitment.</p>
-</div>
+<p style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:0.8em 1.1em;font-family:system-ui,sans-serif;font-size:12.5px;line-height:1.65;margin-top:0.8em"><strong>Jargon guide:</strong> <strong>DALY</strong> = one year of healthy life lost to death or disability. <strong>$/DALY</strong> = cost per healthy year saved; GiveWell's bar for "exceptional" is ~$50–100. <strong>AMC</strong> = Advance Market Commitment. <strong>SNCU</strong> = Special Newborn Care Unit. <strong>PSBI</strong> = Possible Serious Bacterial Infection. <strong>Se/Sp</strong> = sensitivity/specificity.</p>
 
-<p style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:0.8em 1.1em;font-family:system-ui,sans-serif;font-size:12.5px;line-height:1.65;margin-top:0.8em"><strong>Jargon guide (reference as needed):</strong> <strong>DALY</strong> = one year of healthy life lost to death or disability — the standard unit for comparing health interventions. <strong>$/DALY</strong> = cost per healthy year saved; GiveWell's bar for "exceptional" is ~$50–100. <strong>AMC</strong> = Advance Market Commitment. <strong>BOTEC</strong> = back-of-the-envelope cost-effectiveness model. <strong>SNCU</strong> = Special Newborn Care Unit (India's hospital newborn wards). <strong>PSBI</strong> = Possible Serious Bacterial Infection (WHO danger-sign category). <strong>f_cf</strong> = fraction of sick babies who'd get antibiotics even without the test (higher = test has less room to help). <strong>Se/Sp</strong> = sensitivity/specificity (test accuracy).</p>
+<!-- ===================== THE PROBLEM ===================== -->
+<h2 id="problem">The problem</h2>
+
+<p>Every year, roughly 3 million newborns in low- and middle-income countries show signs of serious bacterial infection — fever, fast breathing, feeding problems, limpness. Sepsis kills around 680,000 of them. It is one of the leading causes of neonatal death globally, and disproportionately concentrated in South Asia and sub-Saharan Africa.</p>
+
+<p>The core clinical difficulty is that most of these babies look similar whether they are actually septic or just transiently unwell. The gold standard diagnostic — a blood culture that identifies bacteria — takes 48–72 hours to return a result, requires lab infrastructure that most LMIC hospitals don't have, and misses roughly 45% of true cases (bacteria don't always grow). So doctors face a daily choice with bad options on both sides: treat everyone who looks sick (over-treatment, antibiotic side effects, resistance), or wait for more information (under-treatment, preventable deaths).</p>
+
+<p>In practice, most LMIC hospitals choose a third path: treat based on WHO "danger signs" — a clinical checklist that is deliberately sensitive but not specific. Among neonates who meet danger-sign criteria, roughly 40–80% actually have sepsis (the rest are sick for other reasons or will recover without antibiotics). Empiric antibiotic rates at Indian specialist newborn units run 70–80% of all admissions. The result: a majority of babies admitted to these units receive antibiotics they may not need, while a subset who genuinely need them may not get them fast enough.</p>
+
+<p>This is the problem a rapid diagnostic test would solve — at the bedside, in 15 minutes, before any treatment decision is made.</p>
+
+<!-- ===================== THE SOLUTION ===================== -->
+<h2 id="solution">The proposed solution</h2>
+
+<p>NeoTest is a lateral-flow immunoassay — structurally similar to a COVID rapid antigen test, but calibrated for newborn sepsis biomarkers. A clinician takes a small blood sample (finger-prick or heel-prick), mixes it with a reagent, and reads the result on a strip in 10–20 minutes. No lab equipment. No cold chain. Cost at scale: ~$3–7 per test.</p>
+
+<p>The test would work in two clinical modes:</p>
+
+<ul class="bl">
+  <li><strong>Initiation-gate (most valuable):</strong> At facilities where doctors don't automatically treat every sick neonate — district hospitals, health centres, private clinics — a positive test triggers antibiotic treatment. Without the test, ~40–60% of these babies would go untreated. The test catches the ones who genuinely need treatment. This is where most of the lives-saved math comes from.</li>
+  <li><strong>De-escalation (also valuable):</strong> At specialist newborn units (SNCUs) where empiric antibiotics are the default, a negative test result at 48–72 hours gives clinicians confidence to stop treatment. This shortens unnecessary antibiotic courses, reduces hospital-acquired infections, and is the dominant mode at India's highest-volume facilities.</li>
+</ul>
+
+<p>No qualifying test currently exists. NeoSep-SAA (a consortium including FIND and SD Biosensor) is the most advanced candidate; a pivotal trial in Uganda is underway. WHO has published a target product profile: at minimum 90% sensitivity and 70% specificity on neonatal capillary blood. Whether the existing candidates will hit that threshold on the blood sample type used in real deployments is the primary technical uncertainty.</p>
+
+<p>If a qualifying test is developed and reaches patients, the downstream treatment is antibiotics — which already exist and are cheap. NeoTest is not a new treatment; it is a routing tool that gets the right treatment to the right babies faster, and stops the wrong treatment in babies who don't need it.</p>
+
+<!-- ===================== THE INVESTMENT ===================== -->
+<h2 id="investment">The investment mechanism</h2>
+
+<p>No company has invested seriously in developing an affordable neonatal sepsis rapid test for LMIC markets. The reason is straightforward: the customers who most need it can't pay much for it. Developing a novel diagnostic costs $50–150M in R&D; selling it at $3–5/test to underfunded LMIC health systems doesn't cover that investment. This is a classic market failure — a product that would save many lives sits undeveloped because the economics don't work without external intervention.</p>
+
+<p>The proposed solution is an Advance Market Commitment (AMC): the Gates Foundation pre-commits to subsidise the purchase of qualifying tests once they exist. Specifically:</p>
+
+<ul class="bl">
+  <li><strong>$20M milestone prize:</strong> Paid to the first company that achieves WHO prequalification and meets the TPP — enough to recoup late-stage development costs.</li>
+  <li><strong>$40M in per-test subsidies:</strong> Paid out as tests are sold to LMIC health systems — $7/test for the first tranche, stepping down to $5 and $3 as volume grows. This bridges the gap between what manufacturers need (~$7–10/test) and what LMIC health systems can pay (~$1–3/test).</li>
+  <li><strong>Total commitment: $60M</strong> — but only disbursed if a qualifying test is developed and bought. If no test qualifies, the funder pays $0.</li>
+</ul>
+
+<p>The AMC model has precedent: the Gavi pneumococcal AMC (2009, $1.5B) successfully accelerated PCV vaccine access to low-income countries by roughly a decade. The structural analogy is sound. The key question is whether the NeoTest AMC is designed well enough to work — and our analysis finds six specific design flaws that need fixing before any commitment.</p>
+
+<p style="background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:0.8em 1.1em;font-family:system-ui,sans-serif;font-size:13px;line-height:1.65;margin-top:1em"><strong>Important nuance for the CE math:</strong> Because the AMC only pays out on success, the cost-per-DALY calculation is conditional on a qualifying test being developed. You're not paying $1,218 per DALY on a bet that might not pay off — you're paying $1,218 per DALY <em>in the world where the bet worked</em>. The probability of success affects whether you should commit, not the $/DALY figure itself.</p>
+
+<!-- ===================== VERDICT ===================== -->
+<h2 id="verdict">Our verdict</h2>
 
 <div class="verdict">
   <div class="vl">Bottom line — Sep 2026</div>
@@ -238,6 +277,70 @@
     <li><em>The correct headline is $1,218/DALY</em>, not $89. The three biggest drivers of the gap are explained in the research deep-dive below.</li>
   </ul>
 </div>
+
+<!-- ===================== KEY DISAGREEMENTS ===================== -->
+<h2 id="disagreements">Key areas of disagreement</h2>
+
+<p>We've gone back and forth with Akhil Bansal (CGD, lead modeller) through multiple rounds. Three disagreements are now settled; two remain live. All of them affect the headline number.</p>
+
+<h3>Settled — we were wrong, Akhil was right</h3>
+
+<div class="callout-green">
+  <div class="ct">1. How the test works in hospitals (prescribing behaviour)</div>
+  <p>We initially modelled the test as potentially harmful at India's specialist newborn units (SNCUs), because ~80% of those babies already get antibiotics before any test result — making a test that starts treatment redundant or harmful. Akhil showed that his model targets a different population: the ~40–50% of hospital newborns who are in the "grey zone" and would not otherwise be treated. For those babies, a positive test initiates treatment. Our concern was based on the wrong patient group. <strong>Withdrawn.</strong></p>
+</div>
+
+<div class="callout-green">
+  <div class="ct">2. The test can reach more than specialist newborn wards</div>
+  <p>We initially counted only India's ~900 specialist newborn units (SNCUs). Akhil is right that district hospitals, private newborn units, and primary health centres can also run the test — about 2.65× more deployable volume above SNCU count. We've incorporated this: the full facility ladder adds FRU/CHC, private NICUs, and facility-based PHCs. Private NICUs in particular contribute 26% of total projected DALYs at zero AMC cost (they'd pay market price). <strong>Accepted and incorporated.</strong></p>
+</div>
+
+<h3>Settled — Akhil's model has a significant error, confirmed by physician data</h3>
+
+<div class="callout-red" style="background:#fef2f2;border:1px solid #fca5a5;">
+  <div class="ct" style="color:#b91c1c">3. The community deployment assumption inflates the model by 5–10×</div>
+  <p>This is the biggest error in the analysis. Akhil's model assumes 30% of India's sick newborns will be reached via community health workers and primary health centres operating WHO-standard newborn care programs (called PSBI programs). That sounds reasonable until you check whether those programs exist.</p>
+  <p><strong>They don't.</strong> India has national guidelines for community newborn care (issued 2014) but only 4 research districts — out of 718 — ever ran functioning programs, all under intensive research supervision that ended in 2019. Current national coverage: roughly 0.2–0.3% of sick newborns. No country in the world has scaled these programs nationally in the 11 years since WHO issued the guidelines.</p>
+  <p>We interviewed 25+ physicians across India, Kenya, Nigeria, and WHO. Zero described functioning community PSBI programs. India's leading neonatal specialist (Ramesh Agarwal, AIIMS Delhi) explicitly said community-level test deployment is "not feasible."</p>
+  <p><strong>The arithmetic consequence:</strong> The community arm contributes ~91% of all projected DALYs in Akhil's model (community cases have higher mortality and lower baseline treatment rates, making each test much more valuable). Correcting 30% → 3% collapses total projected DALYs by 5.5×. This alone takes the headline from ~$89 to ~$490/DALY before any other corrections.</p>
+  <p><strong>Akhil's defence:</strong> The within-program coverage (95% in Pakistan, 75% in multi-country studies) shows the program works where it exists. Our response: that's within-program performance, not national population reach. These are measuring different things.</p>
+</div>
+
+<h3>Live disputes</h3>
+
+<div class="callout-amber">
+  <div class="ct">4. How fast does the test spread once it exists? (Adoption rates)</div>
+  <p>The model needs to estimate what fraction of hospitals will actually start using the test. Akhil calibrates to the malaria rapid diagnostic test rollout (high speed of spread) plus GeneXpert (conservative level of penetration). We use India-specific procurement data for comparable diagnostics.</p>
+  <p>The honest answer: we don't know. Akhil's 15–30% peak adoption and our 5.5–12% peak adoption are both reasonable extrapolations from incomplete analogues. The malaria RDT case was driven by a different product structure (commodity, widely distributed, existing care pathway). NeoTest requires clinical training, a new care algorithm, and regulatory listing — slower than malaria RDT but possibly faster than GeneXpert.</p>
+  <p><strong>CE impact:</strong> roughly 2.5× of the $89 → $1,218 gap. <strong>How to resolve:</strong> First-deployment data from Kenya (likely earliest) in 2026–27 will quickly anchor the real adoption rate.</p>
+</div>
+
+<div class="callout-amber">
+  <div class="ct">5. When does the test reach patients? (Launch timeline)</div>
+  <p>Akhil models India commercial launch in 2031. We model meaningful public-sector uptake in 2033–2037 (WHO prequalification median ~2035; India regulatory listing ~2037). The pivotal clinical trial hasn't started. Median time from starting a pivotal to WHO prequalification for novel diagnostics: ~5–7 years.</p>
+  <p>Akhil's counterpoint: he has a direct relationship with India's regulatory body and has discussed pre-listing the test before it exists — which could compress the clock by 2–3 years. This is a real advantage we can't model externally. <strong>CE impact:</strong> about 1.3× of the gap — material but second-order. <strong>How to resolve:</strong> Ask Akhil to walk through the specific regulatory milestones that make 2031 achievable.</p>
+</div>
+
+<!-- ===================== OPEN QUESTIONS ===================== -->
+<h2 id="open-questions">What would change our view</h2>
+
+<p>Our $1,218/DALY central estimate is not a fixed verdict — it's the output of specific assumptions. Here's what would move it materially:</p>
+
+<table>
+  <thead><tr><th>Condition</th><th>Direction</th><th>Scale of change</th></tr></thead>
+  <tbody>
+    <tr><td>Community PSBI programs actually scale in India (10%+ by 2033)</td><td class="agree">Much better</td><td>Down to ~$300–500/DALY — competitive</td></tr>
+    <tr><td>Test sensitivity validated at ≥90% on finger-prick neonatal blood (vs. venous)</td><td class="agree">Better</td><td>~20–30% improvement in DALYs/test</td></tr>
+    <tr><td>India NEDL listing pre-committed (Akhil's regulatory relationship delivers)</td><td class="agree">Better</td><td>~30% improvement from faster ramp-up</td></tr>
+    <tr><td>First-deployment data shows adoption >15% within 3 years</td><td class="agree">Better</td><td>2× improvement — gets to ~$600/DALY range</td></tr>
+    <tr><td>Community PSBI assumption corrected but no other changes</td><td class="red">Worse</td><td>Up to ~$3,000–5,000/DALY — market-shaping only</td></tr>
+    <tr><td>WHO prequalification delayed beyond 2038</td><td class="red">Worse</td><td>~50% worse — longer timeline, more discounting</td></tr>
+    <tr><td>Test performs below 85% sensitivity on capillary blood</td><td class="red">Much worse</td><td>Physicians stop using it — clinical threshold is 85–90%</td></tr>
+    <tr><td>Single manufacturer with no price ceiling post-AMC</td><td class="red">Worse for sustainability</td><td>GeneXpert trap — price locks in at $10–15/test, kills public uptake</td></tr>
+  </tbody>
+</table>
+
+<p>The two highest-leverage knowable facts: (1) what does the test actually achieve on capillary blood in Indian SNCUs — the Uganda trial data will be decisive; (2) does India actually run community PSBI programs at scale before 2030 — two years of NHM implementation data will settle this.</p>
 
 <!-- ===================== WHAT IS A BOTEC ===================== -->
 <h2 id="what-is-botec">How the modelling works — and where it goes wrong</h2>
@@ -812,7 +915,7 @@
 </div>
 
 <!-- ===================== RESEARCH UPDATES ===================== -->
-<h2 id="research">Research loop findings (58 runs, Sep 2026)</h2>
+<h2 id="research">Research run log (62 runs, Sep 2026)</h2>
 
 <p>Sixty-one dedicated research runs interrogated the key BOTEC sensitivities. The first 11 covered structural parameters; 9 additional deep-dives (Sep 21 batch) resolved the clinical mode debate, community arm volumes, and country-specific CE. Three crux-focused runs (Sep 22 batch) interrogated Nigeria/Kenya f_cf, clinician adherence to negative results, and blended portfolio CE. Three Sep 23 morning runs investigated the speed-of-treatment dimension, the sign-negative sepsis population, and the developer pipeline with company traction data. One run validated Akhil's three model corrections (verdict: corrections partially right but insufficient to offset prior adoption downgrades). Three Sep 23 afternoon synthesis runs produced the headline revised CE ($173/DALY pure acceleration at 9%/4%; $216 P-weighted), confirmed and strengthened near-monopoly risk, and validated the community arm volume concern. Five further synthesis runs completed: <strong>BOTEC probability framing (structured probability = correct primary framing → ~$103/DALY at 9%/4%, P_without=0.25, restoring proximity to original BOTEC)</strong>; blood culture reference standard (milestone has no CRS specification — critical design flaw); NeoSep partnership pathways (SD Biosensor is the #1 manufacturing candidate; FIND $1–3M intermediation is the single highest-leverage action). Three AMC/market synthesis runs: <strong>AMC comparables</strong> (no diagnostic prize has accelerated thin-pipeline development; push before pull is universal); <strong>post-AMC market sustainability</strong> (GeneXpert trap is the default without binding ceiling + second source + pooled procurement); <strong>India SNCU physicians</strong> (denominator artifact resolved; grey-zone f_cf ~0.45; Maheshwara confirms both Mode A and B real). Final CHAI/Kenya implementation run: <strong>Hatch Technologies (NEST360 spinoff) identified as the Kenya distributor</strong>; CHAI + Hatch pathway is now concrete; additional benefits add ~0.012 DALYs/test and $11–23/test in system savings (NeoTest is facility-level cost-saving); revised funder $/DALY ~$158 (9%/4%). <strong>Three new runs after Akhil's response:</strong> India PSBI national scale-up (confirms 30% community adoption requires unprecedented infrastructure — defensible base 3–5% by 2033); physician interview deep-dive on community f_cf (zero of 25+ physicians describe functioning community PSBI; community arm is BOTEC's load-bearing wall at 91% of DALYs; correcting to 3% collapses total DALYs 5.5×); revised CE full facility ladder (<strong>honest central: $1,218/DALY</strong> at 4%/4%; $789 at 9%/4%; private NICUs contribute 26% of DALYs at $0 AMC cost; fund $10–15M milestone-first, not $60M). Summary of first 11 below; deep-dive findings summarised in the section above.</p>
 
