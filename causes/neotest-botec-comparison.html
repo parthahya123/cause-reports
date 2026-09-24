@@ -226,7 +226,7 @@
 
 <p>The AMC model has precedent: the Gavi pneumococcal AMC (2009, $1.5B) successfully accelerated PCV vaccine access to low-income countries by roughly a decade. The structural analogy is sound. The key question is whether the NeoTest AMC is designed well enough to work — and our analysis finds six specific design flaws that need fixing before any commitment.</p>
 
-<p style="background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:0.8em 1.1em;font-family:system-ui,sans-serif;font-size:13px;line-height:1.65;margin-top:1em"><strong>Important nuance for the CE math:</strong> Because the AMC only pays out on success, the cost-per-DALY calculation is conditional on a qualifying test being developed. You're not paying ~$130/DALY on a bet that might not pay off — you're paying ~$130/DALY <em>in the world where the bet worked</em>. The probability of success affects whether you should commit, not the $/DALY figure itself.</p>
+<p style="background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:0.8em 1.1em;font-family:system-ui,sans-serif;font-size:13px;line-height:1.65;margin-top:1em"><strong>Important nuance for the CE math:</strong> Because the AMC only pays out on success, the cost-per-DALY calculation is conditional on a qualifying test being developed. You're not paying ~$200–400/DALY on a bet that might not pay off — you're paying ~$200–400/DALY <em>in the world where the bet worked</em>. The probability of success affects whether you should commit, not the $/DALY figure itself.</p>
 
 <!-- ===================== VERDICT ===================== -->
 <h2 id="verdict">Where we land — and what we're still not sure about</h2>
@@ -239,7 +239,7 @@
     <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#dcfce7">Corrections we retract (our errors)</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">Leverage attribution (×2.5): the HTA is a textbook incremental CEA — health system costs cancel between arms. Our correction was a category error. Community deployment (×1.1): we misidentified the parameter; the model's 30% is total TAM penetration, not a CHW-specific term. Both retracted.</td></tr>
     <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fffbeb">Remaining corrections we defend</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">Adoption rate (×2.0, revised from ×2.5): GeneXpert reached only ~38% of TB patients in India after 14 years with every advantage NeoTest lacks. CGD's S-curve reaches 30% of PSBI in 5–8 years — faster than any comparable LMIC diagnostic. Timeline (×1.15): Akhil accepts ~2-year slip; our regulatory runs support ~2037 public-sector uptake.</td></tr>
     <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fffbeb">Under review</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">Test-trigger denominator (×1.5): Akhil disputes — says 8.5% PSBI is within our stated range and 22% is moderate-risk share <em>of</em> PSBI, not of births. Fact-check pending.</td></tr>
-    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Revised implied range</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">~$110/DALY (if denominator correction drops) to ~$170/DALY (if it holds). If Akhil is also right on adoption: ~$55–80/DALY — genuinely GiveWell-competitive. The one remaining genuine disagreement is adoption speed.</td></tr>
+    <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">Revised implied range</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda">~$200–400/DALY (including DALYs/test concern); ~$110–170/DALY (adoption and timeline only, if DALYs/test is taken at face value). The DALYs/test concern (empirical prescribing rates vs HTA counterfactual) was identified after Akhil's rebuttal and has not yet been addressed by him. It is now the most important remaining uncertainty.</td></tr>
     <tr><td style="padding:0.35em 0.7em;border:1px solid #e0deda;font-weight:600;background:#fafaf8">What we recommend</td><td style="padding:0.35em 0.7em;border:1px solid #e0deda"><strong>$10–15M staged</strong>, not $60M. Fund the milestone prize first; gate further disbursement on Kenya/Uganda first-deployment adoption data. This is closer to a real bet than our prior analysis suggested.</td></tr>
   </table>
   <p style="font-family:system-ui,sans-serif;font-size:13px;color:#555;margin-bottom:0"><strong>Six design fixes required before any commitment:</strong> (1) Specify the reference standard — currently, the milestone can be gamed by any test claiming to meet specs. (2) Binding price ceiling post-AMC ($5 → $3.50, enforced). (3) Mandatory second supplier license — one-supplier lock-in is the GeneXpert failure mode. (4) Push grants alongside the pull ($8–10M for clinical trials, not just the prize). (5) Realistic timeline — not 2030, which is impossible; 2037–2040. (6) Route disbursement through FIND or Unitaid as pooled procurer.</p>
@@ -247,12 +247,12 @@
 
 <div class="metrics">
   <div class="metric" style="border-top: 3px solid #059669;">
-    <div class="mv">$110–170</div>
-    <div class="ml">Revised $/DALY after retracting 2 errors — adoption correction is the key remaining dispute</div>
+    <div class="mv">$200–400</div>
+    <div class="ml">Honest range including DALYs/test (f_cf), adoption, and timeline corrections</div>
   </div>
   <div class="metric hl" style="border-top: 3px solid var(--accent);">
-    <div class="mv">$55–80</div>
-    <div class="ml">$/DALY if Akhil is also right on adoption speed — GiveWell-competitive range</div>
+    <div class="mv">$110–170</div>
+    <div class="ml">$/DALY without the DALYs/test concern — adoption and timeline corrections only</div>
   </div>
   <div class="metric" style="border-top: 3px solid #d1d5db;">
     <div class="mv">$10–15M</div>
@@ -361,6 +361,18 @@
   <p>Akhil now accepts ~2 years of slippage from his 2031 base case. Three independent research runs converge on ~2037 India public-sector uptake. No registered pivotal trial exists; NEDL pre-listing saves 0.5–1.5 years (not 2–4). This crux is largely resolved: we apply ×1.15 (2-year shift, 4% discount). Residual dispute: whether Akhil's ICMR working group participation creates any binding commitment — it doesn't.</p>
 </div>
 
+<div class="callout-red" style="margin-top:1.2rem">
+  <div class="ct">Unresolved concern: DALYs/test — are the 0.1665 DALYs/test credible in practice?</div>
+  <p>This is the concern that was lurking behind our retracted leverage correction and is more important than adoption speed. The CGD HTA's 0.1665 DALYs/test is incremental relative to a specific clinical counterfactual: that clinicians in the SOC arm miss ~44% of true sepsis cases and send them home untreated. Eight dedicated research runs interrogated whether this counterfactual is correct.</p>
+  <p><strong>What the evidence shows:</strong> The answer depends entirely on which patients the test is deployed in.</p>
+  <ul style="margin:0.5em 0 0.8em 1.3em;font-size:inherit">
+    <li><strong>ICMR Tier 1 (danger-sign presenting neonates):</strong> f_cf ≈ 0.87–0.95 — essentially all receive empiric antibiotics by FBNC/ICMR protocol regardless of diagnostic test. The test's Mode A (initiation-gate) value here is near zero to net-harmful. Mode B (de-escalation) gives ~0.003 DALYs/test. Indian SNCUs do NOT use the H/M/L risk stratification the HTA assumes — they treat empirically on danger signs.</li>
+    <li><strong>ICMR Tier 2 / grey zone (~40–50% of SNCU admissions):</strong> f_cf ≈ 0.30–0.60 (central ~0.45). The ICMR guideline says to observe without treating; in practice ~half get antibiotics. This is the primary deployment target and where the test has genuine initiation value. The CGD's f_cf = 0.56 is approximately right for this population.</li>
+  </ul>
+  <p><strong>But two concerns survive even at grey-zone f_cf:</strong> (1) Will clinicians in practice correctly target grey-zone cases rather than danger-sign cases? If the test bleeds into Tier 1 use, the initiation math flips negative. (2) <strong>NNF Recommendation 9 explicitly discourages stopping antibiotics based on negative biomarker results for culture-negative probable sepsis</strong> — this limits the de-escalation channel that the HTA credits. Maheshwara NICU showed both channels can work in practice, but it is one tertiary centre.</p>
+  <p style="margin-bottom:0"><strong>Bottom line:</strong> The test has genuine but modest value in the grey zone. Honest DALYs/test for grey-zone-targeted deployment: ~0.07–0.12 (vs HTA's 0.1665) — a ~1.5–2× haircut. This is a parameter adjustment, not a sign flip, IF the test is correctly targeted. Add this to the adoption correction (×2.0) and timeline correction (×1.15), and the revised range including the DALYs/test concern is <strong>~$200–400/DALY</strong> (from the current ~$110–170 that excluded this concern). Still within WHO India threshold (~$1,400) but not GiveWell-competitive.</p>
+</div>
+
 
 
 <!-- ===================== OPEN QUESTIONS ===================== -->
@@ -376,16 +388,22 @@
   <p style="margin-bottom:0"><strong>Bottom line:</strong> The regulatory timeline correction (2031 → 2037) is now supported by three independent lines of evidence. It is no longer a "disputed" crux — it is a settled correction. Akhil's optimistic case on timeline requires conditions that do not currently exist.</p>
 </div>
 
-<p><strong>After Akhil's rebuttal, the key remaining uncertainty is adoption speed.</strong> Two of our corrections were errors; the revised central is ~$110–170/DALY. Whether this is GiveWell-competitive turns almost entirely on whether NeoTest diffuses at GeneXpert/RDT speed (Akhil's view) or faces the structural headwinds we identify (our view). First deployment data is the decisive test.</p>
+<p><strong>After Akhil's rebuttal, two uncertainties remain.</strong> Two of our corrections were retracted as errors; the revised range is ~$110–170/DALY from the adoption and timeline corrections alone. Including the DALYs/test concern (grey-zone f_cf calibration and clinical use constraints) raises the honest range to <strong>~$200–400/DALY</strong>. Akhil has not yet responded to the DALYs/test concerns; these were identified after his formal rebuttal.</p>
 
 <table>
   <thead><tr><th>Condition</th><th>Direction</th><th>Scale of change</th><th>Status</th></tr></thead>
   <tbody>
     <tr>
-      <td>First-deployment data shows adoption &gt;15% of PSBI infants within 3 years</td>
+      <td>First-deployment data shows adoption &gt;15% of PSBI infants within 3 years AND test is deployed in grey-zone patients (not danger-sign)</td>
       <td class="agree">Better</td>
-      <td>~2× improvement from our central — gets to ~$55–80/DALY (GiveWell-competitive)</td>
+      <td>~2-4× improvement — gets to ~$55–120/DALY depending on clinical use mode</td>
       <td><span style="background:#fffbeb;color:#92400e;font-size:11px;padding:.1em .4em;border-radius:2px;font-weight:700">OPEN — decisive test</span></td>
+    </tr>
+    <tr>
+      <td>Test is used as initiation gate (Mode A) at Indian SNCUs — clinicians use it to DECIDE whether to give antibiotics to danger-sign neonates</td>
+      <td class="red">Worse or harmful</td>
+      <td>At Se &lt; 0.90, Mode A is net-harmful at SNCU (f_cf = 0.87). Mode B (de-escalation) is the guideline-mandated use.</td>
+      <td><span style="background:#fffbeb;color:#92400e;font-size:11px;padding:.1em .4em;border-radius:2px;font-weight:700">OPEN — depends on real-world deployment</span></td>
     </tr>
     <tr>
       <td>India NEDL pre-listing accelerates timeline by 2+ years</td>
